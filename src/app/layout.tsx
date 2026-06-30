@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Space_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
 
 const spaceMono = Space_Mono({
   weight: ["400", "700"],
@@ -22,7 +21,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${spaceMono.variable} font-mono antialiased bg-black text-white`}>
-        <Navbar />
         {children}
       </body>
     </html>
