@@ -9,8 +9,21 @@ const spaceMono = Space_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "NBDY — Tech for Real Humans",
-  description: "Punk monks doing tech for real humans.",
+  title: "nbdy_labs — Punk Monks Crafting Digital Experiences",
+  description: "A digital lab where art meets technology.",
+  openGraph: {
+    title: "nbdy_labs — Punk Monks Crafting Digital Experiences",
+    description: "A digital lab where art meets technology.",
+    url: "https://nbdylabs.vercel.app",
+    images: ["/og-image.png"],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "nbdy_labs — Punk Monks Crafting Digital Experiences",
+    description: "A digital lab where art meets technology.",
+    images: ["/og-image.png"],
+  },
 };
 
 export default function RootLayout({
