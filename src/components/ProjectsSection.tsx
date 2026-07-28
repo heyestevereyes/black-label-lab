@@ -1,0 +1,32 @@
+import ProjectCard from "@/components/ProjectCard";
+import { projects } from "@/data/projects";
+
+export default function ProjectsSection() {
+  return (
+    <section id="proyectos" className="bg-[#0a0a0a] dot-grid px-6 py-16 lg:py-24">
+      {/* Heading — Figma: 66.746px / 0.15em tracking, same left margin as the nav logo */}
+      <h2 className="font-mono font-normal uppercase text-white
+                     text-[clamp(2rem,3.48vw,4.17rem)] tracking-[0.15em] leading-none">
+        Proyectos
+      </h2>
+
+      {/* Grid — Figma gaps: 37px column, 39px row.
+          Stays single-column through tablet so the mockup detail inside each
+          card stays readable; goes 2x2 at lg. */}
+      <div className="mt-10 lg:mt-14 grid grid-cols-1 lg:grid-cols-2
+                      gap-6 lg:gap-x-[37px] lg:gap-y-[39px]">
+        {projects.map((project) => (
+          <ProjectCard
+            key={project.slug}
+            title={project.title}
+            tags={project.tags}
+            mockupImage={project.mockupImage}
+            backgroundStyle={project.backgroundStyle}
+            overlayOpacity={project.overlayOpacity}
+            href={`/proyectos/${project.slug}`}
+          />
+        ))}
+      </div>
+    </section>
+  );
+}

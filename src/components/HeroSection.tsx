@@ -1,59 +1,41 @@
+import Navbar from "@/components/Navbar";
 import PixelMascot from "@/components/PixelMascot";
 import RotatingWord from "@/components/RotatingWord";
 
 export default function HeroSection() {
   return (
-    <section className="h-screen bg-black dot-grid flex flex-col overflow-hidden">
+    <div className="bg-[#0a0a0a] dot-grid min-h-screen">
 
-      {/* ── WORDMARK — fills full width, large ── */}
-      <div className="flex-shrink-0 px-4 pt-4">
-        {/* Drop /public/nbdy-wordmark.svg in place */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/nbdy-wordmark.svg"
-          alt="NBDY"
-          className="w-full h-auto"
-          draggable={false}
-        />
-      </div>
+      {/* ── NAVBAR ── */}
+      <Navbar />
 
-      {/* ── CONTENT ROW ── */}
-      <div className="flex flex-1 min-h-0 px-6 pb-6 gap-8 items-stretch
-                      flex-col md:flex-row">
+      {/* ── HERO ── */}
+      <section className="px-6 pt-4 pb-10">
 
-        {/* ── LEFT COLUMN ── */}
-        <div className="flex flex-col justify-between flex-1 min-w-0">
+        {/* Mascot — standalone, left-aligned, above the headline */}
+        <PixelMascot size={68} />
 
-          {/* Mascot + meta */}
-          <div className="flex flex-col gap-3">
-            <PixelMascot size={68} />
-            <div className="font-mono text-[12px] uppercase tracking-[0.18em] text-white/40 leading-relaxed">
-              <p>A digital lab where art meets technology</p>
-              <p className="mt-1">
-                <span className="mr-6">Contact</span>
-                <a
-                  href="mailto:hello@nbdylabs.com"
-                  className="text-[#FF4C02] hover:text-[#FF4C02]/70 transition-colors"
-                >
-                  hello@nbdylabs.com
-                </a>
-              </p>
-            </div>
-          </div>
+        {/* Headline */}
+        <h1 className="mt-6 font-mono font-normal uppercase text-white
+                       text-[clamp(1.75rem,3.4vw,3.25rem)] leading-[1.25] tracking-[0.08em]">
+          Somos un laboratorio
+          <br />
+          Creativo desarrollando
+          <br />
+          <RotatingWord className="text-[#FF6B1A]" />
+        </h1>
 
-          {/* Hero copy */}
-          <div className="mt-auto pt-6">
-            <p className="font-mono font-normal text-white uppercase text-[4vw] leading-[1.5] tracking-[0.15em] break-normal">
-              Punk Monks crafting
-              <br />
-              <RotatingWord className="text-[#FF4C02]" />
-            </p>
-          </div>
-        </div>
+        {/* Subcopy */}
+        <p className="mt-6 max-w-xl font-mono text-[15px] uppercase tracking-[0.14em]
+                      text-white/50 leading-[1.9]">
+          Construimos proyectos enfocados que ayuden a las marcas y empresas a
+          lograr sus objetivos.
+        </p>
+      </section>
 
-        {/* ── RIGHT COLUMN — contained video box ── */}
-        <div className="w-full md:w-[42%] flex-shrink-0 self-center
-                        relative overflow-hidden rounded-sm bg-black aspect-[4/3]">
+      {/* ── SHOWREEL — full-width block below the hero ── */}
+      <section className="px-6 pb-6">
+        <div className="relative w-full aspect-[16/9] overflow-hidden bg-[#C9C9C9]">
           <video
             className="absolute inset-0 w-full h-full object-cover"
             autoPlay
@@ -64,8 +46,8 @@ export default function HeroSection() {
             <source src="/showreel.mp4" type="video/mp4" />
           </video>
         </div>
+      </section>
 
-      </div>
-    </section>
+    </div>
   );
 }

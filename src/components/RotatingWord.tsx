@@ -2,7 +2,12 @@
 
 import { useState, useEffect } from "react";
 
-const WORDS = ["Brands", "Products", "Websites", "Apps", "Tech", "Film"];
+const WORDS = [
+  "Sitios Web",
+  "Identidad de Marca",
+  "Creación de Contenido",
+  "Animación",
+];
 
 export default function RotatingWord({ className = "" }: { className?: string }) {
   const [index, setIndex] = useState(0);
@@ -14,5 +19,9 @@ export default function RotatingWord({ className = "" }: { className?: string })
     return () => clearInterval(interval);
   }, []);
 
-  return <span className={className}>{WORDS[index]}</span>;
+  // Se normaliza el índice al renderizar: aunque el estado quede fuera de
+  // rango (p. ej. al cambiar la lista con Fast Refresh), nunca se pinta vacío.
+  const word = WORDS[index % WORDS.length] ?? WORDS[0];
+
+  return <span className={className}>{word}</span>;
 }
