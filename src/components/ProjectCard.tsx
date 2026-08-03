@@ -26,8 +26,8 @@ export default function ProjectCard({
       aria-label={`${title} — ${tags}`}
       className="group relative block w-full overflow-hidden rounded-lg
                  border border-[#161616] aspect-[892/528]
-                 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF6B1A]
-                 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a]"
+                 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent
+                 focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
       style={backgroundStyle ? { background: backgroundStyle } : undefined}
     >
       {/* Artwork — cropped to the card box, never stretched */}
@@ -57,8 +57,10 @@ export default function ProjectCard({
         className="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-black/70 to-transparent"
       />
 
-      {/* Top-left label. Width is capped so long titles wrap instead of
-          running across the mockup imagery. */}
+      {/* Top-left label. Stays white on purpose: it sits over the project
+          artwork (dark laptop photo, purple, gradient, product shot), which is
+          per-brand and unaffected by the site's light theme. Themed ink here
+          would be invisible on the Kapital card. */}
       <div
         className="absolute left-5 top-5 z-10 max-w-[calc(100%-2.5rem)]
                    lg:left-[29px] lg:top-[25px] lg:max-w-[596px]

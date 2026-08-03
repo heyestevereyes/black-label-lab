@@ -3,9 +3,12 @@ import { projects } from "@/data/projects";
 
 export default function ProjectsSection() {
   return (
-    <section id="proyectos" className="bg-[#0a0a0a] dot-grid px-6 py-16 lg:py-24">
+    <section
+      id="proyectos"
+      className="bg-surface dot-grid border-t border-hairline px-6 py-16 lg:py-24"
+    >
       {/* Heading — Figma: 66.746px / 0.15em tracking, same left margin as the nav logo */}
-      <h2 className="font-mono font-normal uppercase text-white
+      <h2 className="font-mono font-normal uppercase text-ink
                      text-[clamp(2rem,3.48vw,4.17rem)] tracking-[0.15em] leading-none">
         Proyectos
       </h2>

@@ -11,10 +11,16 @@ const config: Config = {
       fontFamily: {
         mono: ["var(--font-space-mono)", "monospace"],
         sans: ["var(--font-space-mono)", "monospace"],
+        // Hero headline only — 403 Neudron.
+        hero: ["var(--font-hero)", "monospace"],
       },
+      // Semantic aliases over the CSS custom properties in globals.css.
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        surface: "var(--bg-primary)",
+        elevated: "var(--bg-elevated)",
+        ink: "var(--text-primary)",
+        muted: "var(--text-secondary)",
+        hairline: "var(--border-subtle)",
         accent: "var(--accent)",
       },
     },
