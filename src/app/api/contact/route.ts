@@ -3,10 +3,10 @@ import { Resend } from "resend";
 // Destino compartido con el footer: se cambia en un solo sitio.
 import { CONTACT_EMAIL } from "@/data/site";
 
-// TODO: reemplazar con un remitente de un dominio verificado en Resend.
-// onboarding@resend.dev solo permite enviar al correo dueño de la cuenta,
-// asi que en produccion hay que verificar el dominio de Black Label.
-const FROM_EMAIL = "Black Label <onboarding@resend.dev>";
+// Remitente y destino son la misma dirección. Resend exige que el dominio
+// del remitente esté verificado en la cuenta (resend.com/domains); sin esa
+// verificación el envío responde 403 aunque la clave sea válida.
+const FROM_EMAIL = CONTACT_EMAIL;
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MAX = { nombre: 100, apellido: 100, correo: 254, mensaje: 5000 };
