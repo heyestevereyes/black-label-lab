@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    url: "https://nbdylabs.vercel.app",
+    url: "https://blacklabelmx.com",
     images: ["/og-image.png"],
     type: "website",
   },

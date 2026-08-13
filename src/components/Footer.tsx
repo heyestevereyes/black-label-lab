@@ -101,7 +101,7 @@ export default function Footer() {
       <div className="overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/wordmark.svg"
+          src="/bl-logo.svg"
           alt=""
           aria-hidden
           className="block w-full h-auto select-none"
