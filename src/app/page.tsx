@@ -1,6 +1,7 @@
 import HeroSection from "@/components/HeroSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import ContactSection from "@/components/ContactSection";
+import CalEmbed from "@/components/CalEmbed";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -10,6 +11,7 @@ export default function Home() {
         <HeroSection />
         <ProjectsSection />
         <ContactSection />
+        <CalEmbed />
       </main>
       <Footer />
     </>
