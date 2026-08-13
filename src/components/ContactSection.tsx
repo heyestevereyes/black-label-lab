@@ -94,8 +94,15 @@ export default function ContactSection() {
 
   const loading = status === "loading";
 
+  // El padding inferior va aparte del superior: la sección de agenda que
+  // sigue comparte el fondo negro, así que su propio padding superior ya
+  // aporta separación. Sumar los dos completos dejaba un hueco enorme entre
+  // el formulario y el calendario.
   return (
-    <section id="contacto" className="bg-black px-6 py-16 lg:py-24 overflow-hidden">
+    <section
+      id="contacto"
+      className="bg-black px-6 pt-16 pb-8 lg:pt-24 lg:pb-10 overflow-hidden"
+    >
       <div className="relative mx-auto max-w-[1600px]">
 
         {/* Título de fondo. Mismo display condensado que el wordmark.
