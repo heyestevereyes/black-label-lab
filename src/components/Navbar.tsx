@@ -11,7 +11,7 @@ export default function Navbar() {
         {/* Hidden below md: the bar is already tight at 375px, and this is
             supporting copy rather than navigation. */}
         <span className="hidden md:block font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
-          Bienvenidos a Black Label Lab
+          Black Label Diseño y Desarrollo
         </span>
       </div>
 

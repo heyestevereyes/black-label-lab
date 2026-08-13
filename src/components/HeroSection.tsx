@@ -1,5 +1,5 @@
 import Navbar from "@/components/Navbar";
-import PixelMascot from "@/components/PixelMascot";
+import FloatingMascot from "@/components/FloatingMascot";
 
 export default function HeroSection() {
   return (
@@ -58,19 +58,8 @@ export default function HeroSection() {
         </div>
       </section>
 
-      {/* ── MASCOT — pinned bottom-right of the viewport ──
-           Out of the document flow entirely, so it leaves no gap where it used
-           to sit. The component itself is untouched: size/border/animation all
-           come from PixelMascot as before. The wrapper only positions it, and
-           the className override shrinks it on small screens (CSS beats the
-           SVG's width/height attributes) so it clears phone gesture bars.
-           pointer-events-none guarantees it can never intercept a click. */}
-      <div className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50 pointer-events-none">
-        <PixelMascot
-          size={68}
-          className="w-[48px] h-[48px] md:w-[68px] md:h-[68px]"
-        />
-      </div>
+      {/* Mascota fija abajo a la derecha; compartida con el detalle de proyecto. */}
+      <FloatingMascot />
 
     </div>
   );

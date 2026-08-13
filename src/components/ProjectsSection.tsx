@@ -21,9 +21,13 @@ export default function ProjectsSection() {
         {projects.map((project) => (
           <ProjectCard
             key={project.slug}
-            title={project.title}
-            tags={project.tags}
-            mockupImage={project.mockupImage}
+            title={project.name}
+            /* tags es string[] en el modelo; la tarjeta lo muestra como
+               una sola línea de texto. */
+            tags={project.tags.join(", ")}
+            /* La portada cae a mainImage salvo que el proyecto declare una
+               propia — Kapital sí lo hace. */
+            mockupImage={project.cardImage ?? project.mainImage}
             backgroundStyle={project.backgroundStyle}
             overlayOpacity={project.overlayOpacity}
             href={`/proyectos/${project.slug}`}
