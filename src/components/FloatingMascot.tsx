@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import PixelMascot from "@/components/PixelMascot";
 import { WHATSAPP_URL } from "@/data/site";
 
@@ -17,12 +18,14 @@ import { WHATSAPP_URL } from "@/data/site";
  * cuidar que no se solape con controles de la página.
  */
 export default function FloatingMascot() {
+  const t = useTranslations("mascot");
+
   return (
     <a
       href={WHATSAPP_URL}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Envíame un mensaje por WhatsApp"
+      aria-label={t("aria")}
       className="group fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50
                  flex items-center gap-2 rounded-lg
                  focus:outline-none focus-visible:ring-2 focus-visible:ring-accent
@@ -37,7 +40,7 @@ export default function FloatingMascot() {
                    text-ink whitespace-nowrap shadow-sm
                    transition-transform duration-200 group-hover:-translate-y-0.5"
       >
-        Envíame un mensaje
+        {t("bubble")}
         {/* Colita apuntando al sprite */}
         <span
           className="absolute -right-[5px] top-1/2 h-2 w-2 -translate-y-1/2 rotate-45

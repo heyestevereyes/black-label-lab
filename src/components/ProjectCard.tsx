@@ -1,5 +1,7 @@
 import Image from "next/image";
-import Link from "next/link";
+// Link de next-intl: añade el prefijo de idioma solo, así /proyectos/kapital
+// se resuelve a /es/... o /en/... según la ruta activa.
+import { Link } from "@/i18n/navigation";
 
 export interface ProjectCardProps {
   title: string;

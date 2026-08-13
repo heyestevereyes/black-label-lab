@@ -1,0 +1,54 @@
+{
+  "nav": {
+    "projects": "PROYECTOS",
+    "lab": "LAB",
+    "bookCall": "AGENDAR LLAMADA",
+    "greeting": "BIENVENIDOS A BLACK LABEL LAB"
+  },
+  "hero": {
+    "copy": "Somos una empresa creativa de diseño y desarrollo con más de <highlight>10 AÑOS</highlight> de experiencia construyendo proyectos de <highlight>BRANDING, WEB, ANIMACIÓN Y COMUNICACIÓN</highlight>."
+  },
+  "projects": {
+    "heading": "PROYECTOS",
+    "prev": "PROYECTO ANTERIOR",
+    "next": "PROYECTO SIGUIENTE",
+    "back": "← Volver a proyectos",
+    "mainImage": "Imagen principal",
+    "wip": "Caso de estudio en construcción."
+  },
+  "footer": {
+    "tagline": "Haz de tu marca la elección obvia",
+    "contact": "Contacto",
+    "navigation": "Navegación",
+    "social": "Redes"
+  },
+  "contact": {
+    "heading": "CONTACTO",
+    "label": "CONTÁCTANOS",
+    "firstName": "Nombre",
+    "lastName": "Apellido",
+    "email": "Correo electrónico",
+    "message": "Mensaje",
+    "consent": "Doy permiso a Black Label de contactarme a este correo.",
+    "messagePlaceholder": "Escribe tu mensaje aquí",
+    "legal": "Este sitio está protegido y sujeto a nuestra política de privacidad.",
+    "send": "Enviar",
+    "sending": "Enviando...",
+    "success": "¡Mensaje enviado! Te contactaremos pronto.",
+    "errorRequired": "Completa todos los campos.",
+    "errorEmail": "Escribe un correo electrónico válido.",
+    "errorConsent": "Necesitamos tu permiso para contactarte.",
+    "errorSend": "No pudimos enviar el mensaje. Intenta de nuevo.",
+    "errorNetwork": "No pudimos conectar con el servidor. Revisa tu conexión."
+  },
+  "cal": {
+    "heading": "AGENDA UNA LLAMADA"
+  },
+  "mascot": {
+    "bubble": "Envíame un mensaje",
+    "aria": "Envíame un mensaje por WhatsApp"
+  },
+  "locale": {
+    "switchTo": "Cambiar idioma a inglés"
+  }
+}

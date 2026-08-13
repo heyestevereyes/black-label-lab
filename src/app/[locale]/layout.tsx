@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
 import { Space_Mono } from "next/font/google";
 import localFont from "next/font/local";
-import "./globals.css";
+import { notFound } from "next/navigation";
+import { NextIntlClientProvider, hasLocale } from "next-intl";
+import { setRequestLocale } from "next-intl/server";
+import "../globals.css";
+import { routing } from "@/i18n/routing";
 import { SITE_TITLE, SITE_DESCRIPTION } from "@/data/site";
+import SmoothScrollProvider from "@/components/SmoothScrollProvider";
 
 const spaceMono = Space_Mono({
   weight: ["400", "700"],
@@ -25,7 +30,7 @@ const spaceMono = Space_Mono({
   HeroSection's h1. Everything else stays on Space Mono.
 */
 const heroFont = localFont({
-  src: "../../public/403-neudron-regular.woff2",
+  src: "../../../public/403-neudron-regular.woff2",
   weight: "normal",
   style: "normal",
   display: "swap",
@@ -50,18 +55,33 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+/** Pre-genera /es y /en en el build en vez de resolverlos por petición. */
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
+export default async function LocaleLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: { locale: string };
 }>) {
+  const { locale } = params;
+  if (!hasLocale(routing.locales, locale)) notFound();
+
+  // Necesario para que las páginas de abajo puedan ser estáticas.
+  setRequestLocale(locale);
+
   return (
-    <html lang="es">
+    <html lang={locale}>
       {/* Colours come from the body rule in globals.css (light theme tokens). */}
       {/* --font-hero is only exposed here; nothing inherits it without
           opting in via the `font-hero` utility. */}
       <body className={`${spaceMono.variable} ${heroFont.variable} font-mono antialiased`}>
-        {children}
+        <NextIntlClientProvider>
+          <SmoothScrollProvider>{children}</SmoothScrollProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

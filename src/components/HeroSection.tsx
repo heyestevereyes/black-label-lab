@@ -1,7 +1,10 @@
+import { useTranslations } from "next-intl";
 import Navbar from "@/components/Navbar";
 import FloatingMascot from "@/components/FloatingMascot";
 
 export default function HeroSection() {
+  const t = useTranslations("hero");
+
   return (
     <div className="bg-surface dot-grid min-h-screen">
 
@@ -27,16 +30,18 @@ export default function HeroSection() {
           />
         </h1>
 
-        {/* Main copy — centred block */}
-        <p className="mx-auto mt-10 max-w-4xl text-center font-mono text-ink
+        {/* Main copy — centred block.
+            El texto viene de messages/{locale}.json con etiquetas
+            <highlight>; t.rich las convierte en los spans naranjas, así
+            que la traducción controla qué se resalta en cada idioma.
+            uppercase lo aplica el CSS: los mensajes van en caja normal. */}
+        <p className="mx-auto mt-10 max-w-4xl text-center font-mono uppercase text-ink
                       text-[clamp(0.8125rem,1.1vw,1.0625rem)] leading-[1.9] tracking-[0.14em]">
-          SOMOS UNA EMPRESA CREATIVA DE DISEÑO Y DESARROLLO CON MÁS DE{" "}
-          <span className="text-accent">10 AÑOS</span> DE EXPERIENCIA
-          CONSTRUYENDO PROYECTOS DE{" "}
-          <span className="text-accent">
-            UX, BRANDING, WEB, ANIMACIÓN Y COMUNICACIÓN
-          </span>
-          .
+          {t.rich("copy", {
+            highlight: (chunks) => (
+              <span className="text-accent">{chunks}</span>
+            ),
+          })}
         </p>
       </section>
 

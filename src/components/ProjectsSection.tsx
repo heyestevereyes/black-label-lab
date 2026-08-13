@@ -1,7 +1,12 @@
+import { useTranslations, useLocale } from "next-intl";
 import ProjectCard from "@/components/ProjectCard";
 import { projects } from "@/data/projects";
+import type { Locale } from "@/i18n/routing";
 
 export default function ProjectsSection() {
+  const t = useTranslations("projects");
+  const locale = useLocale() as Locale;
+
   return (
     <section
       id="proyectos"
@@ -10,7 +15,7 @@ export default function ProjectsSection() {
       {/* Heading — Figma: 66.746px / 0.15em tracking, same left margin as the nav logo */}
       <h2 className="font-mono font-normal uppercase text-ink
                      text-[clamp(2rem,3.48vw,4.17rem)] tracking-[0.15em] leading-none">
-        Proyectos
+        {t("heading")}
       </h2>
 
       {/* Grid — Figma gaps: 37px column, 39px row.
@@ -24,7 +29,7 @@ export default function ProjectsSection() {
             title={project.name}
             /* tags es string[] en el modelo; la tarjeta lo muestra como
                una sola línea de texto. */
-            tags={project.tags.join(", ")}
+            tags={project.tags[locale].join(", ")}
             /* La portada cae a mainImage salvo que el proyecto declare una
                propia — Kapital sí lo hace. */
             mockupImage={project.cardImage ?? project.mainImage}

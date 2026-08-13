@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 type Status = "idle" | "loading" | "success" | "error";
 
@@ -25,6 +26,7 @@ const LABEL =
   "block font-mono text-[10px] uppercase tracking-[0.18em] text-white/50 mb-2";
 
 export default function ContactSection() {
+  const t = useTranslations("contact");
   const [form, setForm] = useState(EMPTY);
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
@@ -44,13 +46,13 @@ export default function ContactSection() {
       !form.correo.trim() ||
       !form.mensaje.trim()
     ) {
-      return "Completa todos los campos.";
+      return t("errorRequired");
     }
     if (!EMAIL_RE.test(form.correo.trim())) {
-      return "Escribe un correo electrónico válido.";
+      return t("errorEmail");
     }
     if (!form.permiso) {
-      return "Necesitamos tu permiso para contactarte.";
+      return t("errorConsent");
     }
     return null;
   }
@@ -79,16 +81,16 @@ export default function ContactSection() {
 
       if (!res.ok) {
         setStatus("error");
-        setMessage(data?.error ?? "No pudimos enviar el mensaje. Intenta de nuevo.");
+        setMessage(data?.error ?? t("errorSend"));
         return;
       }
 
       setStatus("success");
-      setMessage("¡Mensaje enviado! Te contactaremos pronto.");
+      setMessage(t("success"));
       setForm(EMPTY);
     } catch {
       setStatus("error");
-      setMessage("No pudimos conectar con el servidor. Revisa tu conexión.");
+      setMessage(t("errorNetwork"));
     }
   }
 
@@ -118,7 +120,7 @@ export default function ContactSection() {
           className="font-hero uppercase text-white leading-[0.8] tracking-normal
                      text-[clamp(3rem,30vw,36rem)] select-none"
         >
-          Contacto
+          {t("heading")}
         </h2>
 
         {/* Tarjeta: centrada, con tope de 1200px. En móvil/tablet se apila
@@ -130,14 +132,14 @@ export default function ContactSection() {
                      p-6 sm:p-8"
         >
           <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-accent mb-6">
-            Contáctanos
+            {t("label")}
           </p>
 
           <form onSubmit={handleSubmit} noValidate>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label htmlFor="nombre" className={LABEL}>
-                  Nombre
+                  {t("firstName")}
                 </label>
                 <input
                   id="nombre"
@@ -155,7 +157,7 @@ export default function ContactSection() {
 
               <div>
                 <label htmlFor="apellido" className={LABEL}>
-                  Apellido
+                  {t("lastName")}
                 </label>
                 <input
                   id="apellido"
@@ -174,7 +176,7 @@ export default function ContactSection() {
 
             <div className="mt-4">
               <label htmlFor="correo" className={LABEL}>
-                Correo electrónico
+                {t("email")}
               </label>
               <input
                 id="correo"
@@ -205,13 +207,13 @@ export default function ContactSection() {
                 htmlFor="permiso"
                 className="font-mono text-[11px] leading-relaxed text-white/70"
               >
-                Doy permiso a Black Label de contactarme a este correo.
+                {t("consent")}
               </label>
             </div>
 
             <div className="mt-5">
               <label htmlFor="mensaje" className={LABEL}>
-                Mensaje
+                {t("message")}
               </label>
               <textarea
                 id="mensaje"
@@ -219,7 +221,7 @@ export default function ContactSection() {
                 required
                 rows={5}
                 maxLength={5000}
-                placeholder="Escribe tu mensaje aquí"
+                placeholder={t("messagePlaceholder")}
                 className={`${FIELD} resize-y min-h-[120px]`}
                 value={form.mensaje}
                 onChange={(e) => update("mensaje", e.target.value)}
@@ -228,8 +230,7 @@ export default function ContactSection() {
             </div>
 
             <p className="mt-4 font-mono text-[10px] leading-relaxed text-white/40">
-              Este sitio está protegido y sujeto a nuestra política de
-              privacidad.
+              {t("legal")}
             </p>
 
             {/* Texto oscuro sobre naranja: blanco sobre #FF6B1A da 2.85:1
@@ -245,7 +246,7 @@ export default function ContactSection() {
                          focus:outline-none focus-visible:ring-2 focus-visible:ring-white
                          focus-visible:ring-offset-2 focus-visible:ring-offset-black"
             >
-              {loading ? "Enviando..." : "Enviar"}
+              {loading ? t("sending") : t("send")}
               {!loading && <span aria-hidden>→</span>}
             </button>
 

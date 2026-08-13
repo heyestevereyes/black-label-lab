@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import Navbar from "@/components/Navbar";
 import FloatingMascot from "@/components/FloatingMascot";
 import ProjectCard from "@/components/ProjectCard";
@@ -9,13 +10,18 @@ import Footer from "@/components/Footer";
 import { SITE_NAME } from "@/data/site";
 import { projects } from "@/data/projects";
 import { DEFAULT_VIDEO_ASPECT_RATIO } from "@/types/project";
+import { routing, type Locale } from "@/i18n/routing";
 
 interface PageProps {
-  params: { slug: string };
+  params: { slug: string; locale: Locale };
 }
 
+/* Un par (locale, slug) por combinacion: pre-genera las 4 paginas en
+   los 2 idiomas. */
 export function generateStaticParams() {
-  return projects.map((project) => ({ slug: project.slug }));
+  return routing.locales.flatMap((locale) =>
+    projects.map((project) => ({ locale, slug: project.slug }))
+  );
 }
 
 export function generateMetadata({ params }: PageProps): Metadata {
@@ -24,11 +30,15 @@ export function generateMetadata({ params }: PageProps): Metadata {
 
   return {
     title: `${project.name} — ${SITE_NAME}`,
-    description: project.tags.join(", "),
+    description: project.tags[params.locale].join(", "),
   };
 }
 
-export default function ProjectPage({ params }: PageProps) {
+export default async function ProjectPage({ params }: PageProps) {
+  const { locale } = params;
+  setRequestLocale(locale);
+  const t = await getTranslations("projects");
+
   const index = projects.findIndex((p) => p.slug === params.slug);
   if (index === -1) notFound();
 
@@ -53,7 +63,7 @@ export default function ProjectPage({ params }: PageProps) {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={project.mainImage}
-            alt={`${project.name} — imagen principal`}
+            alt={`${project.name} — ${t("mainImage")}`}
             fetchPriority="high"
             decoding="async"
             className="block h-auto w-full rounded-lg"
@@ -70,7 +80,7 @@ export default function ProjectPage({ params }: PageProps) {
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16">
             {/* Descripción */}
             <p className="order-2 lg:order-1 pl-5 font-mono text-[13px] leading-[1.9] tracking-[0.04em] text-muted">
-              {project.description}
+              {project.description[locale]}
             </p>
 
             {/* Nombre + tags */}
@@ -83,7 +93,7 @@ export default function ProjectPage({ params }: PageProps) {
               </h1>
 
               <ul className="mt-6 flex flex-wrap gap-2">
-                {project.tags.map((tag) => (
+                {project.tags[locale].map((tag) => (
                   <li
                     key={tag}
                     className="rounded-full border border-ink/25 px-4 py-1.5
@@ -147,11 +157,11 @@ export default function ProjectPage({ params }: PageProps) {
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-[37px]">
             <div>
               <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.22em] text-muted">
-                Proyecto anterior
+                {t("prev")}
               </p>
               <ProjectCard
                 title={previous.name}
-                tags={previous.tags.join(", ")}
+                tags={previous.tags[locale].join(", ")}
                 mockupImage={previous.cardImage ?? previous.mainImage}
                 backgroundStyle={previous.backgroundStyle}
                 overlayOpacity={previous.overlayOpacity}
@@ -161,11 +171,11 @@ export default function ProjectPage({ params }: PageProps) {
 
             <div>
               <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.22em] text-muted">
-                Proyecto siguiente
+                {t("next")}
               </p>
               <ProjectCard
                 title={next.name}
-                tags={next.tags.join(", ")}
+                tags={next.tags[locale].join(", ")}
                 mockupImage={next.cardImage ?? next.mainImage}
                 backgroundStyle={next.backgroundStyle}
                 overlayOpacity={next.overlayOpacity}
@@ -179,7 +189,7 @@ export default function ProjectPage({ params }: PageProps) {
             className="mt-12 inline-block font-mono text-[11px] uppercase tracking-[0.18em]
                        text-accent hover:opacity-70 transition-opacity"
           >
-            ← Volver a proyectos
+            {t("back")}
           </Link>
         </section>
 

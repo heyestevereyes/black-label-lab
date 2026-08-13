@@ -1,0 +1,54 @@
+{
+  "nav": {
+    "projects": "PROJECTS",
+    "lab": "LAB",
+    "bookCall": "BOOK A CALL",
+    "greeting": "WELCOME TO BLACK LABEL LAB"
+  },
+  "hero": {
+    "copy": "We are a creative design and development studio with over <highlight>10 YEARS</highlight> of experience building <highlight>BRANDING, WEB, ANIMATION, AND COMMUNICATION</highlight> projects."
+  },
+  "projects": {
+    "heading": "PROJECTS",
+    "prev": "PREVIOUS PROJECT",
+    "next": "NEXT PROJECT",
+    "back": "← Back to projects",
+    "mainImage": "Main image",
+    "wip": "Case study in progress."
+  },
+  "footer": {
+    "tagline": "Make your brand the obvious choice",
+    "contact": "Contact",
+    "navigation": "Navigation",
+    "social": "Social"
+  },
+  "contact": {
+    "heading": "CONTACT",
+    "label": "GET IN TOUCH",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "message": "Message",
+    "consent": "I give Black Label permission to contact me at this email.",
+    "messagePlaceholder": "Type your message here",
+    "legal": "This site is protected and subject to our privacy policy.",
+    "send": "Send",
+    "sending": "Sending...",
+    "success": "Message sent! We'll be in touch soon.",
+    "errorRequired": "Please fill in every field.",
+    "errorEmail": "Enter a valid email address.",
+    "errorConsent": "We need your permission to contact you.",
+    "errorSend": "We couldn't send your message. Please try again.",
+    "errorNetwork": "We couldn't reach the server. Check your connection."
+  },
+  "cal": {
+    "heading": "BOOK A CALL"
+  },
+  "mascot": {
+    "bubble": "Send me a message",
+    "aria": "Send me a message on WhatsApp"
+  },
+  "locale": {
+    "switchTo": "Switch language to Spanish"
+  }
+}

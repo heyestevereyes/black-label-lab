@@ -1,3 +1,8 @@
+import type { Locale } from "@/i18n/routing";
+
+/** Valor con una variante por idioma. */
+export type Localized<T> = Record<Locale, T>;
+
 /**
  * Un elemento de la galería del detalle de proyecto.
  *
@@ -18,17 +23,18 @@ export const DEFAULT_VIDEO_ASPECT_RATIO = "56.25%";
 
 /**
  * Forma de un proyecto. Tipar el catálogo con esta interface hace que
- * TypeScript valide cualquier proyecto que se agregue en el futuro.
+ * TypeScript valide cualquier proyecto que se agregue en el futuro —
+ * incluido que traiga los dos idiomas.
  */
 export interface Project {
-  /** Segmento de URL — resuelve a /proyectos/[slug] */
+  /** Segmento de URL — resuelve a /[locale]/proyectos/[slug] */
   slug: string;
-  /** Nombre del proyecto */
+  /** Nombre del proyecto; igual en los dos idiomas. */
   name: string;
-  /** Categorías; se renderizan como pills en el detalle */
-  tags: string[];
-  /** Texto de introducción del detalle */
-  description: string;
+  /** Categorías por idioma; se renderizan como pills en el detalle. */
+  tags: Localized<string[]>;
+  /** Texto de introducción del detalle, por idioma. */
+  description: Localized<string>;
   /** Imagen principal del detalle */
   mainImage: string;
   /**

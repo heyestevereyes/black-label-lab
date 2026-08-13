@@ -29,11 +29,12 @@ export const WHATSAPP_URL = `https://wa.me/${CONTACT_PHONE.replace(/\D/g, "")}`;
 
 /**
  * Enlaces de navegación. Compartidos por el navbar y el footer para que
- * las dos listas no se desincronicen.
+ * las dos listas no se desincronicen. Se guarda la clave de traducción,
+ * no el texto: la etiqueta sale de messages/{locale}.json bajo "nav".
  */
 export const NAV_LINKS = [
-  { label: "Proyectos", href: "#proyectos" },
-  { label: "Lab", href: "#lab" },
+  { key: "projects", href: "#proyectos" },
+  { key: "lab", href: "#lab" },
 ] as const;
 
 /** Redes sociales. Apuntan fuera del sitio, así que el footer las abre

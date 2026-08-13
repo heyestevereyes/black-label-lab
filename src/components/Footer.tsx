@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import BrandMark from "@/components/BrandMark";
 import {
   CONTACT_EMAIL,
@@ -13,6 +14,9 @@ const COLUMN_LINK =
   "font-mono text-[13px] uppercase tracking-[0.14em] text-ink hover:text-accent transition-colors";
 
 export default function Footer() {
+  const t = useTranslations("footer");
+  const tNav = useTranslations("nav");
+
   return (
     <footer className="bg-surface">
       {/* ── FILA SUPERIOR + COLUMNAS ── */}
@@ -26,20 +30,20 @@ export default function Footer() {
                        text-[clamp(1.5rem,3.2vw,2.75rem)]
                        sm:text-right sm:max-w-[60%]"
           >
-            Haz de tu marca la elección obvia
+            {t("tagline")}
           </p>
         </div>
 
         {/* Tres columnas — apiladas en móvil */}
         <div className="mt-14 grid grid-cols-1 gap-10 sm:grid-cols-3 lg:mt-20">
           {/* Navegación */}
-          <nav aria-label="Navegación del pie">
-            <h2 className={COLUMN_HEADING}>Navegación</h2>
+          <nav aria-label={t("navigation")}>
+            <h2 className={COLUMN_HEADING}>{t("navigation")}</h2>
             <ul className="flex flex-col gap-3">
               {NAV_LINKS.map((link) => (
                 <li key={link.href}>
                   <a href={link.href} className={COLUMN_LINK}>
-                    {link.label}
+                    {tNav(link.key)}
                   </a>
                 </li>
               ))}
@@ -48,7 +52,7 @@ export default function Footer() {
 
           {/* Contacto */}
           <div>
-            <h2 className={COLUMN_HEADING}>Contacto</h2>
+            <h2 className={COLUMN_HEADING}>{t("contact")}</h2>
             <ul className="flex flex-col gap-3">
               <li>
                 <a
@@ -71,7 +75,7 @@ export default function Footer() {
 
           {/* Redes sociales */}
           <div>
-            <h2 className={COLUMN_HEADING}>Redes</h2>
+            <h2 className={COLUMN_HEADING}>{t("social")}</h2>
             <ul className="flex flex-col gap-3">
               {SOCIAL_LINKS.map((social) => (
                 <li key={social.label}>

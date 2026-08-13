@@ -2,11 +2,14 @@
 
 import Cal, { getCalApi } from "@calcom/embed-react";
 import { useEffect } from "react";
+import { useTranslations } from "next-intl";
 
 const NAMESPACE = "tengo-un-proyecto-nuevo";
 const CAL_LINK = "esteve-reyes-cgtomq/tengo-un-proyecto-nuevo";
 
 export default function CalEmbed() {
+  const t = useTranslations("cal");
+
   useEffect(() => {
     (async function () {
       const cal = await getCalApi({ namespace: NAMESPACE });
@@ -22,7 +25,7 @@ export default function CalEmbed() {
           no pasa AA en texto pequeño. El naranja da 7.37:1 y además repite
           el color de la etiqueta "Contáctanos" de la sección anterior. */}
       <h2 className="font-mono text-[10px] uppercase tracking-[0.22em] text-accent">
-        Agenda una llamada
+        {t("heading")}
       </h2>
 
       {/* min-height en vez de altura fija: Cal.com cambia de layout según el
