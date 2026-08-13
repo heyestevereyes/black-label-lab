@@ -36,12 +36,13 @@ export const NAV_LINKS = [
   { label: "Lab", href: "#lab" },
 ] as const;
 
-/** Redes sociales. */
+/** Redes sociales. Apuntan fuera del sitio, así que el footer las abre
+ *  en pestaña nueva con rel="noopener noreferrer". */
 export const SOCIAL_LINKS = [
-  // TODO: agregar URL real
-  { label: "LinkedIn", href: "#" },
-  // TODO: agregar URL real
-  { label: "Instagram", href: "#" },
-  // TODO: agregar URL real
-  { label: "Behance", href: "#" },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/estevereyes-design/",
+  },
+  { label: "Instagram", href: "https://www.instagram.com/esteve.king/" },
+  { label: "Behance", href: "https://www.behance.net/heyestevereyes" },
 ] as const;

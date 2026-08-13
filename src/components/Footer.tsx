@@ -75,7 +75,14 @@ export default function Footer() {
             <ul className="flex flex-col gap-3">
               {SOCIAL_LINKS.map((social) => (
                 <li key={social.label}>
-                  <a href={social.href} className={COLUMN_LINK}>
+                  {/* Salen del sitio: pestaña nueva, y noopener para que la
+                      página destino no reciba acceso a window.opener. */}
+                  <a
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={COLUMN_LINK}
+                  >
                     {social.label}
                   </a>
                 </li>
