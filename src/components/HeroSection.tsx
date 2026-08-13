@@ -20,8 +20,8 @@ export default function HeroSection() {
         <h1 className="m-0">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/bl-logo.svg"
-            alt="Black Label"
+            src="/wordmark.svg"
+            alt="Esteve Reyes"
             className="block w-full h-auto"
             draggable={false}
           />
@@ -30,11 +30,11 @@ export default function HeroSection() {
         {/* Main copy — centred block */}
         <p className="mx-auto mt-10 max-w-4xl text-center font-mono text-ink
                       text-[clamp(0.8125rem,1.1vw,1.0625rem)] leading-[1.9] tracking-[0.14em]">
-          SOMOS UNA EMPRESA CREATIVA DE DISEÑO Y DESARROLLO CON MÁS DE{" "}
+          SOY UN DISEÑADOR Y DESARROLLADOR CREATIVO CON MÁS DE{" "}
           <span className="text-accent">10 AÑOS</span> DE EXPERIENCIA
           CONSTRUYENDO PROYECTOS DE{" "}
           <span className="text-accent">
-            BRANDING, WEB, ANIMACIÓN Y COMUNICACIÓN
+            UX, BRANDING, WEB, ANIMACIÓN Y COMUNICACIÓN
           </span>
           .
         </p>

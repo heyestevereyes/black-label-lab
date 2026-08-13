@@ -8,11 +8,11 @@ interface BrandMarkProps {
 }
 
 /**
- * Monograma "B" de Black Label (fuente 193x124, ~1.56:1), envuelto en el
- * enlace a home. Compartido por el navbar y el footer.
+ * Ícono de bandera (fuente 193x124, ~1.56:1), envuelto en el enlace a home.
+ * Compartido por el navbar y el footer.
  *
  * alt="" a propósito: el aria-label del enlace ya anuncia la marca, y el
- * wordmark del hero la lleva como h1 de la página. Un segundo "Black Label"
+ * wordmark del hero la lleva como h1 de la página. Un segundo "Esteve Reyes"
  * aquí solo se leería dos veces.
  */
 export default function BrandMark({
@@ -26,10 +26,10 @@ export default function BrandMark({
     <a
       href="/"
       className={`flex items-center ${className}`}
-      aria-label="Black Label home"
+      aria-label="Esteve Reyes home"
     >
       <Image
-        src="/blacklabel-logo.svg"
+        src="/flag.svg"
         alt=""
         width={width}
         height={height}

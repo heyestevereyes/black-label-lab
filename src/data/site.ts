@@ -3,7 +3,7 @@
  * renders the brand name — root metadata, per-project page titles, etc.
  */
 
-export const SITE_NAME = "Black Label Studio";
+export const SITE_NAME = "Esteve Reyes";
 
 /** Browser tab / <title> and social card headline. */
 export const SITE_TITLE = `${SITE_NAME} | Diseño y Desarrollo Web`;
@@ -15,11 +15,17 @@ export const SITE_DESCRIPTION =
  * Datos de contacto. Viven aquí y no en la API route para que el footer
  * pueda mostrarlos sin importar código de servidor al bundle del cliente.
  */
-// TODO: reemplazar con el correo real de destino
-export const CONTACT_EMAIL = "pending@blacklabel.com";
+export const CONTACT_EMAIL = "hey@estevereyes.com";
 
-// TODO: reemplazar con teléfono real
-export const CONTACT_PHONE = "+52 000 000 0000";
+// Alimenta el teléfono del footer y el enlace de WhatsApp del sprite.
+export const CONTACT_PHONE = "+52 442 377 6196";
+
+/**
+ * Enlace de WhatsApp derivado de CONTACT_PHONE. wa.me exige el número en
+ * formato internacional sin "+", espacios ni guiones, así que se limpia
+ * todo lo que no sea dígito.
+ */
+export const WHATSAPP_URL = `https://wa.me/${CONTACT_PHONE.replace(/\D/g, "")}`;
 
 /**
  * Enlaces de navegación. Compartidos por el navbar y el footer para que
