@@ -200,7 +200,19 @@ export default function PixelMascot({ size = 32, className = "" }: PixelMascotPr
     >
       {/* Head */}
       <rect x="1" y="1" width="30" height="30" rx="4" fill="#111111" />
-      <rect x="1" y="1" width="30" height="30" rx="4" stroke="#FF4C02" strokeWidth="1.5" />
+      {/* stroke-accent y no un hex: el borde sigue al token --accent, así
+          que si el rosa de marca cambia, la mascota lo acompaña. Va como
+          clase porque los atributos de presentación de SVG no resuelven
+          var(). */}
+      <rect
+        x="1"
+        y="1"
+        width="30"
+        height="30"
+        rx="4"
+        className="stroke-accent"
+        strokeWidth="1.5"
+      />
       {/* Eyes */}
       <Eye cx={LX} expr={expr} isLeft={true}  blink={blink} />
       <Eye cx={RX} expr={expr} isLeft={false} blink={blink} />
