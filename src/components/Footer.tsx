@@ -26,7 +26,7 @@ export default function Footer() {
           <BrandMark width={56} />
 
           <p
-            className="font-hero uppercase text-ink leading-[0.95] tracking-normal
+            className="font-satoshi font-bold uppercase text-ink leading-[0.95] tracking-normal
                        text-[clamp(1.5rem,3.2vw,2.75rem)]
                        sm:text-right sm:max-w-[60%]"
           >
@@ -105,7 +105,7 @@ export default function Footer() {
       <div className="overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/bl-logo.svg"
+          src="/somosmas-logo.svg"
           alt=""
           aria-hidden
           className="block w-full h-auto select-none"

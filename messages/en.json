@@ -3,7 +3,7 @@
     "projects": "PROJECTS",
     "lab": "LAB",
     "bookCall": "BOOK A CALL",
-    "greeting": "WELCOME TO BLACK LABEL LAB"
+    "greeting": "WELCOME TO SOMOS MÁS STUDIO"
   },
   "hero": {
     "copy": "We are a creative design and development studio with over <highlight>10 YEARS</highlight> of experience building <highlight>BRANDING, WEB, ANIMATION, AND COMMUNICATION</highlight> projects."
@@ -29,7 +29,7 @@
     "lastName": "Last Name",
     "email": "Email",
     "message": "Message",
-    "consent": "I give Black Label permission to contact me at this email.",
+    "consent": "I give Somos Más Studio permission to contact me at this email.",
     "messagePlaceholder": "Type your message here",
     "legal": "This site is protected and subject to our privacy policy.",
     "send": "Send",

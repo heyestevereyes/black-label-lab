@@ -9,9 +9,15 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
+        // Satoshi es la principal: titulares, hero y títulos de sección
+        // grandes. Se carga desde Fontshare con un <link> en el layout, no
+        // por next/font, así que va por nombre y no por variable CSS.
+        satoshi: ["Satoshi", "sans-serif"],
+        sans: ["Satoshi", "sans-serif"],
+        // Space Mono se conserva para body copy, subheaders y labels.
         mono: ["var(--font-space-mono)", "monospace"],
-        sans: ["var(--font-space-mono)", "monospace"],
-        // Hero headline only — 403 Neudron.
+        // 403 Neudron. Sin uso desde que Satoshi tomó el rol de display;
+        // se deja registrada por si vuelve a hacer falta.
         hero: ["var(--font-hero)", "monospace"],
       },
       // Semantic aliases over the CSS custom properties in globals.css.
@@ -22,6 +28,7 @@ const config: Config = {
         muted: "var(--text-secondary)",
         hairline: "var(--border-subtle)",
         accent: "var(--accent)",
+        magenta: "var(--accent-magenta)",
       },
     },
   },

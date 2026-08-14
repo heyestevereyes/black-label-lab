@@ -117,7 +117,7 @@ export default function ContactSection() {
             leading-[0.8] recorta el espacio muerto sobre y bajo las mayúsculas
             para que la tarjeta pueda solaparse sin chocar con las letras. */}
         <h2
-          className="font-hero uppercase text-white leading-[0.8] tracking-normal
+          className="font-satoshi font-bold uppercase text-white leading-[0.8] tracking-normal
                      text-[clamp(3rem,30vw,36rem)] select-none"
         >
           {t("heading")}

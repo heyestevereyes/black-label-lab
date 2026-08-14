@@ -86,7 +86,7 @@ export default async function ProjectPage({ params }: PageProps) {
             {/* Nombre + tags */}
             <div className="order-1 lg:order-2 lg:pl-4">
               <h1
-                className="font-hero uppercase text-ink leading-[0.95] tracking-normal
+                className="font-satoshi font-bold uppercase text-ink leading-[0.95] tracking-normal
                            text-[clamp(2rem,5vw,4rem)]"
               >
                 {project.name}

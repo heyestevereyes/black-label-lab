@@ -13,8 +13,11 @@ export default function ProjectsSection() {
       className="bg-surface dot-grid border-t border-hairline px-6 py-16 lg:py-24"
     >
       {/* Heading — Figma: 66.746px / 0.15em tracking, same left margin as the nav logo */}
-      <h2 className="font-mono font-normal uppercase text-ink
-                     text-[clamp(2rem,3.48vw,4.17rem)] tracking-[0.15em] leading-none">
+      {/* Satoshi, igual que el título de Contacto: los dos son títulos de
+          sección grandes. El tracking baja de 0.15em a normal porque ese
+          valor estaba calibrado para la monoespaciada. */}
+      <h2 className="font-satoshi font-bold uppercase text-ink
+                     text-[clamp(2rem,3.48vw,4.17rem)] tracking-tight leading-none">
         {t("heading")}
       </h2>
 

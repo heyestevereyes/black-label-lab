@@ -19,12 +19,17 @@
   --dot-color: rgba(20, 20, 20, 0.08);
   --border-subtle: rgba(20, 20, 20, 0.1);
   --accent: #ff6b1a;
+  /* Magenta de la frase rotativa del hero. 3.91:1 sobre --bg-primary:
+     pasa AA para texto grande, que es el único sitio donde se usa. */
+  --accent-magenta: #e6007e;
 }
 
+/* Satoshi es la principal del sitio; los bloques que deben seguir en
+   monoespaciada (body copy, subheaders, labels) lo piden con font-mono. */
 body {
   color: var(--text-primary);
   background: var(--bg-primary);
-  font-family: var(--font-space-mono), monospace;
+  font-family: "Satoshi", sans-serif;
 }
 
 .dot-grid {

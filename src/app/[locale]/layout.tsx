@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    url: "https://blacklabelmx.com",
+    url: "https://holasomosmas.com",
     images: ["/og-image.png"],
     type: "website",
   },
@@ -75,10 +75,22 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale}>
+      <head>
+        {/* Satoshi desde Fontshare. preconnect abre la conexión antes de que
+            el navegador descubra la hoja, lo que recorta la espera. */}
+        <link rel="preconnect" href="https://api.fontshare.com" />
+        <link
+          href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       {/* Colours come from the body rule in globals.css (light theme tokens). */}
       {/* --font-hero is only exposed here; nothing inherits it without
           opting in via the `font-hero` utility. */}
-      <body className={`${spaceMono.variable} ${heroFont.variable} font-mono antialiased`}>
+      {/* font-satoshi es la principal del sitio. Los bloques que deben
+          seguir en monoespaciada (body copy, subheaders, labels) piden
+          font-mono explícitamente, así que no dependen de esta herencia. */}
+      <body className={`${spaceMono.variable} ${heroFont.variable} font-satoshi antialiased`}>
         <NextIntlClientProvider>
           <SmoothScrollProvider>{children}</SmoothScrollProvider>
         </NextIntlClientProvider>

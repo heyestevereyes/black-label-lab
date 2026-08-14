@@ -1,48 +1,35 @@
-import { useTranslations } from "next-intl";
 import Navbar from "@/components/Navbar";
 import FloatingMascot from "@/components/FloatingMascot";
+import RotatingPhrase from "@/components/RotatingPhrase";
 
 export default function HeroSection() {
-  const t = useTranslations("hero");
-
   return (
     <div className="bg-surface dot-grid min-h-screen">
 
       {/* ── NAVBAR ── */}
       <Navbar />
 
-      {/* ── HERO ── */}
+      {/* ── HERO — logo + frase rotativa ── */}
       <section className="px-6 pt-4 pb-10">
 
-        {/* Wordmark as the main visual — fluid full width.
-            Wrapped in the h1 so the page keeps a top-level heading now that
-            the old text headline is gone; the alt text carries it.
-            Plain <img> rather than next/image: it's a vector that must scale
-            to the container, so there is nothing to optimise and no intrinsic
-            size worth reserving. */}
+        {/* Logo como visual principal, a ancho completo.
+            Envuelto en el h1 para que la página conserve un encabezado de
+            primer nivel; el alt lo aporta.
+            <img> plano en vez de next/image: es un vector que debe escalar
+            al contenedor, así que no hay nada que optimizar ni tamaño
+            intrínseco que valga la pena reservar. */}
         <h1 className="m-0">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/bl-logo.svg"
-            alt="Black Label"
+            src="/somosmas-logo.svg"
+            alt="Somos Más Studio"
             className="block w-full h-auto"
             draggable={false}
           />
         </h1>
 
-        {/* Main copy — centred block.
-            El texto viene de messages/{locale}.json con etiquetas
-            <highlight>; t.rich las convierte en los spans naranjas, así
-            que la traducción controla qué se resalta en cada idioma.
-            uppercase lo aplica el CSS: los mensajes van en caja normal. */}
-        <p className="mx-auto mt-10 max-w-4xl text-center font-mono uppercase text-ink
-                      text-[clamp(0.8125rem,1.1vw,1.0625rem)] leading-[1.9] tracking-[0.14em]">
-          {t.rich("copy", {
-            highlight: (chunks) => (
-              <span className="text-accent">{chunks}</span>
-            ),
-          })}
-        </p>
+        {/* Frase rotativa: mismo tratamiento de ancho que el logo. */}
+        <RotatingPhrase />
       </section>
 
       {/* ── SHOWREEL — full-width block below the hero.

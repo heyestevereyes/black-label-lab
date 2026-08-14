@@ -3,10 +3,10 @@
  * renders the brand name — root metadata, per-project page titles, etc.
  */
 
-export const SITE_NAME = "Black Label";
+export const SITE_NAME = "Somos Más Studio";
 
 /** Browser tab / <title> and social card headline. */
-export const SITE_TITLE = `${SITE_NAME} | Diseño y Desarrollo Web`;
+export const SITE_TITLE = SITE_NAME;
 
 export const SITE_DESCRIPTION =
   "Somos un laboratorio Creativo, construimos proyectos de diseño y comunicación enfocados que ayuden a las marcas y empresas a lograr sus objetivos.";
@@ -15,7 +15,7 @@ export const SITE_DESCRIPTION =
  * Datos de contacto. Viven aquí y no en la API route para que el footer
  * pueda mostrarlos sin importar código de servidor al bundle del cliente.
  */
-export const CONTACT_EMAIL = "info@blacklabelmx.com";
+export const CONTACT_EMAIL = "info@holasomosmas.com";
 
 // Alimenta el teléfono del footer y el enlace de WhatsApp del sprite.
 export const CONTACT_PHONE = "+52 442 377 6196";
