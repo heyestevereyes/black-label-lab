@@ -51,7 +51,7 @@ export default function RotatingPhrase() {
       // constante para un lector de pantalla.
       aria-hidden
       className="font-satoshi font-bold text-accent leading-[0.9] tracking-tight
-                 text-[clamp(2.5rem,13vw,11rem)] select-none"
+                 text-[clamp(2.5rem,14vw,14rem)] select-none"
     >
       <span
         className={`inline-block transition-opacity duration-300 ${
