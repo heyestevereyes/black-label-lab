@@ -22,7 +22,9 @@ export default function Footer() {
       <div className="px-6 pt-16 pb-12 lg:pt-24">
         {/* Fila superior: monograma a la izquierda, tagline a la derecha */}
         <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-          <BrandMark width={56} />
+          {/* 140px: con el ratio 7.5:1 del wordmark, los 56px que llevaba
+              el monograma anterior darían 7px de alto, ilegibles. */}
+          <BrandMark width={140} />
 
           <p
             className="font-satoshi font-bold text-ink leading-[0.95] tracking-normal
