@@ -36,7 +36,7 @@ export default function FloatingMascot() {
       <span
         aria-hidden
         className="relative rounded-lg border border-ink/15 bg-surface
-                   px-3 py-2 font-mono text-[10px] uppercase tracking-[0.14em]
+                   px-3 py-2 font-mono text-[10px] tracking-[0.03em]
                    text-ink whitespace-nowrap shadow-sm
                    transition-transform duration-200 group-hover:-translate-y-0.5"
       >

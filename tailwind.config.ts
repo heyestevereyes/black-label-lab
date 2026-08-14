@@ -28,7 +28,6 @@ const config: Config = {
         muted: "var(--text-secondary)",
         hairline: "var(--border-subtle)",
         accent: "var(--accent)",
-        magenta: "var(--accent-magenta)",
       },
     },
   },

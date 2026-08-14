@@ -8,10 +8,10 @@ import {
 } from "@/data/site";
 
 const COLUMN_HEADING =
-  "font-mono text-[10px] uppercase tracking-[0.22em] text-muted mb-4";
+  "font-mono text-[10px] tracking-[0.06em] text-muted mb-4";
 
 const COLUMN_LINK =
-  "font-mono text-[13px] uppercase tracking-[0.14em] text-ink hover:text-accent transition-colors";
+  "font-mono text-[13px] tracking-[0.03em] text-ink hover:text-accent transition-colors";
 
 export default function Footer() {
   const t = useTranslations("footer");
@@ -26,7 +26,7 @@ export default function Footer() {
           <BrandMark width={56} />
 
           <p
-            className="font-satoshi font-bold uppercase text-ink leading-[0.95] tracking-normal
+            className="font-satoshi font-bold text-ink leading-[0.95] tracking-normal
                        text-[clamp(1.5rem,3.2vw,2.75rem)]
                        sm:text-right sm:max-w-[60%]"
           >

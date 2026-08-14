@@ -16,7 +16,7 @@ export default function ProjectsSection() {
       {/* Satoshi, igual que el título de Contacto: los dos son títulos de
           sección grandes. El tracking baja de 0.15em a normal porque ese
           valor estaba calibrado para la monoespaciada. */}
-      <h2 className="font-satoshi font-bold uppercase text-ink
+      <h2 className="font-satoshi font-bold text-ink
                      text-[clamp(2rem,3.48vw,4.17rem)] tracking-tight leading-none">
         {t("heading")}
       </h2>

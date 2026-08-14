@@ -23,7 +23,7 @@ const FIELD =
   "transition-colors";
 
 const LABEL =
-  "block font-mono text-[10px] uppercase tracking-[0.18em] text-white/50 mb-2";
+  "block font-mono text-[10px] tracking-[0.04em] text-white/50 mb-2";
 
 export default function ContactSection() {
   const t = useTranslations("contact");
@@ -117,7 +117,7 @@ export default function ContactSection() {
             leading-[0.8] recorta el espacio muerto sobre y bajo las mayúsculas
             para que la tarjeta pueda solaparse sin chocar con las letras. */}
         <h2
-          className="font-satoshi font-bold uppercase text-white leading-[0.8] tracking-normal
+          className="font-hero text-white leading-[0.8] tracking-normal
                      text-[clamp(3rem,30vw,36rem)] select-none"
         >
           {t("heading")}
@@ -131,7 +131,7 @@ export default function ContactSection() {
                      bg-[#111111] border border-accent rounded-lg
                      p-6 sm:p-8"
         >
-          <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-accent mb-6">
+          <p className="font-mono text-[10px] tracking-[0.06em] text-accent mb-6">
             {t("label")}
           </p>
 
@@ -197,7 +197,7 @@ export default function ContactSection() {
                 id="permiso"
                 name="permiso"
                 type="checkbox"
-                className="mt-0.5 h-4 w-4 shrink-0 accent-[#FF6B1A]
+                className="mt-0.5 h-4 w-4 shrink-0 accent-[color:var(--accent)]
                            focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-0"
                 checked={form.permiso}
                 onChange={(e) => update("permiso", e.target.checked)}
@@ -233,14 +233,14 @@ export default function ContactSection() {
               {t("legal")}
             </p>
 
-            {/* Texto oscuro sobre naranja: blanco sobre #FF6B1A da 2.85:1
-                y no pasa AA; #141414 sobre el mismo naranja da 6.47:1. */}
+            {/* Texto oscuro sobre el acento: blanco sobre #FF7DE3 da 2.1:1
+                y no pasa AA; #141414 sobre el mismo rosa da 8.36:1. */}
             <button
               type="submit"
               disabled={loading}
               className="mt-6 inline-flex items-center gap-2 rounded-md
                          bg-accent px-7 py-3.5 min-h-[44px]
-                         font-mono text-[11px] uppercase tracking-[0.18em] text-ink
+                         font-mono text-[11px] tracking-[0.04em] text-ink
                          hover:opacity-90 transition-opacity
                          disabled:opacity-60 disabled:cursor-not-allowed
                          focus:outline-none focus-visible:ring-2 focus-visible:ring-white

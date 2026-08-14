@@ -68,10 +68,10 @@ export default function ProjectCard({
                    lg:left-[29px] lg:top-[25px] lg:max-w-[596px]
                    flex flex-col leading-[1.875] text-white [word-break:break-word]"
       >
-        <h3 className="font-mono font-normal text-[clamp(1rem,1.6vw,1.407rem)]">
+        <h3 className="font-satoshi font-bold text-[clamp(1rem,1.6vw,1.407rem)]">
           {title}
         </h3>
-        <p className="font-mono uppercase tracking-[0.15em] text-[clamp(0.625rem,1vw,0.859rem)] text-white/80">
+        <p className="font-mono tracking-[0.03em] text-[clamp(0.625rem,1vw,0.859rem)] text-white/80">
           {tags}
         </p>
       </div>

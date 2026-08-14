@@ -50,7 +50,7 @@ export default function RotatingPhrase() {
       // aria-live off: es decorativo y anunciarlo cada 2.6s sería ruido
       // constante para un lector de pantalla.
       aria-hidden
-      className="font-satoshi font-bold text-magenta leading-[0.9] tracking-tight
+      className="font-satoshi font-bold text-accent leading-[0.9] tracking-tight
                  text-[clamp(2.5rem,13vw,11rem)] select-none"
     >
       <span

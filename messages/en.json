@@ -1,17 +1,16 @@
 {
   "nav": {
-    "projects": "PROJECTS",
-    "lab": "LAB",
-    "bookCall": "BOOK A CALL",
-    "greeting": "WELCOME TO SOMOS MÁS STUDIO"
+    "projects": "Projects",
+    "lab": "Lab",
+    "bookCall": "Book a call"
   },
   "hero": {
     "copy": "We are a creative design and development studio with over <highlight>10 YEARS</highlight> of experience building <highlight>BRANDING, WEB, ANIMATION, AND COMMUNICATION</highlight> projects."
   },
   "projects": {
-    "heading": "PROJECTS",
-    "prev": "PREVIOUS PROJECT",
-    "next": "NEXT PROJECT",
+    "heading": "Projects",
+    "prev": "Previous project",
+    "next": "Next project",
     "back": "← Back to projects",
     "mainImage": "Main image",
     "wip": "Case study in progress."
@@ -23,8 +22,8 @@
     "social": "Social"
   },
   "contact": {
-    "heading": "CONTACT",
-    "label": "GET IN TOUCH",
+    "heading": "Contact",
+    "label": "Get in touch",
     "firstName": "First Name",
     "lastName": "Last Name",
     "email": "Email",
@@ -42,7 +41,7 @@
     "errorNetwork": "We couldn't reach the server. Check your connection."
   },
   "cal": {
-    "heading": "BOOK A CALL"
+    "heading": "Book a call"
   },
   "mascot": {
     "bubble": "Send me a message",

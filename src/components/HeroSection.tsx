@@ -28,8 +28,13 @@ export default function HeroSection() {
           />
         </h1>
 
-        {/* Frase rotativa: mismo tratamiento de ancho que el logo. */}
-        <RotatingPhrase />
+        {/* Frase rotativa a sangre: -mx-6 cancela exactamente el px-6 de
+            esta sección, así que ocupa el ancho del viewport. Se prefiere
+            a w-screen porque 100vw incluye el ancho de la barra de scroll
+            y provocaría desbordamiento horizontal. */}
+        <div className="-mx-6 overflow-hidden">
+          <RotatingPhrase />
+        </div>
       </section>
 
       {/* ── SHOWREEL — full-width block below the hero.

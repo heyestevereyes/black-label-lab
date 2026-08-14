@@ -1,17 +1,16 @@
 {
   "nav": {
-    "projects": "PROYECTOS",
-    "lab": "LAB",
-    "bookCall": "AGENDAR LLAMADA",
-    "greeting": "BIENVENIDOS A SOMOS MÁS STUDIO"
+    "projects": "Proyectos",
+    "lab": "Lab",
+    "bookCall": "Agendar llamada"
   },
   "hero": {
     "copy": "Somos una empresa creativa de diseño y desarrollo con más de <highlight>10 AÑOS</highlight> de experiencia construyendo proyectos de <highlight>BRANDING, WEB, ANIMACIÓN Y COMUNICACIÓN</highlight>."
   },
   "projects": {
-    "heading": "PROYECTOS",
-    "prev": "PROYECTO ANTERIOR",
-    "next": "PROYECTO SIGUIENTE",
+    "heading": "Proyectos",
+    "prev": "Proyecto anterior",
+    "next": "Proyecto siguiente",
     "back": "← Volver a proyectos",
     "mainImage": "Imagen principal",
     "wip": "Caso de estudio en construcción."
@@ -23,8 +22,8 @@
     "social": "Redes"
   },
   "contact": {
-    "heading": "CONTACTO",
-    "label": "CONTÁCTANOS",
+    "heading": "Contacto",
+    "label": "Contáctanos",
     "firstName": "Nombre",
     "lastName": "Apellido",
     "email": "Correo electrónico",
@@ -42,7 +41,7 @@
     "errorNetwork": "No pudimos conectar con el servidor. Revisa tu conexión."
   },
   "cal": {
-    "heading": "AGENDA UNA LLAMADA"
+    "heading": "Agenda una llamada"
   },
   "mascot": {
     "bubble": "Envíame un mensaje",

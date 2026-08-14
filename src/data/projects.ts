@@ -124,7 +124,7 @@ export const projects: Project[] = [
     slug: "kapital",
     name: "Kapital",
     tags: {
-      es: ["Branding", "Sitio Web", "App"],
+      es: ["Branding", "Sitio web", "App"],
       en: ["Branding", "Website", "App"],
     },
     description: KAPITAL_DESCRIPTION,
@@ -161,7 +161,7 @@ export const projects: Project[] = [
     slug: "reino-de-magos",
     name: "Reino de Magos",
     tags: {
-      es: ["Branding", "Sitio Web", "E-commerce"],
+      es: ["Branding", "Sitio web", "E-commerce"],
       en: ["Branding", "Website", "E-commerce"],
     },
     description: REINO_DE_MAGOS_DESCRIPTION,
@@ -207,8 +207,8 @@ export const projects: Project[] = [
     slug: "aeric",
     name: "Aeric",
     tags: {
-      es: ["3D Viz"],
-      en: ["3D Viz"],
+      es: ["3D viz"],
+      en: ["3D viz"],
     },
     description: AERIC_DESCRIPTION,
     // Ojo con las extensiones: aquí la portada y la galería son .png y la

@@ -18,12 +18,12 @@ export default function LocaleSwitcher() {
   const router = useRouter();
 
   return (
-    <div className="flex items-center gap-1 font-mono text-[11px] uppercase tracking-[0.18em]">
+    <div className="flex items-center font-satoshi text-[14px]">
       {routing.locales.map((code, i) => {
         const active = code === locale;
         return (
           <span key={code} className="flex items-center">
-            {i > 0 && <span className="mx-1 text-muted/50">/</span>}
+            {i > 0 && <span className="mx-2 text-muted/50">|</span>}
             <button
               type="button"
               onClick={() => router.replace(pathname, { locale: code })}
@@ -34,7 +34,7 @@ export default function LocaleSwitcher() {
                   : "text-muted hover:text-ink transition-colors"
               }
             >
-              {code.toUpperCase()}
+              {code}
             </button>
           </span>
         );

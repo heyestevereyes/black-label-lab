@@ -86,7 +86,7 @@ export default async function ProjectPage({ params }: PageProps) {
             {/* Nombre + tags */}
             <div className="order-1 lg:order-2 lg:pl-4">
               <h1
-                className="font-satoshi font-bold uppercase text-ink leading-[0.95] tracking-normal
+                className="font-satoshi font-bold text-ink leading-[0.95] tracking-normal
                            text-[clamp(2rem,5vw,4rem)]"
               >
                 {project.name}
@@ -97,7 +97,7 @@ export default async function ProjectPage({ params }: PageProps) {
                   <li
                     key={tag}
                     className="rounded-full border border-ink/25 px-4 py-1.5
-                               font-mono text-[10px] uppercase tracking-[0.18em] text-ink"
+                               font-mono text-[10px] tracking-[0.04em] text-ink"
                   >
                     {tag}
                   </li>
@@ -156,7 +156,7 @@ export default async function ProjectPage({ params }: PageProps) {
         <section className="px-6 pb-16 lg:pb-24">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-[37px]">
             <div>
-              <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.22em] text-muted">
+              <p className="mb-4 font-mono text-[10px] tracking-[0.06em] text-muted">
                 {t("prev")}
               </p>
               <ProjectCard
@@ -170,7 +170,7 @@ export default async function ProjectPage({ params }: PageProps) {
             </div>
 
             <div>
-              <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.22em] text-muted">
+              <p className="mb-4 font-mono text-[10px] tracking-[0.06em] text-muted">
                 {t("next")}
               </p>
               <ProjectCard
@@ -186,7 +186,7 @@ export default async function ProjectPage({ params }: PageProps) {
 
           <Link
             href="/#proyectos"
-            className="mt-12 inline-block font-mono text-[11px] uppercase tracking-[0.18em]
+            className="mt-12 inline-block font-mono text-[11px] tracking-[0.04em]
                        text-accent hover:opacity-70 transition-opacity"
           >
             {t("back")}

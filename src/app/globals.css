@@ -18,10 +18,11 @@
   --text-secondary: #6b6b6b;
   --dot-color: rgba(20, 20, 20, 0.08);
   --border-subtle: rgba(20, 20, 20, 0.1);
-  --accent: #ff6b1a;
-  /* Magenta de la frase rotativa del hero. 3.91:1 sobre --bg-primary:
-     pasa AA para texto grande, que es el único sitio donde se usa. */
-  --accent-magenta: #e6007e;
+  /* Rosa de marca. Ojo: sobre --bg-primary da 1.96:1, muy por debajo del
+     3:1 que pide AA incluso para texto grande, así que en texto sobre
+     fondo claro se lee lavado. Sobre negro sube a 9.29:1 y como relleno
+     de botón con texto --text-primary encima da 8.36:1. */
+  --accent: #ff7de3;
 }
 
 /* Satoshi es la principal del sitio; los bloques que deben seguir en

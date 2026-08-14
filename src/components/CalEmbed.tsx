@@ -24,7 +24,7 @@ export default function CalEmbed() {
       {/* text-accent, no text-muted: el gris #6B6B6B sobre negro da 3.94:1 y
           no pasa AA en texto pequeño. El naranja da 7.37:1 y además repite
           el color de la etiqueta "Contáctanos" de la sección anterior. */}
-      <h2 className="font-mono text-[10px] uppercase tracking-[0.22em] text-accent">
+      <h2 className="font-mono text-[10px] tracking-[0.06em] text-accent">
         {t("heading")}
       </h2>
 
