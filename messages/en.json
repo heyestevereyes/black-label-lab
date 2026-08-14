@@ -1,9 +1,4 @@
 {
-  "nav": {
-    "projects": "Projects",
-    "lab": "Lab",
-    "bookCall": "Book a call"
-  },
   "hero": {
     "copy": "We are a creative design and development studio with over <highlight>10 YEARS</highlight> of experience building <highlight>BRANDING, WEB, ANIMATION, AND COMMUNICATION</highlight> projects."
   },

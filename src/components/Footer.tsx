@@ -15,7 +15,6 @@ const COLUMN_LINK =
 
 export default function Footer() {
   const t = useTranslations("footer");
-  const tNav = useTranslations("nav");
 
   return (
     <footer className="bg-surface">
@@ -43,7 +42,7 @@ export default function Footer() {
               {NAV_LINKS.map((link) => (
                 <li key={link.href}>
                   <a href={link.href} className={COLUMN_LINK}>
-                    {tNav(link.key)}
+                    {link.label}
                   </a>
                 </li>
               ))}

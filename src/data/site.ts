@@ -29,13 +29,23 @@ export const WHATSAPP_URL = `https://wa.me/${CONTACT_PHONE.replace(/\D/g, "")}`;
 
 /**
  * Enlaces de navegación. Compartidos por el navbar y el footer para que
- * las dos listas no se desincronicen. Se guarda la clave de traducción,
- * no el texto: la etiqueta sale de messages/{locale}.json bajo "nav".
+ * las dos listas no se desincronicen.
+ *
+ * Las etiquetas van literales y en inglés en los dos idiomas: son
+ * nombres de sección de la marca, no copy traducible — mismo criterio
+ * que "Somos Más" o las frases del hero. Por eso ya no salen de
+ * messages/{locale}.json.
  */
 export const NAV_LINKS = [
-  { key: "projects", href: "#proyectos" },
-  { key: "lab", href: "#lab" },
+  { label: "Work", href: "#proyectos" },
+  // TODO: #studio y #lab todavía no existen como secciones en la página.
+  { label: "Studio", href: "#studio" },
+  { label: "Playground", href: "#lab" },
+  { label: "Contact", href: "#contacto" },
 ] as const;
+
+/** Etiqueta del CTA. Igual en ambos idiomas, por lo mismo. */
+export const CTA_LABEL = "Book a Call";
 
 /** Redes sociales. Apuntan fuera del sitio, así que el footer las abre
  *  en pestaña nueva con rel="noopener noreferrer". */

@@ -18,7 +18,7 @@ export default function LocaleSwitcher() {
   const router = useRouter();
 
   return (
-    <div className="flex items-center font-satoshi text-[14px]">
+    <div className="flex items-center font-satoshi font-bold text-[14px]">
       {routing.locales.map((code, i) => {
         const active = code === locale;
         return (
