@@ -1,11 +1,8 @@
-import { useTranslations } from "next-intl";
 import Navbar from "@/components/Navbar";
 import FloatingMascot from "@/components/FloatingMascot";
 import RotatingPhrase from "@/components/RotatingPhrase";
 
 export default function HeroSection() {
-  const t = useTranslations("hero");
-
   return (
     <div className="bg-surface dot-grid min-h-screen">
 
@@ -38,19 +35,6 @@ export default function HeroSection() {
         <div className="-mr-6 overflow-hidden">
           <RotatingPhrase />
         </div>
-
-        {/* Descripción. Body copy, así que va en monoespaciada, no en
-            Satoshi. A diferencia de la frase rotativa no sangra: se queda
-            dentro del px-6 y con ancho de lectura acotado.
-            El texto viene de messages/{locale}.json con etiquetas
-            <highlight>; t.rich las convierte en los spans de acento, así
-            que la traducción decide qué se resalta en cada idioma. */}
-        <p className="mt-10 max-w-[660px] font-mono text-ink
-                      text-[clamp(0.8125rem,1.1vw,1.0625rem)] leading-[1.9] tracking-[0.03em]">
-          {t.rich("description", {
-            highlight: (chunks) => <span className="text-accent">{chunks}</span>,
-          })}
-        </p>
       </section>
 
       {/* ── SHOWREEL — full-width block below the hero.
