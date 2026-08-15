@@ -2,9 +2,13 @@ import Navbar from "@/components/Navbar";
 import FloatingMascot from "@/components/FloatingMascot";
 import RotatingPhrase from "@/components/RotatingPhrase";
 
+// Sin min-h-screen en el wrapper: en móvil el contenido del hero no llena la
+// pantalla, así que un mínimo de 100vh rellenaba con ~400px de vacío entre el
+// showreel y la sección siguiente. En desktop el contenido ya supera el
+// viewport, de modo que el mínimo nunca aportaba nada.
 export default function HeroSection() {
   return (
-    <div className="bg-surface dot-grid min-h-screen">
+    <div className="bg-surface dot-grid">
 
       {/* ── NAVBAR ── */}
       <Navbar />
