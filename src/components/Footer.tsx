@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import BrandMark from "@/components/BrandMark";
+import AnchorLink from "@/components/AnchorLink";
 import {
   CONTACT_EMAIL,
   CONTACT_PHONE,
@@ -42,10 +43,10 @@ export default function Footer() {
             <h2 className={COLUMN_HEADING}>{t("navigation")}</h2>
             <ul className="flex flex-col gap-3">
               {NAV_LINKS.map((link) => (
-                <li key={link.href}>
-                  <a href={link.href} className={COLUMN_LINK}>
+                <li key={link.hash}>
+                  <AnchorLink hash={link.hash} className={COLUMN_LINK}>
                     {link.label}
-                  </a>
+                  </AnchorLink>
                 </li>
               ))}
             </ul>

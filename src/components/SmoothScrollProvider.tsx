@@ -22,6 +22,9 @@ export default function SmoothScrollProvider({
     if (reduced.matches) return;
 
     const lenis = new Lenis({
+      // Intercepta los clics en <a href="#..."> y anima el salto en vez
+      // de dejar que el navegador lo haga de golpe.
+      anchors: true,
       duration: 1.2,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     });

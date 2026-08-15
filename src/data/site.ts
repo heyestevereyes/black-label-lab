@@ -37,11 +37,11 @@ export const WHATSAPP_URL = `https://wa.me/${CONTACT_PHONE.replace(/\D/g, "")}`;
  * messages/{locale}.json.
  */
 export const NAV_LINKS = [
-  { label: "Work", href: "#proyectos" },
-  // TODO: #studio y #lab todavía no existen como secciones en la página.
-  { label: "Studio", href: "#studio" },
-  { label: "Playground", href: "#lab" },
-  { label: "Contact", href: "#contacto" },
+  { label: "Work", hash: "#proyectos" },
+  { label: "Studio", hash: "#studio" },
+  // TODO: #lab todavía no existe como sección en la página.
+  { label: "Playground", hash: "#lab" },
+  { label: "Contact", hash: "#contacto" },
 ] as const;
 
 /** Etiqueta del CTA. Igual en ambos idiomas, por lo mismo. */

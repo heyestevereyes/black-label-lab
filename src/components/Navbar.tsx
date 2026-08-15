@@ -1,4 +1,5 @@
 import LocaleSwitcher from "@/components/LocaleSwitcher";
+import AnchorLink from "@/components/AnchorLink";
 import { Link } from "@/i18n/navigation";
 import { NAV_LINKS, CTA_LABEL } from "@/data/site";
 
@@ -22,27 +23,27 @@ export default function Navbar() {
           /en: son nombres de sección de la marca, no copy traducible. */}
       <div className="flex items-center gap-6 lg:gap-8">
         {NAV_LINKS.map((link) => (
-          <a
-            key={link.href}
-            href={link.href}
+          <AnchorLink
+            key={link.hash}
+            hash={link.hash}
             className={`hidden sm:block ${NAV_ITEM}`}
           >
             {link.label}
-          </a>
+          </AnchorLink>
         ))}
 
         <LocaleSwitcher />
 
         {/* Texto oscuro sobre el acento: sobre el rosa #FF7DE3 el ink da
             8.15:1, mientras que el blanco se quedaría en 2.1:1. */}
-        <a
-          href="#agendar"
+        <AnchorLink
+          hash="#agendar"
           className="hidden sm:block font-satoshi font-bold text-[14px] text-ink
                      bg-accent hover:opacity-90 transition-opacity
                      rounded-md px-5 py-2.5"
         >
           {CTA_LABEL}
-        </a>
+        </AnchorLink>
       </div>
     </nav>
   );
