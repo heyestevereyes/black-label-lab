@@ -11,7 +11,7 @@ export default function Navbar() {
     <nav className="flex items-center justify-between px-6 py-5">
       {/* Logo de marca. El nombre ya sale como h1 justo debajo, así que
           aquí basta con el símbolo. */}
-      <BrandMark width={40} />
+      <BrandMark width={60} />
 
       {/* Enlaces + selector + CTA. Las etiquetas son las mismas en /es y
           /en: son nombres de sección de la marca, no copy traducible. */}
