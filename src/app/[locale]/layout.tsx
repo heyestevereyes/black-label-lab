@@ -6,7 +6,7 @@ import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import "../globals.css";
 import { routing } from "@/i18n/routing";
-import { SITE_TITLE, SITE_DESCRIPTION } from "@/data/site";
+import { SITE_TITLE, SITE_DESCRIPTION, SITE_URL } from "@/data/site";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
 
 const spaceMono = Space_Mono({
@@ -26,8 +26,9 @@ const spaceMono = Space_Mono({
             from using the WebFonts(s) listed without a purchased license.
             All details above must always remain unaltered and visible in your CSS.
 
-  Single weight (normal / normal). Scoped to the hero headline only — see
-  HeroSection's h1. Everything else stays on Space Mono.
+  Single weight (normal / normal). Se usa solo en los tres títulos display
+  del sitio — el h1 del hero, el heading de Contacto y la firma de cierre
+  del footer — vía la utilidad `font-hero`. El resto no la hereda.
 */
 const heroFont = localFont({
   src: "../../../public/403-neudron-regular.woff2",
@@ -43,7 +44,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    url: "https://holasomosmas.com",
+    url: SITE_URL,
     images: ["/og-image.png"],
     type: "website",
   },

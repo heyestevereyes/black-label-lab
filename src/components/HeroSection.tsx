@@ -1,6 +1,5 @@
 import Navbar from "@/components/Navbar";
 import FloatingMascot from "@/components/FloatingMascot";
-import RotatingPhrase from "@/components/RotatingPhrase";
 
 // Sin min-h-screen en el wrapper: en móvil el contenido del hero no llena la
 // pantalla, así que un mínimo de 100vh rellenaba con ~400px de vacío entre el
@@ -13,32 +12,35 @@ export default function HeroSection() {
       {/* ── NAVBAR ── */}
       <Navbar />
 
-      {/* ── HERO — logo + frase rotativa ── */}
+      {/* ── HERO — nombre a ancho completo ── */}
       <section className="px-6 pt-4 pb-10">
 
-        {/* Logo como visual principal, a ancho completo.
-            Envuelto en el h1 para que la página conserve un encabezado de
-            primer nivel; el alt lo aporta.
-            <img> plano en vez de next/image: es un vector que debe escalar
-            al contenedor, así que no hay nada que optimizar ni tamaño
-            intrínseco que valga la pena reservar. */}
-        <h1 className="m-0">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/somosmas-logo.svg"
-            alt="Somos Más Studio"
-            className="block w-full h-auto"
-            draggable={false}
-          />
-        </h1>
+        {/* El nombre va como texto, no como SVG: sigue siendo el h1 de la
+            página y así queda seleccionable e indexable.
+            font-hero es Neudron, la misma display del heading de Contacto.
 
-        {/* Frase rotativa: solo sangra por la derecha. Conserva el px-6 de
-            la izquierda para alinear con el logo, y -mr-6 la deja llegar al
-            borde del viewport. overflow-hidden recorta lo que sobre en vez
-            de empujar el ancho de la página. */}
-        <div className="-mr-6 overflow-hidden">
-          <RotatingPhrase />
-        </div>
+            Tamaño medido, no estimado: en Neudron "ESTEVE REYES" ocupa 373px
+            por cada 100px de font-size, asi que llenar un ancho X pide
+            X/3.73 de font-size.
+
+            Va en calc y no en vw puro porque el px-6 del contenedor son 48px
+            fijos, no un porcentaje: la caja util es el 96.7% del viewport a
+            1440px pero solo el 87.2% a 375px. Un vw unico llenaria bien un
+            extremo y desbordaria el otro. (100vw - 48px)/3.73 = 26.8vw -
+            12.9px la deja llena en cualquier ancho. Sin tope: escala a ancho
+            completo en todos los breakpoints, igual que el wordmark w-full
+            que habia antes.
+
+            whitespace-nowrap por si acaso: si el ancho se quedara corto
+            preferimos que asome antes que partir el nombre en dos lineas.
+            leading-[0.8] recorta el espacio muerto sobre y bajo las
+            mayusculas, igual que el heading de Contacto. */}
+        <h1
+          className="font-hero uppercase text-ink leading-[0.8] tracking-normal
+                     text-[calc(26.6vw-12.8px)] whitespace-nowrap m-0 select-none"
+        >
+          Esteve Reyes
+        </h1>
       </section>
 
       {/* ── SHOWREEL — full-width block below the hero.

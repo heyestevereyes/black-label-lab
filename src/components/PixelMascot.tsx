@@ -196,7 +196,7 @@ export default function PixelMascot({ size = 32, className = "" }: PixelMascotPr
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
-      aria-label="Somos Más Studio mascot"
+      aria-label="Esteve Reyes mascot"
     >
       {/* Head */}
       <rect x="1" y="1" width="30" height="30" rx="4" fill="#111111" />

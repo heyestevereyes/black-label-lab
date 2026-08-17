@@ -23,9 +23,9 @@ export default function Footer() {
       <div className="px-6 pt-16 pb-12 lg:pt-24">
         {/* Fila superior: monograma a la izquierda, tagline a la derecha */}
         <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-          {/* 140px: con el ratio 7.5:1 del wordmark, los 56px que llevaba
-              el monograma anterior darían 7px de alto, ilegibles. */}
-          <BrandMark width={140} />
+          {/* 72px: el logo nuevo es casi cuadrado, así que a lo ancho pesa
+              mucho más que el wordmark apaisado que había antes. */}
+          <BrandMark width={72} />
 
           <p
             className="font-satoshi font-bold text-ink leading-[0.95] tracking-normal
@@ -103,16 +103,21 @@ export default function Footer() {
            Sin fondo ni borde propios: comparte el fondo del footer para que
            las letras no queden sobre un bloque de otro tono.
            overflow-hidden protege el layout si el ancho llegara a exceder la
-           caja. Se reutiliza el mismo SVG del hero. */}
+           caja.
+           aria-hidden: es la misma marca que ya anuncia el enlace de arriba,
+           repetirla solo la leería dos veces.
+           26.6vw y no los 25.8vw del hero: alli la caja util descuenta los
+           24px de px-6 por lado, aqui el texto va a 100vw completo. Con los
+           373px por cada 100px de font-size que mide "ESTEVE REYES" en
+           Neudron, los dos acaban llenando su ancho respectivo. */}
       <div className="overflow-hidden">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/somosmas-logo.svg"
-          alt=""
+        <p
           aria-hidden
-          className="block w-full h-auto select-none"
-          draggable={false}
-        />
+          className="font-hero uppercase text-ink leading-[0.8] tracking-normal
+                     text-[26.6vw] whitespace-nowrap select-none"
+        >
+          Esteve Reyes
+        </p>
       </div>
     </footer>
   );

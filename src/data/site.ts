@@ -3,19 +3,22 @@
  * renders the brand name — root metadata, per-project page titles, etc.
  */
 
-export const SITE_NAME = "Somos Más Studio";
+export const SITE_NAME = "Esteve Reyes";
 
 /** Browser tab / <title> and social card headline. */
-export const SITE_TITLE = SITE_NAME;
+export const SITE_TITLE = `${SITE_NAME} | Design Studio`;
+
+/** Dominio canónico. Alimenta og:url. */
+export const SITE_URL = "https://estevereyes.com";
 
 export const SITE_DESCRIPTION =
-  "Somos un laboratorio Creativo, construimos proyectos de diseño y comunicación enfocados que ayuden a las marcas y empresas a lograr sus objetivos.";
+  "Estudio de diseño: construimos proyectos de diseño y comunicación enfocados que ayuden a las marcas y empresas a lograr sus objetivos.";
 
 /**
  * Datos de contacto. Viven aquí y no en la API route para que el footer
  * pueda mostrarlos sin importar código de servidor al bundle del cliente.
  */
-export const CONTACT_EMAIL = "info@holasomosmas.com";
+export const CONTACT_EMAIL = "hey@estevereyes.com";
 
 // Alimenta el teléfono del footer y el enlace de WhatsApp del sprite.
 export const CONTACT_PHONE = "+52 442 377 6196";
@@ -32,9 +35,8 @@ export const WHATSAPP_URL = `https://wa.me/${CONTACT_PHONE.replace(/\D/g, "")}`;
  * las dos listas no se desincronicen.
  *
  * Las etiquetas van literales y en inglés en los dos idiomas: son
- * nombres de sección de la marca, no copy traducible — mismo criterio
- * que "Somos Más" o las frases del hero. Por eso ya no salen de
- * messages/{locale}.json.
+ * nombres de sección de la marca, no copy traducible. Por eso ya no
+ * salen de messages/{locale}.json.
  */
 export const NAV_LINKS = [
   { label: "Work", hash: "#proyectos" },

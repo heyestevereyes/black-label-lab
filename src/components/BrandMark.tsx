@@ -1,27 +1,32 @@
-import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 
+/** Proporción del SVG original (620 x 644). */
+const RATIO = 644 / 620;
+
 interface BrandMarkProps {
-  /** Ancho en px; el alto se deriva del ratio 7.5:1 del SVG original. */
+  /** Ancho en px; el alto se deriva del ratio del SVG. */
   width?: number;
-  priority?: boolean;
   className?: string;
 }
 
 /**
- * Wordmark de Somos Más (fuente 195x26, ~7.5:1), envuelto en el enlace a
- * home. Hoy solo lo usa el footer: el navbar lleva el nombre como texto.
+ * Logo de Esteve Reyes envuelto en el enlace a home. Lo usan el navbar y la
+ * fila superior del footer.
+ *
+ * <img> plano y no next/image a propósito: el optimizador rechaza los SVG
+ * con un 400 mientras `dangerouslyAllowSVG` esté desactivado, así que la
+ * versión con next/image no llegaba a pintarse. Además es un vector, no hay
+ * nada que optimizar.
  *
  * alt="" a propósito: el aria-label del enlace ya anuncia la marca, y el
- * logo del hero la lleva como h1 de la página. Un segundo "Somos Más"
- * aquí solo se leería dos veces.
+ * nombre vuelve a salir como h1 en el hero. Un segundo "Esteve Reyes" aquí
+ * solo se leería dos veces.
  */
 export default function BrandMark({
-  width = 140,
-  priority = false,
+  width = 40,
   className = "",
 }: BrandMarkProps) {
-  const height = Math.round((width / 195) * 26);
+  const height = Math.round(width * RATIO);
 
   return (
     // Link de next-intl, no <a>: conserva el idioma activo. Con un enlace
@@ -30,14 +35,16 @@ export default function BrandMark({
     <Link
       href="/"
       className={`flex items-center ${className}`}
-      aria-label="Somos Más Studio home"
+      aria-label="Esteve Reyes home"
     >
-      <Image
-        src="/somosmas-logo.svg"
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/esteve-reyes-logo.svg"
         alt=""
         width={width}
         height={height}
-        priority={priority}
+        className="block h-auto"
+        draggable={false}
       />
     </Link>
   );

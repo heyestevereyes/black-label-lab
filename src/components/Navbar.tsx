@@ -1,6 +1,6 @@
 import LocaleSwitcher from "@/components/LocaleSwitcher";
 import AnchorLink from "@/components/AnchorLink";
-import { Link } from "@/i18n/navigation";
+import BrandMark from "@/components/BrandMark";
 import { NAV_LINKS, CTA_LABEL } from "@/data/site";
 
 const NAV_ITEM =
@@ -9,15 +9,9 @@ const NAV_ITEM =
 export default function Navbar() {
   return (
     <nav className="flex items-center justify-between px-6 py-5">
-      {/* Wordmark de texto. El ® va en un span aparte para poder subirlo
-          y reducirlo sin tocar el tamaño del nombre. */}
-      <Link
-        href="/"
-        className="font-satoshi font-bold text-ink text-[20px] leading-none tracking-tight"
-      >
-        Somos Más
-        <span className="align-super text-[0.5em]">®</span>
-      </Link>
+      {/* Logo de marca. El nombre ya sale como h1 justo debajo, así que
+          aquí basta con el símbolo. */}
+      <BrandMark width={40} />
 
       {/* Enlaces + selector + CTA. Las etiquetas son las mismas en /es y
           /en: son nombres de sección de la marca, no copy traducible. */}
