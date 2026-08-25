@@ -55,19 +55,42 @@ export default async function ProjectPage({ params }: PageProps) {
       <Navbar />
 
       <main>
-        {/* ── 1. IMAGEN PRINCIPAL ──
-             Mismo tratamiento que la galería: ancho completo y alto natural,
-             sin recorte. main.jpg es 16:9, así que a 1440 ocupa ~783px de
-             alto — la mayor parte del viewport, como pedía el diseño. */}
+        {/* ── 1. MEDIA PRINCIPAL ──
+             Imagen por defecto; video si el proyecto trae mainVideo. En los
+             dos casos el mismo tratamiento que la galería: ancho completo y
+             alto natural, sin recorte. A 16:9 y 1440 ocupa ~783px de alto —
+             la mayor parte del viewport, como pedía el diseño. */}
         <section className="px-6 pt-4">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={project.mainImage}
-            alt={`${project.name} — ${t("mainImage")}`}
-            fetchPriority="high"
-            decoding="async"
-            className="block h-auto w-full rounded-lg"
-          />
+          {project.mainVideo ? (
+            /* Mismo truco de padding-top que los videos de la galería: el
+               contenedor reserva la proporción, así el iframe no se deforma
+               ni provoca un salto de layout mientras carga. */
+            <div
+              className="relative w-full overflow-hidden rounded-lg bg-elevated"
+              style={{
+                paddingTop:
+                  project.mainVideo.aspectRatio ?? DEFAULT_VIDEO_ASPECT_RATIO,
+              }}
+            >
+              <iframe
+                src={project.mainVideo.src}
+                title={`${project.name} — ${t("mainImage")}`}
+                frameBorder="0"
+                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                className="absolute left-0 top-0 h-full w-full"
+              />
+            </div>
+          ) : (
+            /* eslint-disable-next-line @next/next/no-img-element */
+            <img
+              src={project.mainImage}
+              alt={`${project.name} — ${t("mainImage")}`}
+              fetchPriority="high"
+              decoding="async"
+              className="block h-auto w-full rounded-lg"
+            />
+          )}
         </section>
 
         {/* ── 2. FILA DE INTRODUCCIÓN ──

@@ -165,11 +165,15 @@ export const projects: Project[] = [
       en: ["Branding", "Website", "E-commerce"],
     },
     description: REINO_DE_MAGOS_DESCRIPTION,
-    // Sin cardImage: la portada del grid cae a mainImage.
-    // TODO: reemplazar con un card.jpg dedicado si se quiere una imagen
-    // distinta en el grid respecto a la página de detalle.
-    // OJO: el archivo principal aquí es .png, no .jpg como el de Kapital.
+    // La portada del grid sigue cayendo a mainImage: aqui no hay
+    // cardImage y ProjectCard necesita un fotograma fijo, no el iframe.
+    // OJO: el archivo principal aqui es .png, no .jpg como el de Kapital.
     mainImage: "/proyectos/ReinoDeMagos/main.png",
+    // El detalle abre con video en vez de con main.png. 16:9, asi que
+    // no hace falta aspectRatio: DEFAULT_VIDEO_ASPECT_RATIO ya es 56.25%.
+    mainVideo: {
+      src: "https://player.vimeo.com/video/1221231149?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1",
+    },
     galleryItems: [
       { type: "image", src: "/proyectos/ReinoDeMagos/gallery-1.jpg" },
       { type: "image", src: "/proyectos/ReinoDeMagos/gallery-2.jpg" },

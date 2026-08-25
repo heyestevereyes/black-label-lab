@@ -35,8 +35,23 @@ export interface Project {
   tags: Localized<string[]>;
   /** Texto de introducción del detalle, por idioma. */
   description: Localized<string>;
-  /** Imagen principal del detalle */
+  /**
+   * Imagen principal del detalle.
+   *
+   * Se sigue exigiendo aunque el proyecto traiga mainVideo: es la portada
+   * de la tarjeta en la grilla cuando no hay cardImage, y ahi hace falta
+   * un fotograma fijo.
+   */
   mainImage: string;
+  /**
+   * Video que sustituye a la imagen principal en la pagina de detalle.
+   * Mismo truco de padding-top que la galeria para reservar la proporcion
+   * antes de que cargue el iframe; si se omite aspectRatio se usa 16:9.
+   */
+  mainVideo?: {
+    src: string;
+    aspectRatio?: string;
+  };
   /**
    * Portada de la tarjeta en la grilla. Si se omite se usa mainImage,
    * que es lo que hacían todos los proyectos antes de que Kapital
