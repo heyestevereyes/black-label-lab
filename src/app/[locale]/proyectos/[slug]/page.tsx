@@ -102,7 +102,11 @@ export default async function ProjectPage({ params }: PageProps) {
               el orden original, descripción a la izquierda. */}
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16">
             {/* Descripción */}
-            <p className="order-2 lg:order-1 pl-5 font-mono text-[13px] leading-[1.9] tracking-[0.04em] text-muted">
+            {/* whitespace-pre-line: las descripciones que traen saltos dobles
+                (hoy solo Reino de Magos) se ven como parrafos separados. Las
+                que van en un solo bloque no cambian: sin saltos que respetar,
+                la clase no hace nada. */}
+            <p className="order-2 lg:order-1 pl-5 font-mono text-[13px] leading-[1.9] tracking-[0.04em] text-muted whitespace-pre-line">
               {project.description[locale]}
             </p>
 

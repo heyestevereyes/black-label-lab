@@ -46,32 +46,54 @@ const KAPITAL_DESCRIPTION = {
     "against traditional corporate banking.",
 };
 
+/**
+ * Unica descripcion del catalogo partida en varios bloques. El detalle la
+ * pinta con whitespace-pre-line, asi que el salto doble entre bloques se ve
+ * como parrafo aparte. El resto de proyectos son un solo parrafo sin saltos,
+ * de modo que esa clase no les cambia nada.
+ */
 const REINO_DE_MAGOS_DESCRIPTION = {
   es:
-    "Reino de Magos es una tienda de TCG y juegos de mesa que pasó por un " +
-    "rebranding completo y el desarrollo de su e-commerce en Shopify. " +
-    "Rediseñamos la identidad de marca partiendo de la mascota original un " +
-    "mapache mago para llevarla a un logotipo más limpio, expresivo y " +
-    "escalable, acompañado de un sistema de iconografía temática (cartas, " +
-    "dados, pociones, sombreros de mago) que hoy vive en el patrón de marca " +
-    "y en producto físico como playmats. En paralelo, construimos la tienda " +
-    "en línea sobre Shopify: arquitectura de colecciones por franquicia " +
-    "(One Piece, Lorcana, Magic, Pokémon, Dragon Ball, Digimon), fichas de " +
-    "producto listas para singles y sellado, y una configuración de " +
-    "catálogo/inventario que soporta la operación diaria de la tienda bajo " +
-    "un mismo sistema.",
+    "Tuve la oportunidad de trabajar la identidad para Reino de Magos, una " +
+    "tienda de TCG (Trading Card Games). Es una tienda importante en México, " +
+    "líderes dentro de su industria. Ellos ya tenían a un personaje que " +
+    "interactúa todo el tiempo con su comunidad, un mapache hechicero " +
+    "llamado \"Arcanito\", la mascota principal." +
+    "\n\n" +
+    "¿Por qué arreglar algo que no está roto?" +
+    "\n\n" +
+    "Arcanito ya era un personaje que funcionaba como marca, necesitaba un " +
+    "empujón y polvos mágicos, tener esa personalidad divertida y mágica que " +
+    "lo caracteriza, de esta manera rediseñé al personaje, el cual puede " +
+    "interactuar con sus jugadores." +
+    "\n\n" +
+    "La idea de tomar la forma de una carta y transformarla a nuestro antojo " +
+    "para crear un sistema que resalta la personalidad de la tienda y sus " +
+    "productos. A partir de ahí se diseñó un sistema visual completo que " +
+    "lleva esa idea a cada punto de contacto: empaques que convierten el " +
+    "unboxing en un momento mágico, y una línea de merchandising (deck " +
+    "boxes, playmats, jerseys) pensada para que los jugadores vivan una sola " +
+    "idea consistente en todos lados.",
   en:
-    "Reino de Magos is a TCG and board game store that went through a full " +
-    "rebrand alongside the development of its Shopify storefront. We " +
-    "redesigned the brand identity starting from the original mascot, a " +
-    "wizard raccoon, and took it toward a cleaner, more expressive and " +
-    "scalable logo, backed by a themed icon system (cards, dice, potions, " +
-    "wizard hats) that now lives in the brand pattern and on physical " +
-    "product such as playmats. In parallel we built the online store on " +
-    "Shopify: a collection architecture organised by franchise (One Piece, " +
-    "Lorcana, Magic, Pokémon, Dragon Ball, Digimon), product pages ready " +
-    "for singles and sealed stock, and a catalogue and inventory setup that " +
-    "supports the store's day-to-day operation under a single system.",
+    "I had the chance to work on the identity for Reino de Magos, a TCG " +
+    "(Trading Card Games) store. It is a major store in Mexico, leaders " +
+    "within their industry. They already had a character that interacts " +
+    "with their community all the time, a wizard raccoon called " +
+    "\"Arcanito\", their main mascot." +
+    "\n\n" +
+    "Why fix something that isn't broken?" +
+    "\n\n" +
+    "Arcanito already worked as a character for the brand; he needed a push " +
+    "and some magic dust, to have that fun, magical personality that defines " +
+    "him. So I redesigned the character, who can now interact with their " +
+    "players." +
+    "\n\n" +
+    "The idea of taking the shape of a card and reshaping it at will to " +
+    "create a system that brings out the personality of the store and its " +
+    "products. From there we designed a complete visual system that carries " +
+    "that idea into every touchpoint: packaging that turns the unboxing into " +
+    "a magical moment, and a merchandising line (deck boxes, playmats, " +
+    "jerseys) meant to let players live one consistent idea everywhere.",
 };
 
 const FORTE_FITNESS_DESCRIPTION = {
