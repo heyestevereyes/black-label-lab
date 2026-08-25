@@ -165,21 +165,48 @@ export const projects: Project[] = [
       en: ["Branding", "Website", "E-commerce"],
     },
     description: REINO_DE_MAGOS_DESCRIPTION,
-    // La portada del grid sigue cayendo a mainImage: aqui no hay
-    // cardImage y ProjectCard necesita un fotograma fijo, no el iframe.
-    // OJO: el archivo principal aqui es .png, no .jpg como el de Kapital.
+    // OJO: main.png ya no existe en disco y nada lo pinta — el detalle abre
+    // con mainVideo y la tarjeta usa cardImage. Se conserva porque mainImage
+    // es obligatorio en Project; si se quiere limpiar, hay que volverlo
+    // opcional en el tipo.
     mainImage: "/proyectos/ReinoDeMagos/main.png",
-    // El detalle abre con video en vez de con main.png. 16:9, asi que
-    // no hace falta aspectRatio: DEFAULT_VIDEO_ASPECT_RATIO ya es 56.25%.
+    // El detalle abre con video. 16:9, asi que no hace falta aspectRatio:
+    // DEFAULT_VIDEO_ASPECT_RATIO ya es 56.25%.
     mainVideo: {
       src: "https://player.vimeo.com/video/1221231149?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1",
     },
+    // GIF animado de 72.9 MB: es con mucho el asset mas pesado del sitio.
+    cardImage: "/proyectos/ReinoDeMagos/card.gif",
     galleryItems: [
       { type: "image", src: "/proyectos/ReinoDeMagos/gallery-1.jpg" },
       { type: "image", src: "/proyectos/ReinoDeMagos/gallery-2.jpg" },
-      { type: "image", src: "/proyectos/ReinoDeMagos/gallery-5.jpg" },
       { type: "image", src: "/proyectos/ReinoDeMagos/gallery-3.jpg" },
-      { type: "image", src: "/proyectos/ReinoDeMagos/gallery-4.jpg" },
+      {
+        type: "video",
+        src: "https://player.vimeo.com/video/1221278267?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1",
+        aspectRatio: "56.25%",
+      },
+      {
+        type: "video",
+        src: "https://player.vimeo.com/video/1221263238?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1",
+        aspectRatio: "56.25%",
+      },
+      {
+        type: "video",
+        src: "https://player.vimeo.com/video/1221272329?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1",
+        aspectRatio: "56.25%",
+      },
+      {
+        type: "video",
+        src: "https://player.vimeo.com/video/1221248071?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1",
+        aspectRatio: "56.25%",
+      },
+      { type: "image", src: "/proyectos/ReinoDeMagos/gallery-8.jpg" },
+      { type: "image", src: "/proyectos/ReinoDeMagos/gallery-9.jpg" },
+      { type: "image", src: "/proyectos/ReinoDeMagos/gallery-10.jpg" },
+      { type: "image", src: "/proyectos/ReinoDeMagos/gallery-11.jpg" },
+      { type: "image", src: "/proyectos/ReinoDeMagos/gallery-12.jpg" },
+      { type: "image", src: "/proyectos/ReinoDeMagos/gallery-13.jpg" },
     ],
     overlayOpacity: 0.3,
   },
