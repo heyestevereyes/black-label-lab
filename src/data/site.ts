@@ -40,7 +40,7 @@ export const WHATSAPP_URL = `https://wa.me/${CONTACT_PHONE.replace(/\D/g, "")}`;
  */
 export const NAV_LINKS = [
   { label: "Work", hash: "#proyectos" },
-  { label: "Studio", hash: "#studio" },
+  { label: "Studio", hash: "#como-trabajamos" },
   // TODO: #lab todavía no existe como sección en la página.
   { label: "Playground", hash: "#lab" },
   { label: "Contact", hash: "#contacto" },

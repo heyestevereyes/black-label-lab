@@ -28,7 +28,7 @@ const ICON_BUTTON =
 // Las etiquetas salen de messages (nav.*). Playground apunta a #lab, que
 // todavía no existe como sección (ver NAV_LINKS en data/site.ts).
 const PILLS = [
-  { key: "studio", hash: "#studio" },
+  { key: "studio", hash: "#como-trabajamos" },
   { key: "portfolio", hash: "#proyectos" },
   { key: "playground", hash: "#lab" },
 ] as const;
