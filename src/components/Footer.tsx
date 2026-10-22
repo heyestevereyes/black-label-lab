@@ -98,26 +98,6 @@ export default function Footer() {
           {t("cta")}
         </AnchorLink>
       </div>
-
-      {/* ── WORDMARK GIGANTE — firma de cierre ──
-           Sin padding lateral a propósito: va de borde a borde del viewport.
-           Sin fondo ni borde propios: comparte el fondo negro del footer.
-           overflow-hidden protege el layout si el ancho llegara a exceder la
-           caja.
-           aria-hidden: es la misma marca que ya anuncia el navbar, repetirla
-           solo la leería dos veces.
-           31vw: "HUMANCHIP" mide 320px por cada 100px de font-size en Neudron
-           (medido en el navegador), asi que 100vw / 3.2 = 31vw la deja a
-           borde a borde. */}
-      <div className="overflow-hidden">
-        <p
-          aria-hidden
-          className="font-hero uppercase text-white leading-[0.8] tracking-normal
-                     text-[31vw] whitespace-nowrap select-none"
-        >
-          Humanchip
-        </p>
-      </div>
     </footer>
   );
 }
