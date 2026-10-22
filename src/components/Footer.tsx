@@ -1,116 +1,118 @@
 import { useTranslations } from "next-intl";
-import BrandMark from "@/components/BrandMark";
 import AnchorLink from "@/components/AnchorLink";
 import {
   CONTACT_EMAIL,
   CONTACT_PHONE,
-  NAV_LINKS,
-  SOCIAL_LINKS,
+  INSTAGRAM_URL,
+  WHATSAPP_URL,
 } from "@/data/site";
 
-const COLUMN_HEADING =
-  "font-mono text-[10px] tracking-[0.06em] text-muted mb-4";
+// Los textos en gris sobre negro van en #9a9a9a (7.4:1): el --text-secondary
+// del sitio (#6b6b6b) da 3.94:1 sobre negro y no pasa AA en texto pequeño.
+const MUTED = "text-[#9a9a9a]";
 
-const COLUMN_LINK =
-  "font-mono text-[13px] tracking-[0.03em] text-ink hover:text-accent transition-colors";
+const COLUMN_HEADING =
+  "font-satoshi font-bold text-white text-[clamp(1.125rem,1.5vw,1.5rem)]";
+
+const COLUMN_VALUE = `mt-3 block font-mono text-[13px] tracking-[0.03em] ${MUTED}
+                      hover:text-white transition-colors break-all`;
+
+const SOCIAL_LINK =
+  "font-satoshi font-bold uppercase tracking-[0.02em] text-white " +
+  "text-[clamp(1rem,1.4vw,1.5rem)] hover:opacity-70 transition-opacity";
+
+// Querétaro es un nombre propio: igual en /es y /en, no sale de messages.
+const CITY = "Querétaro";
+
+const SOCIALS = [
+  { label: "Instagram", href: INSTAGRAM_URL },
+  { label: "WhatsApp", href: WHATSAPP_URL },
+] as const;
 
 export default function Footer() {
   const t = useTranslations("footer");
 
   return (
-    <footer className="bg-surface">
-      {/* ── FILA SUPERIOR + COLUMNAS ── */}
+    <footer className="bg-black text-white">
       <div className="px-6 pt-16 pb-12 lg:pt-24">
-        {/* Fila superior: monograma a la izquierda, tagline a la derecha */}
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-          <BrandMark className="w-[180px]" />
-
+        {/* Párrafo + redes: apilados en móvil, lado a lado desde md. */}
+        <div className="flex flex-col gap-10 md:flex-row md:justify-between md:gap-16">
           <p
-            className="font-satoshi font-bold text-ink leading-[0.95] tracking-normal
-                       text-[clamp(1.5rem,3.2vw,2.75rem)]
-                       sm:text-right sm:max-w-[60%]"
+            className="font-satoshi font-bold text-white leading-[1.1] tracking-normal
+                       text-[clamp(1.5rem,2.6vw,2.75rem)] md:max-w-[62%]"
           >
-            {t("tagline")}
+            {t("about")}
           </p>
+
+          <ul className="flex flex-col gap-2 md:text-right">
+            {SOCIALS.map((social) => (
+              <li key={social.label}>
+                {/* Salen del sitio: pestaña nueva, y noopener para que la
+                    página destino no reciba acceso a window.opener. */}
+                <a
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={SOCIAL_LINK}
+                >
+                  {social.label}
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
 
-        {/* Tres columnas — apiladas en móvil */}
-        <div className="mt-14 grid grid-cols-1 gap-10 sm:grid-cols-3 lg:mt-20">
-          {/* Navegación */}
-          <nav aria-label={t("navigation")}>
-            <h2 className={COLUMN_HEADING}>{t("navigation")}</h2>
-            <ul className="flex flex-col gap-3">
-              {NAV_LINKS.map((link) => (
-                <li key={link.hash}>
-                  <AnchorLink hash={link.hash} className={COLUMN_LINK}>
-                    {link.label}
-                  </AnchorLink>
-                </li>
-              ))}
-            </ul>
-          </nav>
-
-          {/* Contacto */}
+        {/* Contacto: apilado en móvil, dos columnas desde sm. */}
+        <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 md:max-w-[62%] lg:mt-16">
           <div>
             <h2 className={COLUMN_HEADING}>{t("contact")}</h2>
-            <ul className="flex flex-col gap-3">
-              <li>
-                <a
-                  href={`mailto:${CONTACT_EMAIL}`}
-                  className="font-mono text-[13px] tracking-[0.08em] text-muted hover:text-accent transition-colors break-all"
-                >
-                  {CONTACT_EMAIL}
-                </a>
-              </li>
-              <li>
-                <a
-                  href={`tel:${CONTACT_PHONE.replace(/\s/g, "")}`}
-                  className="font-mono text-[13px] tracking-[0.08em] text-muted hover:text-accent transition-colors"
-                >
-                  {CONTACT_PHONE}
-                </a>
-              </li>
-            </ul>
+            <a href={`mailto:${CONTACT_EMAIL}`} className={COLUMN_VALUE}>
+              {CONTACT_EMAIL}
+            </a>
           </div>
 
-          {/* Redes sociales */}
           <div>
-            <h2 className={COLUMN_HEADING}>{t("social")}</h2>
-            <ul className="flex flex-col gap-3">
-              {SOCIAL_LINKS.map((social) => (
-                <li key={social.label}>
-                  {/* Salen del sitio: pestaña nueva, y noopener para que la
-                      página destino no reciba acceso a window.opener. */}
-                  <a
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={COLUMN_LINK}
-                  >
-                    {social.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+            <h2 className={COLUMN_HEADING}>{CITY}</h2>
+            <a
+              href={`tel:${CONTACT_PHONE.replace(/\s/g, "")}`}
+              className={COLUMN_VALUE}
+            >
+              {CONTACT_PHONE}
+            </a>
           </div>
         </div>
+
+        {/* CTA. Sección de Contacto del sitio = el calendario (#agendar);
+            AnchorLink emite un <a href> plano en la home, que Lenis anima,
+            y navega a /#agendar desde otras rutas. */}
+        <AnchorLink
+          hash="#agendar"
+          className={`mt-12 flex cursor-pointer items-center justify-center rounded-[20px]
+                      border border-white/20 bg-black px-6 py-14 text-center lg:mt-16 lg:py-24
+                      font-satoshi font-bold leading-[1.05] text-balance ${MUTED}
+                      text-[clamp(1.75rem,5.2vw,5.5rem)]
+                      transition-colors hover:border-white/50 hover:text-white
+                      focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                      focus-visible:outline-white`}
+        >
+          {t("cta")}
+        </AnchorLink>
       </div>
 
       {/* ── WORDMARK GIGANTE — firma de cierre ──
            Sin padding lateral a propósito: va de borde a borde del viewport.
-           Sin fondo ni borde propios: comparte el fondo del footer para que
-           las letras no queden sobre un bloque de otro tono.
+           Sin fondo ni borde propios: comparte el fondo negro del footer.
            overflow-hidden protege el layout si el ancho llegara a exceder la
            caja.
-           aria-hidden: es la misma marca que ya anuncia el enlace de arriba,
-           repetirla solo la leería dos veces.
+           aria-hidden: es la misma marca que ya anuncia el navbar, repetirla
+           solo la leería dos veces.
            31vw: "HUMANCHIP" mide 320px por cada 100px de font-size en Neudron
            (medido en el navegador), asi que 100vw / 3.2 = 31vw la deja a
            borde a borde. */}
       <div className="overflow-hidden">
         <p
           aria-hidden
-          className="font-hero uppercase text-ink leading-[0.8] tracking-normal
+          className="font-hero uppercase text-white leading-[0.8] tracking-normal
                      text-[31vw] whitespace-nowrap select-none"
         >
           Humanchip

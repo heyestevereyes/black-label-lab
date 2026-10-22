@@ -38,10 +38,9 @@
     "wip": "Caso de estudio en construcción."
   },
   "footer": {
-    "tagline": "Haz de tu marca la elección obvia",
-    "contact": "Contacto",
-    "navigation": "Navegación",
-    "social": "Redes"
+    "about": "Humanchip es un estudio de diseño estratégico y producción creativa con sede en Querétaro, México — trabajando para marcas en todo el mundo.",
+    "contact": "Contáctanos",
+    "cta": "¿Tienes un proyecto? Hablemos"
   },
   "contact": {
     "heading": "Contacto",

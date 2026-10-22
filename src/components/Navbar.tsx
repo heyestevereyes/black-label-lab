@@ -26,7 +26,7 @@ const ICON_BUTTON =
   "bg-black hover:bg-[#2a2a2a] transition-colors";
 
 // Las etiquetas salen de messages (nav.*). Playground apunta a #lab, que
-// todavía no existe como sección (ver NAV_LINKS en data/site.ts).
+// todavía no existe como sección en la página.
 const PILLS = [
   { key: "studio", hash: "#como-trabajamos" },
   { key: "portfolio", hash: "#proyectos" },

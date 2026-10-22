@@ -7,8 +7,7 @@ interface BrandMarkProps {
 }
 
 /**
- * Wordmark "Humanchip." envuelto en el enlace a home. Lo usan el navbar y la
- * fila superior del footer.
+ * Wordmark "Humanchip." envuelto en el enlace a home. Lo usa el navbar.
  *
  * <img> plano y no next/image a propósito: el optimizador rechaza los SVG
  * con un 400 mientras `dangerouslyAllowSVG` esté desactivado, así que la

@@ -38,10 +38,9 @@
     "wip": "Case study in progress."
   },
   "footer": {
-    "tagline": "Make your brand the obvious choice",
+    "about": "Humanchip is a strategic design and creative production studio based in Querétaro, Mexico — working with brands worldwide.",
     "contact": "Contact",
-    "navigation": "Navigation",
-    "social": "Social"
+    "cta": "Have a project? Let's talk"
   },
   "contact": {
     "heading": "Contact",

@@ -30,22 +30,6 @@ export const CONTACT_PHONE = "+52 442 377 6196";
  */
 export const WHATSAPP_URL = `https://wa.me/${CONTACT_PHONE.replace(/\D/g, "")}`;
 
-/**
- * Enlaces de navegación del footer. El navbar tiene su propio juego de
- * etiquetas (messages: nav.*) desde el rediseño de Humanchip.
- *
- * Las etiquetas van literales y en inglés en los dos idiomas: son
- * nombres de sección de la marca, no copy traducible. Por eso ya no
- * salen de messages/{locale}.json.
- */
-export const NAV_LINKS = [
-  { label: "Work", hash: "#proyectos" },
-  { label: "Studio", hash: "#como-trabajamos" },
-  // TODO: #lab todavía no existe como sección en la página.
-  { label: "Playground", hash: "#lab" },
-  { label: "Contact", hash: "#agendar" },
-] as const;
-
 /** Redes sociales. Apuntan fuera del sitio, así que el footer las abre
  *  en pestaña nueva con rel="noopener noreferrer". */
 export const SOCIAL_LINKS = [
@@ -56,3 +40,8 @@ export const SOCIAL_LINKS = [
   { label: "Instagram", href: "https://www.instagram.com/esteve.king/" },
   { label: "Behance", href: "https://www.behance.net/heyestevereyes" },
 ] as const;
+
+/** Instagram, que es el único perfil que muestra el footer. */
+export const INSTAGRAM_URL = SOCIAL_LINKS.find(
+  (s) => s.label === "Instagram"
+)!.href;
