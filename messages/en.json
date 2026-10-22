@@ -1,4 +1,19 @@
 {
+  "nav": {
+    "home": "Home",
+    "studio": "Studio",
+    "portfolio": "Portfolio",
+    "playground": "Playground",
+    "contact": "Contact",
+    "menuOpen": "Open menu",
+    "menuClose": "Close menu"
+  },
+  "hero": {
+    "tagStart": "Your",
+    "title": "Creative Partners",
+    "tagEnd": "Strategic",
+    "body": "Strategy and Creative Direction designed by humans. Production built by machines. Brand, website and cinematic content for brands that want to sell more, not just look better."
+  },
   "projects": {
     "heading": "Projects",
     "prev": "Previous project",
@@ -20,7 +35,7 @@
     "lastName": "Last Name",
     "email": "Email",
     "message": "Message",
-    "consent": "I give Esteve Reyes permission to contact me at this email.",
+    "consent": "I give Humanchip permission to contact me at this email.",
     "messagePlaceholder": "Type your message here",
     "legal": "This site is protected and subject to our privacy policy.",
     "send": "Send",

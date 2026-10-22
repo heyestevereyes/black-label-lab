@@ -1,69 +1,90 @@
+import { useTranslations } from "next-intl";
 import Navbar from "@/components/Navbar";
+import HeroBackground from "@/components/HeroBackground";
 import FloatingMascot from "@/components/FloatingMascot";
 
-// Sin min-h-screen en el wrapper: en móvil el contenido del hero no llena la
-// pantalla, así que un mínimo de 100vh rellenaba con ~400px de vacío entre el
-// showreel y la sección siguiente. En desktop el contenido ya supera el
-// viewport, de modo que el mínimo nunca aportaba nada.
+/*
+  Hero de Humanchip. Figma es solo de escritorio (1920 x 1080), así que el
+  comportamiento por debajo de lg está pensado aparte, no es el diseño
+  escalado.
+
+  lg+ : la imagen llena el hero y navbar y tarjeta flotan encima, tal cual
+        el Figma. La altura es el viewport, pero con tope de 58vw (proporción
+        1.72:1, casi la 16:9 de la imagen): en pantallas más cuadradas
+        object-cover recorta como mucho un 2.5% por lado y no se corta a
+        los personajes de los extremos.
+  <lg : en un viewport vertical, object-cover mostraría solo la franja
+        central de la imagen (en 375px, un tercio) y partiría el texto
+        "happy neurons" y a los personajes. Por eso la imagen va a 16:9
+        completa, sin recorte, y navbar y tarjeta se apilan arriba y abajo.
+
+  El fondo cálido de la imagen (#fef9ef, muestreado de sus bordes) se repite
+  como color del contenedor para que, apilado, no se note el borde entre
+  imagen y página. Si el placeholder cambia por el reel, revisar este color.
+*/
 export default function HeroSection() {
+  const t = useTranslations("hero");
+
   return (
-    <div className="bg-surface dot-grid">
+    <div
+      id="inicio"
+      className="relative bg-[#fef9ef] pb-6 lg:h-[max(min(100svh,58vw),560px)]
+                 lg:overflow-hidden lg:pb-0"
+    >
+      {/* ── NAVBAR ── en lg+ flota sobre la imagen. */}
+      <div className="relative z-20 lg:absolute lg:inset-x-0 lg:top-0">
+        <Navbar />
+      </div>
 
-      {/* ── NAVBAR ── */}
-      <Navbar />
+      {/* ── FONDO ── placeholder de imagen; ver HeroBackground para pasar
+          a video cuando el reel esté listo. */}
+      <div className="relative aspect-video w-full lg:absolute lg:inset-0 lg:aspect-auto">
+        <HeroBackground imageSrc="/brand/hero-happy-neurons.png" />
+      </div>
 
-      {/* ── HERO — nombre a ancho completo ── */}
-      <section className="px-6 pt-4 pb-10">
+      {/* ── TARJETA ──
+          container-type: los tamaños internos van en cqw (relativos al
+          ancho de la tarjeta), así que tipografía y paddings escalan juntos
+          igual que en el Figma sea cual sea el ancho. Los clamp fijan un
+          mínimo legible en móvil. Por eso el ancho de la tarjeta tiene que
+          venir de fuera y no del contenido. */}
+      <div
+        className="relative z-10 mx-4 mt-4 [container-type:inline-size] md:mx-6
+                   lg:absolute lg:bottom-[clamp(24px,1.98vw,38px)]
+                   lg:left-[clamp(24px,2.08vw,40px)] lg:m-0
+                   lg:w-[clamp(420px,38.65vw,742px)]
+                   rounded-[10px] border border-[#363636] bg-black"
+      >
+        <div className="px-[clamp(16px,3.5cqw,26px)] pt-[clamp(16px,4cqw,30px)] pb-[clamp(20px,8.5cqw,63px)]">
+          {/* Un solo h1 con la frase completa; los tags son spans. */}
+          <h1 className="m-0 flex flex-wrap items-center gap-x-[clamp(8px,2cqw,16px)] gap-y-[clamp(6px,1.5cqw,12px)] font-satoshi font-bold text-white">
+            <span
+              className="rounded-[clamp(4px,0.92cqw,6.8px)] bg-[#00d71b] px-[clamp(6px,1.5cqw,11px)]
+                         py-[clamp(4px,0.92cqw,6.8px)] text-[length:clamp(12px,2.72cqw,20.2px)]
+                         font-medium leading-tight text-[#280041]"
+            >
+              {t("tagStart")}
+            </span>
+            <span className="text-[length:clamp(26px,7.9cqw,58.6px)] leading-none">
+              {t("title")}
+            </span>
+            <span
+              className="rounded-[clamp(4px,0.92cqw,6.8px)] bg-[#febf29] px-[clamp(6px,1.5cqw,11px)]
+                         py-[clamp(4px,0.92cqw,6.8px)] text-[length:clamp(12px,2.72cqw,20.2px)]
+                         font-medium leading-tight text-[#280041]"
+            >
+              {t("tagEnd")}
+            </span>
+          </h1>
 
-        {/* El nombre va como texto, no como SVG: sigue siendo el h1 de la
-            página y así queda seleccionable e indexable.
-            font-hero es Neudron, la misma display del heading de Contacto.
-
-            Tamaño medido, no estimado: en Neudron "ESTEVE REYES" ocupa 373px
-            por cada 100px de font-size, asi que llenar un ancho X pide
-            X/3.73 de font-size.
-
-            Va en calc y no en vw puro porque el px-6 del contenedor son 48px
-            fijos, no un porcentaje: la caja util es el 96.7% del viewport a
-            1440px pero solo el 87.2% a 375px. Un vw unico llenaria bien un
-            extremo y desbordaria el otro. (100vw - 48px)/3.73 = 26.8vw -
-            12.9px la deja llena en cualquier ancho. Sin tope: escala a ancho
-            completo en todos los breakpoints, igual que el wordmark w-full
-            que habia antes.
-
-            whitespace-nowrap por si acaso: si el ancho se quedara corto
-            preferimos que asome antes que partir el nombre en dos lineas.
-            leading-[0.8] recorta el espacio muerto sobre y bajo las
-            mayusculas, igual que el heading de Contacto. */}
-        <h1
-          className="font-hero uppercase text-ink leading-[0.8] tracking-normal
-                     text-[calc(26.6vw-12.8px)] whitespace-nowrap m-0 select-none"
-        >
-          Esteve Reyes
-        </h1>
-      </section>
-
-      {/* ── SHOWREEL — full-width block below the hero.
-           bg-elevated + hairline border carry the section break now that the
-           whole page sits on one light tone. ── */}
-      <section className="px-6 pb-6">
-        <div className="relative w-full aspect-[16/9] overflow-hidden rounded-lg
-                        border border-hairline bg-elevated">
-          <video
-            className="absolute inset-0 w-full h-full object-cover"
-            autoPlay
-            muted
-            loop
-            playsInline
-          >
-            <source src="/showreel.mp4" type="video/mp4" />
-          </video>
+          <p className="mt-[clamp(14px,4.2cqw,32px)] max-w-[74cqw] font-mono text-[length:clamp(12px,2.3cqw,17px)] leading-[1.5] text-white">
+            {t("body")}
+          </p>
         </div>
-      </section>
+      </div>
 
       {/* Mascota fija abajo a la derecha; compartida con el detalle de proyecto. */}
       <FloatingMascot />
-
     </div>
   );
 }

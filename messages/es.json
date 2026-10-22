@@ -1,4 +1,19 @@
 {
+  "nav": {
+    "home": "Inicio",
+    "studio": "El estudio",
+    "portfolio": "Portafolio",
+    "playground": "Playground",
+    "contact": "Contacto",
+    "menuOpen": "Abrir menú",
+    "menuClose": "Cerrar menú"
+  },
+  "hero": {
+    "tagStart": "Tus",
+    "title": "Socios Creativos",
+    "tagEnd": "Estratégicos",
+    "body": "Estrategia y Dirección Creativa pensada por humanos. Producción construida por máquinas. Marca, sitio web y contenido cinemático para marcas que quieren vender más, no solo verse mejor."
+  },
   "projects": {
     "heading": "Proyectos",
     "prev": "Proyecto anterior",
@@ -20,7 +35,7 @@
     "lastName": "Apellido",
     "email": "Correo electrónico",
     "message": "Mensaje",
-    "consent": "Doy permiso a Esteve Reyes de contactarme a este correo.",
+    "consent": "Doy permiso a Humanchip de contactarme a este correo.",
     "messagePlaceholder": "Escribe tu mensaje aquí",
     "legal": "Este sitio está protegido y sujeto a nuestra política de privacidad.",
     "send": "Enviar",

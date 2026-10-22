@@ -26,9 +26,9 @@ const spaceMono = Space_Mono({
             from using the WebFonts(s) listed without a purchased license.
             All details above must always remain unaltered and visible in your CSS.
 
-  Single weight (normal / normal). Se usa solo en los tres títulos display
-  del sitio — el h1 del hero, el heading de Contacto y la firma de cierre
-  del footer — vía la utilidad `font-hero`. El resto no la hereda.
+  Single weight (normal / normal). Se usa solo en los títulos display
+  del sitio — el heading de Contacto y la firma de cierre del footer —
+  vía la utilidad `font-hero`. El resto no la hereda.
 */
 const heroFont = localFont({
   src: "../../../public/403-neudron-regular.woff2",

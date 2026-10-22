@@ -3,16 +3,16 @@
  * renders the brand name — root metadata, per-project page titles, etc.
  */
 
-export const SITE_NAME = "Esteve Reyes";
+export const SITE_NAME = "Humanchip";
 
 /** Browser tab / <title> and social card headline. */
-export const SITE_TITLE = `${SITE_NAME} | Design Studio`;
+export const SITE_TITLE = `${SITE_NAME} | Tus Socios Creativos Estratégicos`;
 
 /** Dominio canónico. Alimenta og:url. */
 export const SITE_URL = "https://estevereyes.com";
 
 export const SITE_DESCRIPTION =
-  "Estudio de diseño: construimos proyectos de diseño y comunicación enfocados que ayuden a las marcas y empresas a lograr sus objetivos.";
+  "Humanchip, tus socios creativos estratégicos: estrategia y dirección creativa pensada por humanos, producción construida por máquinas. Marca, sitio web y contenido cinemático para marcas que quieren vender más.";
 
 /**
  * Datos de contacto. Viven aquí y no en la API route para que el footer
@@ -31,8 +31,8 @@ export const CONTACT_PHONE = "+52 442 377 6196";
 export const WHATSAPP_URL = `https://wa.me/${CONTACT_PHONE.replace(/\D/g, "")}`;
 
 /**
- * Enlaces de navegación. Compartidos por el navbar y el footer para que
- * las dos listas no se desincronicen.
+ * Enlaces de navegación del footer. El navbar tiene su propio juego de
+ * etiquetas (messages: nav.*) desde el rediseño de Humanchip.
  *
  * Las etiquetas van literales y en inglés en los dos idiomas: son
  * nombres de sección de la marca, no copy traducible. Por eso ya no
@@ -45,9 +45,6 @@ export const NAV_LINKS = [
   { label: "Playground", hash: "#lab" },
   { label: "Contact", hash: "#contacto" },
 ] as const;
-
-/** Etiqueta del CTA. Igual en ambos idiomas, por lo mismo. */
-export const CTA_LABEL = "Book a Call";
 
 /** Redes sociales. Apuntan fuera del sitio, así que el footer las abre
  *  en pestaña nueva con rel="noopener noreferrer". */

@@ -23,9 +23,7 @@ export default function Footer() {
       <div className="px-6 pt-16 pb-12 lg:pt-24">
         {/* Fila superior: monograma a la izquierda, tagline a la derecha */}
         <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-          {/* 72px: el logo nuevo es casi cuadrado, así que a lo ancho pesa
-              mucho más que el wordmark apaisado que había antes. */}
-          <BrandMark width={72} />
+          <BrandMark className="w-[180px]" />
 
           <p
             className="font-satoshi font-bold text-ink leading-[0.95] tracking-normal
@@ -106,17 +104,16 @@ export default function Footer() {
            caja.
            aria-hidden: es la misma marca que ya anuncia el enlace de arriba,
            repetirla solo la leería dos veces.
-           26.6vw y no los 25.8vw del hero: alli la caja util descuenta los
-           24px de px-6 por lado, aqui el texto va a 100vw completo. Con los
-           373px por cada 100px de font-size que mide "ESTEVE REYES" en
-           Neudron, los dos acaban llenando su ancho respectivo. */}
+           31vw: "HUMANCHIP" mide 320px por cada 100px de font-size en Neudron
+           (medido en el navegador), asi que 100vw / 3.2 = 31vw la deja a
+           borde a borde. */}
       <div className="overflow-hidden">
         <p
           aria-hidden
           className="font-hero uppercase text-ink leading-[0.8] tracking-normal
-                     text-[26.6vw] whitespace-nowrap select-none"
+                     text-[31vw] whitespace-nowrap select-none"
         >
-          Esteve Reyes
+          Humanchip
         </p>
       </div>
     </footer>

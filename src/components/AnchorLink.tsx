@@ -6,6 +6,9 @@ interface AnchorLinkProps {
   /** Ancla destino, incluyendo la almohadilla: "#studio". */
   hash: string;
   className?: string;
+  "aria-label"?: string;
+  /** Para cerrar menús al navegar. */
+  onClick?: () => void;
   children: React.ReactNode;
 }
 
@@ -23,20 +26,32 @@ interface AnchorLinkProps {
 export default function AnchorLink({
   hash,
   className,
+  "aria-label": ariaLabel,
+  onClick,
   children,
 }: AnchorLinkProps) {
   const pathname = usePathname();
 
   if (pathname === "/") {
     return (
-      <a href={hash} className={className}>
+      <a
+        href={hash}
+        className={className}
+        aria-label={ariaLabel}
+        onClick={onClick}
+      >
         {children}
       </a>
     );
   }
 
   return (
-    <Link href={`/${hash}`} className={className}>
+    <Link
+      href={`/${hash}`}
+      className={className}
+      aria-label={ariaLabel}
+      onClick={onClick}
+    >
       {children}
     </Link>
   );
