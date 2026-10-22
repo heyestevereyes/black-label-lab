@@ -14,6 +14,21 @@
     "tagEnd": "Strategic",
     "body": "Strategy and Creative Direction designed by humans. Production built by machines. Brand, website and cinematic content for brands that want to sell more, not just look better."
   },
+  "process": {
+    "heading": "How we work",
+    "discover": {
+      "title": "Discover",
+      "body": "A diagnosis of your business, your target customers, the competition and what is holding back your goals today."
+    },
+    "strategy": {
+      "title": "Define Strategy",
+      "body": "We design a strategic communication and design plan: how, and in what way."
+    },
+    "production": {
+      "title": "Design & Production",
+      "body": "We design and produce the project, whether it is a website, a video or high-quality visual content."
+    }
+  },
   "projects": {
     "heading": "Projects",
     "prev": "Previous project",

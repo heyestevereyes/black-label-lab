@@ -14,6 +14,21 @@
     "tagEnd": "Estratégicos",
     "body": "Estrategia y Dirección Creativa pensada por humanos. Producción construida por máquinas. Marca, sitio web y contenido cinemático para marcas que quieren vender más, no solo verse mejor."
   },
+  "process": {
+    "heading": "Cómo trabajamos",
+    "discover": {
+      "title": "Descubrir",
+      "body": "Diagnóstico de tu negocio, tus clientes objetivo, la competencia y lo que hoy frena tus objetivos."
+    },
+    "strategy": {
+      "title": "Definir Estrategia",
+      "body": "Diseñamos un plan estratégico de comunicación y diseño, cómo y de qué manera."
+    },
+    "production": {
+      "title": "Diseño y producción",
+      "body": "Diseñamos y producimos el proyecto ya sea un sitio web, un video, creación de contenido de gran calidad visual."
+    }
+  },
   "projects": {
     "heading": "Proyectos",
     "prev": "Proyecto anterior",
