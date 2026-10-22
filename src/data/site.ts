@@ -43,7 +43,7 @@ export const NAV_LINKS = [
   { label: "Studio", hash: "#como-trabajamos" },
   // TODO: #lab todavía no existe como sección en la página.
   { label: "Playground", hash: "#lab" },
-  { label: "Contact", hash: "#contacto" },
+  { label: "Contact", hash: "#agendar" },
 ] as const;
 
 /** Redes sociales. Apuntan fuera del sitio, así que el footer las abre

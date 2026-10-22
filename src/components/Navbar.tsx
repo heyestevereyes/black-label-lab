@@ -77,7 +77,7 @@ export default function Navbar() {
       ))}
 
       <AnchorLink
-        hash="#contacto"
+        hash="#agendar"
         aria-label={t("contact")}
         onClick={onNavigate}
         className={ICON_BUTTON}

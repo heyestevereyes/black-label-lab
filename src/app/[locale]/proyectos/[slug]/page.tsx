@@ -5,7 +5,6 @@ import { Link } from "@/i18n/navigation";
 import Navbar from "@/components/Navbar";
 import FloatingMascot from "@/components/FloatingMascot";
 import ProjectCard from "@/components/ProjectCard";
-import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import { SITE_NAME } from "@/data/site";
 import { projects } from "@/data/projects";
@@ -219,9 +218,6 @@ export default async function ProjectPage({ params }: PageProps) {
             {t("back")}
           </Link>
         </section>
-
-        {/* ── 5. CONTACTO — mismo componente del home ── */}
-        <ContactSection />
       </main>
 
       <Footer />

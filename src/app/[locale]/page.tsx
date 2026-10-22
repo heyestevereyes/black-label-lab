@@ -2,7 +2,6 @@ import { setRequestLocale } from "next-intl/server";
 import HeroSection from "@/components/HeroSection";
 import HowWeWork from "@/components/HowWeWork";
 import ProjectsSection from "@/components/ProjectsSection";
-import ContactSection from "@/components/ContactSection";
 import CalEmbed from "@/components/CalEmbed";
 import Footer from "@/components/Footer";
 import type { Locale } from "@/i18n/routing";
@@ -18,7 +17,6 @@ export default function Home({ params }: { params: { locale: Locale } }) {
         <HeroSection />
         <HowWeWork />
         <ProjectsSection />
-        <ContactSection />
         <CalEmbed />
       </main>
       <Footer />
