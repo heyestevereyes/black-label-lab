@@ -21,9 +21,6 @@ const SOCIAL_LINK =
   "font-satoshi font-bold uppercase tracking-[0.02em] text-white " +
   "text-[clamp(1rem,1.4vw,1.5rem)] hover:opacity-70 transition-opacity";
 
-// Querétaro es un nombre propio: igual en /es y /en, no sale de messages.
-const CITY = "Querétaro";
-
 const SOCIALS = [
   { label: "Instagram", href: INSTAGRAM_URL },
   { label: "WhatsApp", href: WHATSAPP_URL },
@@ -72,7 +69,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h2 className={COLUMN_HEADING}>{CITY}</h2>
+            <h2 className={COLUMN_HEADING}>{t("country")}</h2>
             <a
               href={`tel:${CONTACT_PHONE.replace(/\s/g, "")}`}
               className={COLUMN_VALUE}
