@@ -77,7 +77,7 @@ export default function HeroSection() {
             </span>
           </h1>
 
-          <p className="mt-[clamp(14px,4.2cqw,32px)] max-w-[74cqw] font-satoshi font-medium text-[length:clamp(13px,2.3cqw,17px)] leading-[1.4] text-white">
+          <p className="mt-[clamp(14px,4.2cqw,32px)] max-w-[74cqw] font-satoshi font-medium text-[length:clamp(16.25px,2.875cqw,21.25px)] leading-[1.4] text-white">
             {t("body")}
           </p>
         </div>
