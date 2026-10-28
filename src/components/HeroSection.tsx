@@ -4,7 +4,7 @@ import HeroBackground from "@/components/HeroBackground";
 import FloatingMascot from "@/components/FloatingMascot";
 
 /*
-  Hero de Humanchip. Figma es solo de escritorio (1920 x 1080), así que el
+  Hero de Esteve Reyes. Figma es solo de escritorio (1920 x 1080), así que el
   comportamiento por debajo de lg está pensado aparte, no es el diseño
   escalado.
 

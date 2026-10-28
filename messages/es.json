@@ -9,9 +9,9 @@
     "menuClose": "Cerrar menú"
   },
   "hero": {
-    "tagStart": "Tus",
-    "title": "Socios Creativos",
-    "tagEnd": "Estratégicos",
+    "tagStart": "Tu",
+    "title": "Socio Creativo",
+    "tagEnd": "Estratégico",
     "body": "Estrategia y Dirección Creativa pensada por humanos. Producción construida por máquinas. Marca, sitio web y contenido cinemático para marcas que quieren vender más, no solo verse mejor."
   },
   "process": {
@@ -38,8 +38,8 @@
     "wip": "Caso de estudio en construcción."
   },
   "footer": {
-    "about": "Humanchip es un estudio de diseño estratégico y producción creativa con sede en México — trabajando para marcas en todo el mundo.",
-    "contact": "Contáctanos",
+    "about": "Soy Esteve Reyes, diseñador con sede en México. Mi estudio de diseño estratégico y producción creativa trabaja con marcas en todo el mundo.",
+    "contact": "Contáctame",
     "country": "México",
     "cta": "¿Tienes un proyecto? Hablemos"
   },
@@ -50,7 +50,7 @@
     "lastName": "Apellido",
     "email": "Correo electrónico",
     "message": "Mensaje",
-    "consent": "Doy permiso a Humanchip de contactarme a este correo.",
+    "consent": "Doy permiso a Esteve Reyes de contactarme a este correo.",
     "messagePlaceholder": "Escribe tu mensaje aquí",
     "legal": "Este sitio está protegido y sujeto a nuestra política de privacidad.",
     "send": "Enviar",

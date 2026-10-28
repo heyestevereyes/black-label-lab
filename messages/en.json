@@ -10,7 +10,7 @@
   },
   "hero": {
     "tagStart": "Your",
-    "title": "Creative Partners",
+    "title": "Creative Partner",
     "tagEnd": "Strategic",
     "body": "Strategy and Creative Direction designed by humans. Production built by machines. Brand, website and cinematic content for brands that want to sell more, not just look better."
   },
@@ -38,7 +38,7 @@
     "wip": "Case study in progress."
   },
   "footer": {
-    "about": "Humanchip is a strategic design and creative production studio based in Mexico — working with brands worldwide.",
+    "about": "I'm Esteve Reyes, a designer based in Mexico. My strategic design and creative production studio works with brands worldwide.",
     "contact": "Contact",
     "country": "Mexico",
     "cta": "Have a project? Let's talk"
@@ -50,7 +50,7 @@
     "lastName": "Last Name",
     "email": "Email",
     "message": "Message",
-    "consent": "I give Humanchip permission to contact me at this email.",
+    "consent": "I give Esteve Reyes permission to contact me at this email.",
     "messagePlaceholder": "Type your message here",
     "legal": "This site is protected and subject to our privacy policy.",
     "send": "Send",

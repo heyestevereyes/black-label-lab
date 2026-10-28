@@ -3,16 +3,16 @@
  * renders the brand name — root metadata, per-project page titles, etc.
  */
 
-export const SITE_NAME = "Humanchip";
+export const SITE_NAME = "Esteve Reyes";
 
 /** Browser tab / <title> and social card headline. */
-export const SITE_TITLE = `${SITE_NAME} | Tus Socios Creativos Estratégicos`;
+export const SITE_TITLE = `${SITE_NAME} | Estudio de Diseño Estratégico`;
 
 /** Dominio canónico. Alimenta og:url. */
 export const SITE_URL = "https://estevereyes.com";
 
 export const SITE_DESCRIPTION =
-  "Humanchip, tus socios creativos estratégicos: estrategia y dirección creativa pensada por humanos, producción construida por máquinas. Marca, sitio web y contenido cinemático para marcas que quieren vender más.";
+  "Soy Esteve Reyes, diseñador con más de 10 años de experiencia. Mi estudio crea estrategia, marca, sitio web y contenido cinemático para marcas que quieren vender más, no solo verse mejor.";
 
 /**
  * Datos de contacto. Viven aquí y no en la API route para que el footer
