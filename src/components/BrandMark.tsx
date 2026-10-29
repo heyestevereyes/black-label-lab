@@ -7,7 +7,7 @@ interface BrandMarkProps {
 }
 
 /**
- * Logo de Esteve Reyes (mascota + wordmark) envuelto en el enlace a home. Lo usa el navbar.
+ * Wordmark "Reyno." de Reyno Studio envuelto en el enlace a home. Lo usa el navbar.
  *
  * <img> plano y no next/image a propósito: el optimizador rechaza los SVG
  * con un 400 mientras `dangerouslyAllowSVG` esté desactivado, así que la
@@ -29,10 +29,10 @@ export default function BrandMark({ className = "w-[196px]" }: BrandMarkProps) {
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src="/brand/esteve-reyes-logo.png"
+        src="/brand/reyno-logo.svg"
         alt=""
-        width={1736}
-        height={310}
+        width={172}
+        height={47}
         className="block h-auto w-full"
         draggable={false}
       />

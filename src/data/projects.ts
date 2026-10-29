@@ -54,7 +54,7 @@ const KAPITAL_DESCRIPTION = {
  */
 const REINO_DE_MAGOS_DESCRIPTION = {
   es:
-    "Tuve la oportunidad de trabajar la identidad para Reino de Magos, una " +
+    "Tuvimos la oportunidad de trabajar la identidad para Reino de Magos, una " +
     "tienda de TCG (Trading Card Games). Es una tienda importante en México, " +
     "líderes dentro de su industria. Ellos ya tenían a un personaje que " +
     "interactúa todo el tiempo con su comunidad, un mapache hechicero " +
@@ -64,7 +64,7 @@ const REINO_DE_MAGOS_DESCRIPTION = {
     "\n\n" +
     "Arcanito ya era un personaje que funcionaba como marca, necesitaba un " +
     "empujón y polvos mágicos, tener esa personalidad divertida y mágica que " +
-    "lo caracteriza, de esta manera rediseñé al personaje, el cual puede " +
+    "lo caracteriza, de esta manera rediseñamos al personaje, el cual puede " +
     "interactuar con sus jugadores." +
     "\n\n" +
     "La idea de tomar la forma de una carta y transformarla a nuestro antojo " +
@@ -75,7 +75,7 @@ const REINO_DE_MAGOS_DESCRIPTION = {
     "boxes, playmats, jerseys) pensada para que los jugadores vivan una sola " +
     "idea consistente en todos lados.",
   en:
-    "I had the chance to work on the identity for Reino de Magos, a TCG " +
+    "We had the chance to work on the identity for Reino de Magos, a TCG " +
     "(Trading Card Games) store. It is a major store in Mexico, leaders " +
     "within their industry. They already had a character that interacts " +
     "with their community all the time, a wizard raccoon called " +
@@ -85,7 +85,7 @@ const REINO_DE_MAGOS_DESCRIPTION = {
     "\n\n" +
     "Arcanito already worked as a character for the brand; he needed a push " +
     "and some magic dust, to have that fun, magical personality that defines " +
-    "him. So I redesigned the character, who can now interact with their " +
+    "him. So we redesigned the character, who can now interact with their " +
     "players." +
     "\n\n" +
     "The idea of taking the shape of a card and reshaping it at will to " +

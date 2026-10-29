@@ -100,7 +100,7 @@ export default function Navbar() {
                  lg:px-[clamp(24px,2.03vw,39px)] lg:py-[clamp(20px,2.4vw,46px)]"
     >
       <div className="flex min-w-0 items-center md:gap-[clamp(16px,1.93vw,37px)]">
-        <BrandMark className="w-[172px] shrink-0 md:w-[clamp(165px,14vw,280px)]" />
+        <BrandMark className="w-[120px] shrink-0 md:w-[clamp(104px,8.6vw,160px)]" />
 
         {/* md+: grupo en fila, a 6px como en Figma. */}
         <div className="hidden items-stretch gap-[6px] md:flex">{group()}</div>

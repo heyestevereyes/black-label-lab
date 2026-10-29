@@ -10,7 +10,7 @@
   },
   "hero": {
     "tagStart": "Your",
-    "title": "Creative Partner",
+    "title": "Creative Partners",
     "tagEnd": "Strategic",
     "body": "Strategy and Creative Direction designed by humans. Brand, website and cinematic content for brands that want to sell more, not just look better."
   },
@@ -38,7 +38,7 @@
     "wip": "Case study in progress."
   },
   "footer": {
-    "about": "Strategic design and creative production studio working with brands worldwide.",
+    "about": "We are Reyno Studio, a strategic design and creative production studio working with brands worldwide.",
     "contact": "Contact",
     "country": "Mexico",
     "cta": "Have a project? Let's talk"
@@ -50,7 +50,7 @@
     "lastName": "Last Name",
     "email": "Email",
     "message": "Message",
-    "consent": "I give Esteve Reyes permission to contact me at this email.",
+    "consent": "I give Reyno Studio permission to contact me at this email.",
     "messagePlaceholder": "Type your message here",
     "legal": "This site is protected and subject to our privacy policy.",
     "send": "Send",

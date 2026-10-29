@@ -3,7 +3,7 @@
  * renders the brand name — root metadata, per-project page titles, etc.
  */
 
-export const SITE_NAME = "Esteve Reyes";
+export const SITE_NAME = "Reyno Studio";
 
 /** Browser tab / <title> and social card headline. */
 export const SITE_TITLE = `${SITE_NAME} | Estudio de Diseño Estratégico`;
@@ -12,7 +12,7 @@ export const SITE_TITLE = `${SITE_NAME} | Estudio de Diseño Estratégico`;
 export const SITE_URL = "https://estevereyes.com";
 
 export const SITE_DESCRIPTION =
-  "Soy Esteve Reyes, diseñador con más de 10 años de experiencia. Mi estudio crea estrategia, marca, sitio web y contenido cinemático para marcas que quieren vender más, no solo verse mejor.";
+  "Reyno Studio es un estudio de diseño estratégico y producción creativa. Creamos estrategia, marca, sitio web y contenido cinemático para marcas que quieren vender más, no solo verse mejor.";
 
 /**
  * Datos de contacto. Viven aquí y no en la API route para que el footer
