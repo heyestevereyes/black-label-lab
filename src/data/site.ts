@@ -9,7 +9,7 @@ export const SITE_NAME = "Reyno Studio";
 export const SITE_TITLE = `${SITE_NAME} | Estudio de Diseño Estratégico`;
 
 /** Dominio canónico. Alimenta og:url. */
-export const SITE_URL = "https://estevereyes.com";
+export const SITE_URL = "https://www.reyno-studio.com";
 
 export const SITE_DESCRIPTION =
   "Reyno Studio es un estudio de diseño estratégico y producción creativa. Creamos estrategia, marca, sitio web y contenido cinemático para marcas que quieren vender más, no solo verse mejor.";
@@ -18,7 +18,7 @@ export const SITE_DESCRIPTION =
  * Datos de contacto. Viven aquí y no en la API route para que el footer
  * pueda mostrarlos sin importar código de servidor al bundle del cliente.
  */
-export const CONTACT_EMAIL = "hey@estevereyes.com";
+export const CONTACT_EMAIL = "hello@reyno-studio.com";
 
 // Alimenta el teléfono del footer y el enlace de WhatsApp del sprite.
 export const CONTACT_PHONE = "+52 442 377 6196";
