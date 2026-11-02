@@ -36,10 +36,14 @@ export default function HeroSection() {
         <Navbar />
       </div>
 
-      {/* ── FONDO ── placeholder de imagen; ver HeroBackground para pasar
-          a video cuando el reel esté listo. */}
+      {/* ── FONDO ── reel desde md; en móvil solo la imagen (ver
+          HeroBackground). El nombre del archivo lleva mayúscula y en
+          Vercel las rutas distinguen mayúsculas. */}
       <div className="relative aspect-video w-full lg:absolute lg:inset-0 lg:aspect-auto">
-        <HeroBackground imageSrc="/brand/hero-happy-neurons.png" />
+        <HeroBackground
+          imageSrc="/brand/hero-happy-neurons.png"
+          videoSrc="/Reel-Reyno-nov.mp4"
+        />
       </div>
 
       {/* ── TARJETA ──
