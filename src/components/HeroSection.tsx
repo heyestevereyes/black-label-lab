@@ -51,13 +51,22 @@ export default function HeroSection() {
           ancho de la tarjeta), así que tipografía y paddings escalan juntos
           igual que en el Figma sea cual sea el ancho. Los clamp fijan un
           mínimo legible en móvil. Por eso el ancho de la tarjeta tiene que
-          venir de fuera y no del contenido. */}
+          venir de fuera y no del contenido.
+
+          Vidrio esmerilado solo en lg+, que es donde la tarjeta flota
+          sobre el video. Por debajo va apilada sobre el crema liso: ahí
+          el blur no tiene nada que desenfocar y el negro translúcido
+          quedaría gris, con el texto blanco menos legible, así que sigue
+          sólida. El postcss del proyecto no lleva autoprefixer, por eso
+          el -webkit- para Safari va a mano. */}
       <div
         className="relative z-10 mx-4 mt-4 [container-type:inline-size] md:mx-6
                    lg:absolute lg:bottom-[clamp(24px,1.98vw,38px)]
                    lg:left-[clamp(24px,2.08vw,40px)] lg:m-0
                    lg:w-[clamp(420px,38.65vw,742px)]
-                   rounded-[10px] border border-[#363636] bg-black"
+                   rounded-[10px] border border-[#363636] bg-black
+                   lg:border-white/[0.12] lg:bg-black/[0.6]
+                   lg:backdrop-blur-[16px] lg:[-webkit-backdrop-filter:blur(16px)]"
       >
         <div className="px-[clamp(16px,3.5cqw,26px)] pt-[clamp(16px,4cqw,30px)] pb-[clamp(20px,8.5cqw,63px)]">
           {/* Un solo h1 con la frase completa; los tags son spans. */}
