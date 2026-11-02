@@ -100,7 +100,13 @@ export default function Navbar() {
                  lg:px-[clamp(24px,2.03vw,39px)] lg:py-[clamp(20px,2.4vw,46px)]"
     >
       <div className="flex min-w-0 items-center md:gap-[clamp(16px,1.93vw,37px)]">
-        <BrandMark className="w-[120px] shrink-0 md:w-[clamp(104px,8.6vw,160px)]" />
+        {/* Logo en blanco dentro de la misma envolvente negra que los
+            botones de icono. Su alto (1.6em) lo hace un poco más alto que
+            los botones para que el wordmark siga leyéndose como marca. */}
+        <BrandMark
+          className={`${ICON_BUTTON} shrink-0`}
+          logoClassName="h-[1.6em] w-auto"
+        />
 
         {/* md+: grupo en fila, a 6px como en Figma. */}
         <div className="hidden items-stretch gap-[6px] md:flex">{group()}</div>
