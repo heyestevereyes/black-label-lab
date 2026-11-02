@@ -83,7 +83,9 @@ const STEPS: Step[] = [
     blocks: [
       { top: 0, height: 139, color: C.navy },
       { top: 139, height: 24, color: C.sky },
-      { top: 313, height: 40, color: C.ink },
+      // En Figma este bloque termina en 353 y deja 9px de gris del fondo
+      // abajo; llega hasta el borde (362) como las otras dos columnas.
+      { top: 313, height: CANVAS_H - 313, color: C.ink },
     ],
     text: {
       top: 163, height: 150, color: C.blue,
