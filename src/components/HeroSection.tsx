@@ -36,13 +36,14 @@ export default function HeroSection() {
         <Navbar />
       </div>
 
-      {/* ── FONDO ── reel desde md; en móvil solo la imagen (ver
-          HeroBackground). El nombre del archivo lleva mayúscula y en
+      {/* ── FONDO ── reel completo desde md y versión ligera (540p) en
+          móvil; ver HeroBackground. Los nombres llevan mayúscula y en
           Vercel las rutas distinguen mayúsculas. */}
       <div className="relative aspect-video w-full lg:absolute lg:inset-0 lg:aspect-auto">
         <HeroBackground
           imageSrc="/brand/hero-happy-neurons.png"
           videoSrc="/Reel-Reyno-nov.mp4"
+          mobileVideoSrc="/Reel-Reyno-nov-mobile.mp4"
         />
       </div>
 
