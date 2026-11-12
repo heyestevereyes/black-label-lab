@@ -3,7 +3,6 @@
     "home": "Inicio",
     "studio": "El estudio",
     "portfolio": "Portafolio",
-    "playground": "Playground",
     "contact": "Contacto",
     "menuOpen": "Abrir menú",
     "menuClose": "Cerrar menú"
@@ -12,7 +11,8 @@
     "tagStart": "Tus",
     "title": "Socios Creativos",
     "tagEnd": "Estratégicos",
-    "body": "Estrategia y Dirección Creativa pensada por humanos. Marca, sitio web y contenido cinemático para marcas que quieren vender más, no solo verse mejor."
+    "body": "Estrategia y Dirección Creativa pensada por humanos. Marca, sitio web y contenido cinemático para marcas que quieren vender más, no solo verse mejor.",
+    "cta": "Agenda una llamada"
   },
   "process": {
     "heading": "Cómo trabajamos",

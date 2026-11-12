@@ -2,6 +2,7 @@ import { useTranslations } from "next-intl";
 import Navbar from "@/components/Navbar";
 import HeroBackground from "@/components/HeroBackground";
 import FloatingMascot from "@/components/FloatingMascot";
+import AnchorLink from "@/components/AnchorLink";
 
 /*
   Hero de Reyno Studio. Figma es solo de escritorio (1920 x 1080), así que el
@@ -42,7 +43,7 @@ export default function HeroSection() {
       <div className="relative aspect-video w-full lg:absolute lg:inset-0 lg:aspect-auto">
         <HeroBackground
           imageSrc="/brand/hero-happy-neurons.png"
-          videoSrc="/Reel-Reyno-nov.mp4"
+          videoSrc="/Reel-Reyno-nov-web.mp4"
           mobileVideoSrc="/Reel-Reyno-nov-mobile.mp4"
         />
       </div>
@@ -69,7 +70,7 @@ export default function HeroSection() {
                    lg:border-white/[0.12] lg:bg-black/[0.6]
                    lg:backdrop-blur-[16px] lg:[-webkit-backdrop-filter:blur(16px)]"
       >
-        <div className="px-[clamp(16px,3.5cqw,26px)] pt-[clamp(16px,4cqw,30px)] pb-[clamp(20px,8.5cqw,63px)]">
+        <div className="px-[clamp(16px,3.5cqw,26px)] pt-[clamp(16px,4cqw,30px)] pb-[clamp(20px,4.6cqw,34px)]">
           {/* Un solo h1 con la frase completa; los tags son spans. */}
           <h1 className="m-0 flex flex-wrap items-center gap-x-[clamp(8px,2cqw,16px)] gap-y-[clamp(6px,1.5cqw,12px)] font-satoshi font-bold text-white">
             <span
@@ -94,6 +95,22 @@ export default function HeroSection() {
           <p className="mt-[clamp(14px,4.2cqw,32px)] max-w-[74cqw] font-satoshi font-medium text-[length:clamp(16.25px,2.875cqw,21.25px)] leading-[1.4] text-white">
             {t("body")}
           </p>
+
+          {/* CTA principal: lleva al calendario de Cal.com. Blanco sobre la
+              tarjeta oscura, con el radio y el padding de los botones del
+              navbar. Ocupa el aire que el Figma dejaba bajo el párrafo, por
+              eso el padding inferior de la tarjeta es menor que antes. */}
+          <AnchorLink
+            hash="#agendar"
+            className="mt-[clamp(18px,4.6cqw,34px)] inline-flex items-center gap-[0.5em]
+                       rounded-[10px] bg-white px-[clamp(16px,2.6cqw,20px)]
+                       py-[clamp(10px,1.6cqw,12px)] font-satoshi font-bold
+                       text-[length:clamp(15px,2.45cqw,18px)] leading-none text-black
+                       transition-colors hover:bg-[#d4d4d4]"
+          >
+            {t("cta")}
+            <span aria-hidden>→</span>
+          </AnchorLink>
         </div>
       </div>
 

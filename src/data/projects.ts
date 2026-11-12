@@ -197,8 +197,10 @@ export const projects: Project[] = [
     mainVideo: {
       src: "https://player.vimeo.com/video/1221231149?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1",
     },
-    // GIF animado de 72.9 MB: es con mucho el asset mas pesado del sitio.
-    cardImage: "/proyectos/ReinoDeMagos/card.gif",
+    // Antes era un GIF de 72.9 MB; el mismo clip en mp4 720p pesa 0.26 MB.
+    // card-poster.jpg es su primer fotograma.
+    cardImage: "/proyectos/ReinoDeMagos/card-poster.jpg",
+    cardVideo: "/proyectos/ReinoDeMagos/card.mp4",
     galleryItems: [
       { type: "image", src: "/proyectos/ReinoDeMagos/gallery-1.jpg" },
       { type: "image", src: "/proyectos/ReinoDeMagos/gallery-2.jpg" },

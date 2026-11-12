@@ -21,7 +21,7 @@ const DESKTOP_QUERY = "(min-width: 768px)";
  * monta un <video> en bucle con la misma imagen como póster. object-cover
  * rellena la caja en ambos casos, así que el contenedor decide el recorte.
  *
- * El reel completo pesa ~90MB, así que en móvil se usa `mobileVideoSrc`
+ * El reel de escritorio pesa ~11MB, así que en móvil se usa `mobileVideoSrc`
  * (~3MB) en vez de esconder el grande con CSS: un display:none sobre un
  * <video> ya presente no impide que el navegador lo precargue. Por eso el
  * servidor solo renderiza la imagen y la fuente se elige en el cliente con

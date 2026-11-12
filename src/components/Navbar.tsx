@@ -25,12 +25,11 @@ const ICON_BUTTON =
   "flex items-center justify-center rounded-[10px] px-[14px] py-[8px] " +
   "bg-black hover:bg-[#2a2a2a] transition-colors";
 
-// Las etiquetas salen de messages (nav.*). Playground apunta a #lab, que
-// todavía no existe como sección en la página.
+// Las etiquetas salen de messages (nav.*). Playground se quitó mientras
+// no exista su sección: apuntaba a #lab y el clic no hacía nada.
 const PILLS = [
   { key: "studio", hash: "#como-trabajamos" },
   { key: "portfolio", hash: "#proyectos" },
-  { key: "playground", hash: "#lab" },
 ] as const;
 
 export default function Navbar() {

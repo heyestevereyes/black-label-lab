@@ -3,7 +3,6 @@
     "home": "Home",
     "studio": "Studio",
     "portfolio": "Portfolio",
-    "playground": "Playground",
     "contact": "Contact",
     "menuOpen": "Open menu",
     "menuClose": "Close menu"
@@ -12,7 +11,8 @@
     "tagStart": "Your",
     "title": "Creative Partners",
     "tagEnd": "Strategic",
-    "body": "Strategy and Creative Direction designed by humans. Brand, website and cinematic content for brands that want to sell more, not just look better."
+    "body": "Strategy and Creative Direction designed by humans. Brand, website and cinematic content for brands that want to sell more, not just look better.",
+    "cta": "Book a call"
   },
   "process": {
     "heading": "How we work",

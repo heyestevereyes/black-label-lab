@@ -58,6 +58,13 @@ export interface Project {
    * necesitara una portada distinta a su imagen principal.
    */
   cardImage?: string;
+  /**
+   * Portada animada (mp4 en bucle, sin audio). Si existe, la tarjeta la
+   * reproduce encima de cardImage, que queda como póster mientras carga.
+   * Para portadas animadas usar esto y no GIF: un GIF pesa decenas de
+   * veces más que el mismo clip en mp4.
+   */
+  cardVideo?: string;
   /** Contenido de la galería: imágenes y/o videos, en orden. */
   galleryItems: GalleryItem[];
 

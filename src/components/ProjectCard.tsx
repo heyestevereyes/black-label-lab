@@ -7,6 +7,8 @@ export interface ProjectCardProps {
   title: string;
   tags: string;
   mockupImage: string;
+  /** Portada animada opcional; mockupImage queda como póster. */
+  mockupVideo?: string;
   href: string;
   /** Optional CSS background painted behind the artwork */
   backgroundStyle?: string;
@@ -18,6 +20,7 @@ export default function ProjectCard({
   title,
   tags,
   mockupImage,
+  mockupVideo,
   href,
   backgroundStyle,
   overlayOpacity = 0,
@@ -41,6 +44,19 @@ export default function ProjectCard({
         className="object-cover transition-transform duration-500 ease-out
                    group-hover:scale-[1.02]"
       />
+      {mockupVideo && (
+        <video
+          src={mockupVideo}
+          poster={mockupImage}
+          autoPlay
+          muted
+          loop
+          playsInline
+          aria-hidden
+          className="absolute inset-0 h-full w-full object-cover transition-transform
+                     duration-500 ease-out group-hover:scale-[1.02]"
+        />
+      )}
 
       {/* Scrim from Figma */}
       {overlayOpacity > 0 && (

@@ -189,6 +189,7 @@ export default async function ProjectPage({ params }: PageProps) {
                 title={previous.name}
                 tags={previous.tags[locale].join(", ")}
                 mockupImage={previous.cardImage ?? previous.mainImage}
+                mockupVideo={previous.cardVideo}
                 backgroundStyle={previous.backgroundStyle}
                 overlayOpacity={previous.overlayOpacity}
                 href={`/proyectos/${previous.slug}`}
@@ -203,6 +204,7 @@ export default async function ProjectPage({ params }: PageProps) {
                 title={next.name}
                 tags={next.tags[locale].join(", ")}
                 mockupImage={next.cardImage ?? next.mainImage}
+                mockupVideo={next.cardVideo}
                 backgroundStyle={next.backgroundStyle}
                 overlayOpacity={next.overlayOpacity}
                 href={`/proyectos/${next.slug}`}

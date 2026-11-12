@@ -36,6 +36,7 @@ export default function ProjectsSection() {
             /* La portada cae a mainImage salvo que el proyecto declare una
                propia — Kapital sí lo hace. */
             mockupImage={project.cardImage ?? project.mainImage}
+            mockupVideo={project.cardVideo}
             backgroundStyle={project.backgroundStyle}
             overlayOpacity={project.overlayOpacity}
             href={`/proyectos/${project.slug}`}

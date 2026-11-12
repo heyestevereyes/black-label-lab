@@ -8,6 +8,7 @@ import "../globals.css";
 import { routing } from "@/i18n/routing";
 import { SITE_TITLE, SITE_DESCRIPTION, SITE_URL } from "@/data/site";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
+import { Analytics } from "@vercel/analytics/next";
 
 const spaceMono = Space_Mono({
   weight: ["400", "700"],
@@ -96,6 +97,10 @@ export default async function LocaleLayout({
         <NextIntlClientProvider>
           <SmoothScrollProvider>{children}</SmoothScrollProvider>
         </NextIntlClientProvider>
+        {/* Visitas y fuentes de tráfico. Solo registra en producción en
+            Vercel, y hay que activarlo en el panel del proyecto (pestaña
+            Analytics); en local no envía nada. */}
+        <Analytics />
       </body>
     </html>
   );
