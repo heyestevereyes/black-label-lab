@@ -1,0 +1,168 @@
+/* Estilos propios de /promo que no caben cómodos en clases de Tailwind. */
+
+/* Satoshi local (next/font, ver layout.tsx). Este CSS solo lo carga /promo,
+   así que la utilidad font-satoshi del home no cambia. */
+body,
+.font-satoshi {
+  font-family: var(--font-satoshi), "Satoshi", sans-serif;
+}
+
+/* Acento serif itálica de los titulares (palabras entre *asteriscos* en
+   src/content/promo.ts). */
+.promo-accent {
+  font-family: var(--font-instrument-serif), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+/* Foco visible y consistente en todo lo interactivo. */
+.promo-focus:focus-visible {
+  outline: 3px solid #2e6aff;
+  outline-offset: 3px;
+}
+
+/* ── Video del hero ── misma sombra que tenía la consola. */
+.promo-reel {
+  box-shadow: 0 30px 60px -25px rgba(7, 0, 207, 0.55);
+}
+
+/* ── Cómo funciona: fondo mesh ──
+   Color base + 4 manchas difuminadas (los colores llegan como --m-* desde
+   StepsSection) + grano con feTurbulence. La mancha 4 va abajo y es el
+   color base: es la que garantiza el contraste del texto. */
+.promo-mesh {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background: var(--m-base);
+}
+.promo-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(42px);
+}
+.promo-blob-1 { width: 75%; height: 55%; left: -18%; top: -14%; background: radial-gradient(circle, var(--m-1) 0%, transparent 70%); }
+.promo-blob-2 { width: 70%; height: 55%; right: -20%; top: -6%; background: radial-gradient(circle, var(--m-2) 0%, transparent 70%); }
+.promo-blob-3 { width: 55%; height: 40%; left: 30%; top: 26%; background: radial-gradient(circle, var(--m-3) 0%, transparent 70%); opacity: 0.75; }
+.promo-blob-4 { width: 150%; height: 65%; left: -25%; bottom: -18%; background: radial-gradient(ellipse, var(--m-4) 30%, transparent 72%); }
+.promo-mesh::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.22;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Piezas de los mockups: giro de reposo --r, giro de hover --rh. */
+.promo-mock {
+  transform: rotate(var(--r, 0deg));
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Inclinación 3D suave en escritorio; se endereza al pasar el mouse. */
+  @media (min-width: 1024px) {
+    .promo-reel-stage {
+      perspective: 1400px;
+    }
+    .promo-reel {
+      transform: rotateY(-10deg) rotateX(5deg) rotateZ(1deg);
+      /* Gira sobre su borde derecho: ese borde se queda en su sitio y
+         respeta el margen del header; el izquierdo se aleja. */
+      transform-origin: right center;
+      /* El rotateZ empuja la esquina ~3px; el lg:pr-1 del contenedor lo compensa. */
+      transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .promo-reel-stage:hover .promo-reel {
+      transform: rotateY(-3deg) rotateX(2deg) rotateZ(0deg);
+    }
+  }
+
+  /* Manchas del mesh: ciclos lentos (24 a 34 s) y desfasados. */
+  .promo-blob-1 { animation: promo-drift-a 26s ease-in-out infinite alternate; }
+  .promo-blob-2 { animation: promo-drift-b 32s ease-in-out infinite alternate; }
+  .promo-blob-3 { animation: promo-drift-c 24s ease-in-out infinite alternate; }
+  .promo-blob-4 { animation: promo-drift-b 34s ease-in-out infinite alternate-reverse; }
+
+  /* Hover de la tarjeta: los mockups se elevan y giran. */
+  .promo-mock {
+    transition: transform 550ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .promo-mock-late {
+    transition-delay: 40ms;
+  }
+  .promo-step:hover .promo-mock {
+    transform: translateY(-10px) rotate(var(--rh, 0deg));
+  }
+
+  /* Beneficios: el ícono de vidrio flota y gira al pasar el mouse. */
+  .promo-glass {
+    transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .promo-benefit:hover .promo-glass {
+    transform: translateY(-8px) rotate(-6deg);
+  }
+
+  /* Trabajo reciente: la portada crece un poco al pasar el mouse. */
+  .promo-work-img {
+    transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .promo-work-card:hover .promo-work-img {
+    transform: scale(1.03);
+  }
+
+  /* Lightbox: el fondo y la barra aparecen, el contenido sube. La
+     animación de opacidad va en esas capas y no en el contenedor del
+     modal: en el contenedor aislaría el backdrop-filter del fondo. */
+  .promo-lb {
+    animation: promo-lb-fade 280ms ease-out both;
+  }
+  .promo-lb-panel {
+    animation: promo-lb-rise 560ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  /* ── Entradas al hacer scroll (RevealObserver) ── */
+  html.js [data-reveal]:not([data-in]) {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  html.js [data-reveal] {
+    transition:
+      opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+
+@keyframes promo-drift-a {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(18%, 14%) scale(1.15); }
+}
+@keyframes promo-drift-b {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(-16%, 10%) scale(1.1); }
+}
+@keyframes promo-drift-c {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(-20%, -12%) scale(1.2); }
+}
+
+@keyframes promo-lb-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes promo-lb-rise {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
