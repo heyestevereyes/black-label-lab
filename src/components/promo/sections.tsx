@@ -42,7 +42,17 @@ export function PromoNav() {
     >
       <div className={`${CONTAINER} flex h-[68px] items-center justify-between gap-3 md:h-[80px]`}>
         <Logo />
-        <CtaButton tipo="llamada" seccion="nav" label={promo.nav.cta} className="!h-11 !px-4 !text-[15px]" />
+        <div className="flex items-center gap-2">
+          {/* En móvil se oculta: ahí ya está la barra fija de WhatsApp. */}
+          <CtaButton
+            tipo="whatsapp"
+            seccion="nav"
+            variant="outline"
+            label={promo.nav.ctaWhatsapp}
+            className="!hidden !h-11 !px-4 !text-[15px] md:!inline-flex"
+          />
+          <CtaButton tipo="llamada" seccion="nav" label={promo.nav.cta} className="!h-11 !px-4 !text-[15px]" />
+        </div>
       </div>
     </header>
   );

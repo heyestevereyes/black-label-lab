@@ -37,17 +37,18 @@ export const promo = {
 
   nav: {
     cta: "Agenda una llamada",
+    ctaWhatsapp: "Escríbenos por WhatsApp",
   },
 
   hero: {
     eyebrow: "Reyno Studio · Branding y Sitios Web",
     title: "Tu marca merece verse tan bien como lo que *vendes.*",
     subtitle:
-      "Diseño estratégico de marca y sitios web para negocios que quieren crecer. Tu proyecto lo lleva directamente el fundador, sin intermediarios.",
+      "Diseño estratégico de marca y sitios web para negocios que quieren crecer. Cada proyecto se trabaja de cerca, con estrategia, atención al detalle y un proceso claro de principio a fin.",
     ctaCall: "Agenda una llamada de 15 min",
     ctaWhatsapp: "Escríbenos por WhatsApp",
     trust:
-      "Más de 10 años de experiencia del fundador. Ex Art Director en Kapital y diseñador en Oracle Health.",
+      "Más de 10 años creando marcas y productos digitales para fintech, salud, retail y gastronomía.",
     reelLabel: "Reel de proyectos de Reyno Studio",
   },
 
