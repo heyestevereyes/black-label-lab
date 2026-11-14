@@ -235,9 +235,8 @@ export const promo = {
     eyebrow: "Sobre mí",
     title: "Hola, soy *Esteve,* fundador de Reyno.",
     text: "Llevo más de 10 años diseñando marcas y productos digitales. Fui Art Director en Kapital y diseñé plataformas clínicas en Oracle Health. Fundé Reyno para trabajar con pocos proyectos a la vez y darle a cada uno la atención que merece.",
-    // TODO: foto de Esteve (cuadrada, mínimo 800 x 800) en
-    // /public/promo/esteve.jpg y poner aquí la ruta.
-    photo: "",
+    // Foto cuadrada de 1200 x 1200.
+    photo: "/promo/esteve.jpg",
     photoAlt: "Esteve Reyes, fundador de Reyno Studio",
     photoPlaceholder: "TODO foto de Esteve",
   },
@@ -245,25 +244,28 @@ export const promo = {
   testimonials: {
     eyebrow: "Testimonios",
     title: "Lo que dicen *nuestros clientes.*",
-    // TODO: 2 o 3 testimonios reales con permiso del cliente.
+    // Testimonios aprobados por cada cliente.
     items: [
       {
-        quote: "TODO: testimonio real del cliente 1.",
-        name: "TODO Nombre",
-        role: "TODO Cargo",
-        brand: "TODO Marca",
+        quote:
+          "Llegué con una repostería y sin nombre. Reyno me acompañó desde el naming hasta la identidad, y logró algo que yo no sabía explicar: una marca elegante pero cálida, que se siente como mi cocina. Mis clientes la reconocen y la recuerdan.",
+        name: "Aranza Sorchini",
+        role: "Fundadora",
+        brand: "Terronella",
       },
       {
-        quote: "TODO: testimonio real del cliente 2.",
-        name: "TODO Nombre",
-        role: "TODO Cargo",
-        brand: "TODO Marca",
+        quote:
+          "Teníamos un catálogo de más de 90 productos en PDF y cotizábamos todo a mano. Reyno nos diseñó una plataforma donde el cliente arma su pedido y la cotización nos llega directo por WhatsApp. Respondemos más rápido y nos vemos mucho más profesionales.",
+        name: "Germán",
+        role: "Director Comercial",
+        brand: "Dekora",
       },
       {
-        quote: "TODO: testimonio real del cliente 3.",
-        name: "TODO Nombre",
-        role: "TODO Cargo",
-        brand: "TODO Marca",
+        quote:
+          "Reyno rediseñó toda nuestra tienda en línea e integró precios de cartas en tiempo real. Desde el lanzamiento vendemos casi 30% más. Entendió el negocio antes de diseñar una sola pantalla.",
+        name: "Santiago",
+        role: "CEO",
+        brand: "Reino de Magos",
       },
     ],
   },
