@@ -2,7 +2,7 @@ import path from "node:path";
 
 /*
   Medidas reales de una imagen de /public, leídas al generar la página.
-  Solo se usa en componentes de servidor (la landing /promo es estática, así
+  Solo se usa en componentes de servidor (el home es estático, así
   que corre en el build). Sirve para que next/image reserve el alto correcto
   y la galería del lightbox no brinque mientras cargan las imágenes.
 

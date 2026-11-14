@@ -11,7 +11,7 @@
  *
  * Busca "TODO" en este archivo para ver lo que falta completar.
  */
-import { CONTACT_EMAIL, WHATSAPP_URL } from "@/data/site";
+import { CONTACT_EMAIL, SOCIAL_LINKS, WHATSAPP_URL } from "@/data/site";
 
 const WHATSAPP_MESSAGE =
   "Hola, vi la página de Reyno y me interesa un proyecto de branding o sitio web.";
@@ -307,6 +307,12 @@ export const promo = {
 
   footer: {
     rights: "Reyno Studio",
+    // Redes de src/data/site.ts.
+    social: SOCIAL_LINKS,
+    socialLabel: "Redes sociales",
+    // TODO: crear la página del aviso de privacidad y poner aquí su ruta.
+    // Mientras `href` esté vacío se muestra el texto sin enlace.
+    privacy: { label: "Aviso de privacidad", href: "" },
   },
 
   mobileBar: {

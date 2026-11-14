@@ -16,10 +16,10 @@ import {
 } from "@/components/promo/sections";
 
 /**
- * Landing de conversión para campañas: reyno-studio.com/promo.
+ * Home de reyno-studio.com: la landing de conversión (antes en /promo).
  * El copy se edita en src/content/promo.ts.
  */
-export default function PromoPage() {
+export default function HomePage() {
   return (
     <>
       <PromoNav />

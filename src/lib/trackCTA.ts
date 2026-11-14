@@ -20,7 +20,7 @@ type Gtag = (command: "event", name: string, params: Record<string, unknown>) =>
 type Fbq = (command: "trackCustom", name: string, params: Record<string, unknown>) => void;
 
 /**
- * Punto único de medición de los CTA de /promo.
+ * Punto único de medición de los CTA de la landing (home).
  *
  * Hoy envía a Vercel Analytics. Ojo: los eventos personalizados de Vercel
  * solo se registran en el plan Pro; en Hobby la llamada no falla, pero no

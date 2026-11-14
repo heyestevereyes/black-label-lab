@@ -50,7 +50,7 @@ const MOCKUPS = [CallMockup, ProposalMockup, DeliveryMockup];
 export default function StepsSection() {
   const s = promo.steps;
   return (
-    <section className={`${CONTAINER} py-16 md:py-24`}>
+    <section id="como-trabajamos" className={`${CONTAINER} scroll-mt-16 py-16 md:py-24`}>
       <div data-reveal>
         <Eyebrow>{s.eyebrow}</Eyebrow>
         <SectionTitle text={s.title} />

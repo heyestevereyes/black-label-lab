@@ -254,7 +254,7 @@ export function Work() {
     }));
 
   return (
-    <section className={`${CONTAINER} ${SECTION} pt-0 md:pt-0`}>
+    <section id="proyectos" className={`${CONTAINER} ${SECTION} scroll-mt-16 pt-0 md:pt-0`}>
       <div data-reveal>
         <Eyebrow>{w.eyebrow}</Eyebrow>
         <SectionTitle text={w.title} />
@@ -392,11 +392,13 @@ export function FaqSection() {
 }
 
 /* ── 10. CTA final y footer ── */
+const FOOTER_LINK = "promo-focus rounded text-white/80 underline-offset-4 hover:text-white hover:underline";
+
 export function FinalCta() {
   const f = promo.final;
   const year = new Date().getFullYear();
   return (
-    <section className="bg-ink text-white">
+    <section id="agendar" className="bg-ink text-white">
       <div className={`${CONTAINER} pb-10 pt-20 md:pt-28`}>
         <div data-reveal className="flex flex-col items-center text-center">
           <span aria-hidden className="block"><PixelMascot size={72} /></span>
@@ -410,15 +412,37 @@ export function FinalCta() {
           </div>
         </div>
 
-        <footer className="mt-24 flex flex-col items-center justify-between gap-4 border-t border-white/15 pt-8 text-[14px] text-white/65 md:flex-row">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/brand/reyno-logo-white.svg" alt="Reyno Studio" width={172} height={47} className="h-[24px] w-auto" />
-          <a href={`mailto:${promo.contact.email}`} className="promo-focus rounded text-white/80 underline-offset-4 hover:text-white hover:underline">
-            {promo.contact.email}
-          </a>
-          <p className="m-0">
-            © {year} {promo.footer.rights}
-          </p>
+        <footer className="mt-24 border-t border-white/15 pt-8 text-[14px] text-white/65">
+          <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/brand/reyno-logo-white.svg" alt="Reyno Studio" width={172} height={47} className="h-[24px] w-auto" />
+            <a href={`mailto:${promo.contact.email}`} className={FOOTER_LINK}>
+              {promo.contact.email}
+            </a>
+            <nav aria-label={promo.footer.socialLabel}>
+              <ul className="m-0 flex list-none gap-5 p-0">
+                {promo.footer.social.map((s) => (
+                  <li key={s.href}>
+                    <a href={s.href} target="_blank" rel="noopener noreferrer" className={FOOTER_LINK}>
+                      {s.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </div>
+          <div className="mt-6 flex flex-col items-center justify-between gap-3 md:flex-row">
+            <p className="m-0">
+              © {year} {promo.footer.rights}
+            </p>
+            {promo.footer.privacy.href ? (
+              <a href={promo.footer.privacy.href} className={FOOTER_LINK}>
+                {promo.footer.privacy.label}
+              </a>
+            ) : (
+              <span>{promo.footer.privacy.label}</span>
+            )}
+          </div>
         </footer>
       </div>
     </section>

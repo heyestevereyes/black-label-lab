@@ -8,10 +8,10 @@ import { SITE_NAME, SITE_URL } from "@/data/site";
 import { promo } from "@/content/promo";
 
 /*
-  Layout raíz propio de /promo. Vive fuera de [locale] (y el middleware la
-  excluye) para que la URL de las campañas sea /promo, sin /es, y para no
-  cargar lo que el home usa y esta página no: next-intl, Lenis ni el
-  calendario embebido de Cal.com.
+  Layout raíz del home (reyno-studio.com/). El grupo (home) no aparece en
+  la URL, así que la landing se sirve en la raíz con su propio layout,
+  solo en español. Antes vivía en /promo; el middleware redirige esa ruta
+  y las del sitio anterior (/es, /en, /[locale]/proyectos/[slug]) aquí.
 */
 
 // Satoshi servida desde el propio sitio (licencia gratuita de Fontshare,
@@ -44,17 +44,17 @@ const instrumentSerif = Instrument_Serif({
   display: "swap",
 });
 
-const URL_PROMO = `${SITE_URL}/promo`;
+const URL_HOME = `${SITE_URL}/`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: promo.meta.title,
   description: promo.meta.description,
-  alternates: { canonical: URL_PROMO },
+  alternates: { canonical: URL_HOME },
   openGraph: {
     title: promo.meta.title,
     description: promo.meta.description,
-    url: URL_PROMO,
+    url: URL_HOME,
     siteName: SITE_NAME,
     locale: "es_MX",
     type: "website",
@@ -73,7 +73,7 @@ export const viewport: Viewport = {
   themeColor: "#eeefef",
 };
 
-export default function PromoLayout({ children }: { children: React.ReactNode }) {
+export default function HomeLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es">
       {/* pb en móvil: reserva el alto de la barra fija de WhatsApp. */}
