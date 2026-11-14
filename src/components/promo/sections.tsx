@@ -90,28 +90,79 @@ export function Hero() {
 }
 
 /* ── 2. Logos de clientes ── */
+/*
+  Balance óptico: en vez de una sola altura, cada logo recibe un tamaño
+  que deja su peso visual parecido al de los demás.
+    - Área constante: alto = BASE · √(3 / proporción). Un logo muy
+      horizontal (Terronella, Dekora) queda más bajo y uno compacto (PSD)
+      más alto, con un área parecida.
+    - Densidad: se multiplica por (0.5 / ink)^¼, así los logos macizos se
+      achican un poco y los de trazo fino crecen un poco.
+    - Ajuste fino: `scale` de cada logo en promo.ts, a ojo.
+    - Ancho máximo: ninguno pasa de LOGO_MAX_W.
+  Los tamaños se calculan en el build con las medidas reales de cada PNG.
+*/
+const LOGO_BASE_H = 34;
+const LOGO_MAX_W = 160;
+
+function logoSize(src: string, ink: number, scale: number) {
+  const { width, height } = publicImageSize(src);
+  const ratio = width / height;
+  let h = LOGO_BASE_H * Math.sqrt(3 / ratio) * Math.pow(0.5 / ink, 0.25) * scale;
+  if (h * ratio > LOGO_MAX_W) h = LOGO_MAX_W / ratio;
+  return { w: Math.round(h * ratio), h: Math.round(h), width, height };
+}
+
 export function Logos() {
   const l = promo.logos;
+  const logos = l.items.map((logo) => ({ ...logo, ...logoSize(logo.src, logo.ink, logo.scale) }));
+
+  const list = (dup: boolean) => (
+    <ul className={`promo-logos-list${dup ? " promo-logos-dup" : ""}`} aria-hidden={dup || undefined}>
+      {logos.map((logo) => (
+        <li key={logo.name} className="flex items-center justify-center">
+          <Image
+            src={logo.src}
+            alt={dup ? "" : logo.name}
+            width={logo.width}
+            height={logo.height}
+            sizes={`${logo.w}px`}
+            quality={90}
+            className="promo-logo"
+            style={{ "--w": `${logo.w}px` } as CSSProperties}
+          />
+        </li>
+      ))}
+    </ul>
+  );
+
   return (
     <section data-reveal className={`${CONTAINER} pb-4`}>
       <p className="m-0 text-center font-mono text-[12px] font-bold uppercase tracking-[0.12em] text-muted">
         {l.title}
       </p>
-      <ul className="m-0 mt-6 grid list-none grid-cols-2 gap-3 p-0 sm:grid-cols-3 md:grid-cols-5">
-        {l.items.map((logo) => (
-          <li
-            key={logo.name}
-            className="flex h-[76px] items-center justify-center rounded-[16px] border border-dashed border-[#141414]/20 px-4"
-          >
-            {logo.src ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={logo.src} alt={logo.name} loading="lazy" className="max-h-9 w-auto opacity-70 grayscale" />
-            ) : (
-              <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-muted">{logo.name}</span>
-            )}
-          </li>
-        ))}
-      </ul>
+      {/* Filtro de tono único (promo.css .promo-logo): todo lo oscuro pasa a
+          un solo gris y lo claro se vuelve transparente, así los detalles en
+          blanco (el corazón de Dekora, la cara del mapache) no se pierden. */}
+      <svg aria-hidden width="0" height="0" className="absolute">
+        <filter id="promo-logo-tone" colorInterpolationFilters="sRGB">
+          <feColorMatrix
+            type="matrix"
+            values="0 0 0 0 0.078  0 0 0 0 0.078  0 0 0 0 0.078  -0.4677 -1.5734 -0.1588 0 2.2"
+            result="tone"
+          />
+          <feComposite in="tone" in2="SourceGraphic" operator="in" />
+        </filter>
+      </svg>
+      {/* En móvil, carrusel con desplazamiento automático (la segunda lista
+          es la copia que cierra el ciclo); con movimiento reducido, en dos
+          filas. Desde md, una sola fila. */}
+      <div className="promo-logos mx-auto mt-8 max-w-[1040px]">
+        <div className="promo-logos-track">
+          {list(false)}
+          {list(true)}
+        </div>
+      </div>
     </section>
   );
 }

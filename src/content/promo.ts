@@ -53,15 +53,22 @@ export const promo = {
 
   logos: {
     title: "Marcas que ya confiaron en Reyno",
-    // TODO: logos de clientes en escala de grises (SVG o PNG) en
-    // /public/promo/logos/. Rellena `src` y `name` de cada uno; mientras
-    // `src` esté vacío se pinta un recuadro de placeholder.
+    // Logos de clientes en /public/promo/logos/ (PNG con fondo transparente).
+    // Se pintan todos del mismo gris y con un tamaño que iguala su peso
+    // visual (ver Logos en sections.tsx).
+    //
+    // ink: qué parte del recuadro del PNG ocupa el logo (0 a 1). Un logo
+    // macizo como PSD pesa más que uno de trazo fino como Terronella con el
+    // mismo tamaño, y este dato lo compensa. Si se agrega un logo y no se
+    // mide, 0.5 funciona como valor neutro.
+    //
+    // scale: ajuste fino a ojo sobre el cálculo (1 = sin cambio).
     items: [
-      { name: "TODO logo 1", src: "" },
-      { name: "TODO logo 2", src: "" },
-      { name: "TODO logo 3", src: "" },
-      { name: "TODO logo 4", src: "" },
-      { name: "TODO logo 5", src: "" },
+      { name: "Reino de Magos", src: "/promo/logos/reino-de-magos.png", ink: 0.64, scale: 1.12 },
+      { name: "Dekora", src: "/promo/logos/dekora.png", ink: 0.49, scale: 1 },
+      { name: "Terronella", src: "/promo/logos/terronella.png", ink: 0.24, scale: 1 },
+      { name: "PSD", src: "/promo/logos/psd.png", ink: 0.72, scale: 0.9 },
+      { name: "Acuario", src: "/promo/logos/acuario.png", ink: 0.41, scale: 1 },
     ],
   },
 
