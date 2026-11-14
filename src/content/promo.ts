@@ -20,9 +20,8 @@ export const promo = {
   meta: {
     title: "Branding y sitios web para negocios que quieren crecer | Reyno Studio",
     description:
-      "Diseño estratégico de marca y sitios web. Tu proyecto lo lleva directamente el fundador, con precio cerrado y un proceso claro. Agenda una llamada de 15 minutos.",
-    // TODO: imagen OG de 1200 x 630 en /public/promo/og.jpg y descomentar
-    // `images` en src/app/promo/layout.tsx.
+      "Diseño estratégico de marca y sitios web para negocios que quieren crecer. Precio cerrado, proceso claro y atención al detalle. Agenda una llamada de 15 minutos.",
+    // Imagen para compartir en redes, 1200 x 630.
     ogImage: "/promo/og.jpg",
   },
 

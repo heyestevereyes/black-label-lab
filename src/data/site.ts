@@ -33,12 +33,7 @@ export const WHATSAPP_URL = `https://wa.me/${CONTACT_PHONE.replace(/\D/g, "")}`;
 /** Redes sociales. Apuntan fuera del sitio, así que el footer las abre
  *  en pestaña nueva con rel="noopener noreferrer". */
 export const SOCIAL_LINKS = [
-  {
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/in/estevereyes-design/",
-  },
-  { label: "Instagram", href: "https://www.instagram.com/esteve.king/" },
-  { label: "Behance", href: "https://www.behance.net/heyestevereyes" },
+  { label: "Instagram", href: "https://www.instagram.com/reynomx.studio/" },
 ] as const;
 
 /** Instagram, que es el único perfil que muestra el footer. */

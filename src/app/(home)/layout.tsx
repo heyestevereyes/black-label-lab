@@ -58,14 +58,13 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
     locale: "es_MX",
     type: "website",
-    // TODO: descomentar cuando exista la imagen (ver promo.meta.ogImage).
-    // images: [promo.meta.ogImage],
+    images: [{ url: promo.meta.ogImage, width: 1200, height: 630, alt: promo.meta.title }],
   },
   twitter: {
     card: "summary_large_image",
     title: promo.meta.title,
     description: promo.meta.description,
-    // images: [promo.meta.ogImage],
+    images: [promo.meta.ogImage],
   },
 };
 
