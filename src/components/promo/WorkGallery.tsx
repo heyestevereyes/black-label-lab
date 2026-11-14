@@ -156,7 +156,8 @@ export default function WorkGallery({ projects }: { projects: LightboxProject[] 
                 src={p.cover}
                 alt=""
                 fill
-                sizes="(min-width: 1200px) 620px, (min-width: 768px) 50vw, 100vw"
+                sizes="(min-width: 1200px) 840px, (min-width: 768px) 67vw, 134vw"
+                quality={90}
                 className="promo-work-img object-cover"
               />
               <span

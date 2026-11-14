@@ -238,7 +238,7 @@ function BrowserFrame({
         <span className="h-[5px] w-[5px] rounded-full bg-[#28c840]" />
       </div>
       <div className="relative aspect-[16/10]">
-        <Image src={src} alt={alt} fill sizes="240px" className={`object-cover ${position}`} />
+        <Image src={src} alt={alt} fill sizes="480px" quality={90} className={`object-cover ${position}`} />
       </div>
     </div>
   );
@@ -258,7 +258,7 @@ function DeliveryMockup() {
           style={tilt(-4, 0)}
         >
           <div className="relative aspect-[9/19] overflow-hidden rounded-[16px]">
-            <Image src={m.phone.src} alt={m.phone.alt} fill sizes="92px" className="object-cover object-top" />
+            <Image src={m.phone.src} alt={m.phone.alt} fill sizes="184px" quality={90} className="object-cover object-top" />
             <span className="absolute left-1/2 top-[5px] h-[5px] w-[28px] -translate-x-1/2 rounded-full bg-[#141414]" />
           </div>
         </div>
