@@ -2,42 +2,49 @@ import { NextResponse, type NextRequest } from "next/server";
 import { promo } from "@/content/promo";
 
 /*
-  El home de reyno-studio.com es la landing (src/app/(home)), solo en
-  español. El sitio anterior por idioma (/es, /en) se retiró, así que este
-  middleware ya no usa next-intl: solo redirige con 301 las rutas viejas al
-  home y deja pasar todo lo demás.
+  La landing vive en "/" (español) y "/en" (inglés). Este middleware solo
+  redirige con 301 las rutas del sitio anterior y deja pasar todo lo demás:
 
     /promo y /promo/*                 → /
-    /es, /en y cualquier /es/*, /en/* → /
-    /es/proyectos/kapital             → /#kapital (abre el lightbox)
+    /es y cualquier /es/*             → /
+    /es/proyectos/kapital             → /#kapital   (abre el lightbox)
+    /en/proyectos/kapital             → /en#kapital
+    cualquier otra /en/*              → /en
+    /en                               → se sirve (landing en inglés)
 
-  Los parámetros de la URL (UTM incluidos) se conservan siempre. Se usa
-  middleware y no redirects() de next.config porque ahí "permanent" manda
-  308 y aquí se pidió 301.
+  Si el proyecto no está en la landing, se va a la sección de trabajo
+  (#proyectos). Los parámetros de la URL (UTM incluidos) se conservan
+  siempre. Se usa middleware y no redirects() de next.config porque ahí
+  "permanent" manda 308 y aquí se pidió 301.
 */
 
 const LANDING_SLUGS: readonly string[] = promo.work.slugs;
 
-function homeHash(pathname: string): string | null {
-  if (pathname === "/promo" || pathname.startsWith("/promo/")) return "";
+/** Destino (ruta + hash) de una ruta vieja, o null si no hay que redirigir. */
+function redirectTarget(pathname: string): string | null {
+  if (pathname === "/promo" || pathname.startsWith("/promo/")) return "/";
 
-  const locale = pathname.match(/^\/(?:es|en)(?:\/(.*))?$/);
+  const locale = pathname.match(/^\/(es|en)(?:\/(.*))?$/);
   if (!locale) return null;
 
-  const project = (locale[1] ?? "").match(/^proyectos\/([^/]+)\/?$/);
+  const [, lang, rest = ""] = locale;
+  const base = lang === "en" ? "/en" : "/";
+  if (lang === "en" && rest === "") return null;
+
+  const project = rest.match(/^proyectos\/([^/]+)\/?$/);
   if (project) {
     const slug = decodeURIComponent(project[1]);
-    // Si el proyecto no está en la landing, a la sección de trabajo.
-    return LANDING_SLUGS.includes(slug) ? `#${slug}` : "#proyectos";
+    return `${base}#${LANDING_SLUGS.includes(slug) ? slug : "proyectos"}`;
   }
-  return "";
+  return base;
 }
 
 export default function middleware(request: NextRequest) {
-  const { pathname, search } = request.nextUrl;
-  const hash = homeHash(pathname);
-  if (hash === null) return NextResponse.next();
-  return NextResponse.redirect(new URL(`/${search}${hash}`, request.url), 301);
+  const target = redirectTarget(request.nextUrl.pathname);
+  if (target === null) return NextResponse.next();
+  const [path, hash = ""] = target.split("#");
+  const url = `${path}${request.nextUrl.search}${hash ? `#${hash}` : ""}`;
+  return NextResponse.redirect(new URL(url, request.url), 301);
 }
 
 export const config = {

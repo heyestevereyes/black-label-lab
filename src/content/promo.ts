@@ -1,5 +1,7 @@
 /**
- * Todo el texto visible de la landing /promo.
+ * Todo el texto visible de la landing en español (/). La versión en
+ * inglés (/en) vive en promo.en.ts y debe tener la misma forma
+ * (PromoContent, al final de este archivo).
  *
  * Se edita aquí sin tocar componentes. Reglas del brief:
  *  - Solo español.
@@ -36,6 +38,8 @@ export const promo = {
 
   nav: {
     cta: "Agenda una llamada",
+    // Nombre del selector de idioma para lectores de pantalla.
+    langLabel: "Idioma",
     ctaWhatsapp: "Escríbenos por WhatsApp",
   },
 
@@ -329,4 +333,30 @@ export const promo = {
   },
 } as const;
 
-export type BenefitIcon = (typeof promo.benefits.items)[number]["icon"];
+/** Íconos de los beneficios (ver GlassIcon.tsx). */
+export type BenefitIcon = "chat" | "compass" | "lock" | "checklist" | "key" | "heart";
+
+/** Convierte los literales de `as const` en tipos generales (string, number). */
+type Widen<T> = T extends string
+  ? string
+  : T extends number
+    ? number
+    : T extends boolean
+      ? boolean
+      : T extends readonly (infer U)[]
+        ? readonly Widen<U>[]
+        : T extends object
+          ? { readonly [K in keyof T]: Widen<T[K]> }
+          : T;
+
+type Base = Widen<typeof promo>;
+type Benefit = Omit<Base["benefits"]["items"][number], "icon"> & { readonly icon: BenefitIcon };
+
+/**
+ * Forma del contenido de la landing, la misma en los dos idiomas. Se deriva
+ * de este archivo: si promo.en.ts no la cumple (falta o sobra una clave),
+ * el build falla.
+ */
+export type PromoContent = Omit<Base, "benefits"> & {
+  readonly benefits: Omit<Base["benefits"], "items"> & { readonly items: readonly Benefit[] };
+};

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { promo } from "@/content/promo";
+import { useLanding } from "@/components/promo/LandingContext";
 import { trackCTA, type CtaSeccion, type CtaTipo } from "@/lib/trackCTA";
 import { getUtm, withUtm } from "@/lib/utm";
 
@@ -32,7 +32,7 @@ interface CtaButtonProps {
 }
 
 /**
- * Botón de los CTA de /promo: abre el calendario o WhatsApp en pestaña
+ * Botón de los CTA de la landing: abre el calendario o WhatsApp en pestaña
  * nueva y registra el clic con trackCTA.
  *
  * El enlace del calendario se pinta primero sin UTM (así coincide el HTML
@@ -47,7 +47,8 @@ export default function CtaButton({
   size = "md",
   className = "",
 }: CtaButtonProps) {
-  const base: string = tipo === "llamada" ? promo.contact.calendarUrl : promo.contact.whatsappUrl;
+  const { c, lang } = useLanding();
+  const base: string = tipo === "llamada" ? c.contact.calendarUrl : c.contact.whatsappUrl;
   const [href, setHref] = useState(base);
 
   useEffect(() => {
@@ -59,7 +60,7 @@ export default function CtaButton({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      onClick={() => trackCTA(tipo, seccion)}
+      onClick={() => trackCTA(tipo, seccion, lang)}
       className={`promo-focus inline-flex items-center justify-center gap-2.5 rounded-[10px]
                   font-satoshi font-bold leading-none whitespace-nowrap
                   transition-[background-color,box-shadow,transform] duration-200

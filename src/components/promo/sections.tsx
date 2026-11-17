@@ -1,6 +1,8 @@
 import Image from "next/image";
 import type { CSSProperties } from "react";
-import { promo } from "@/content/promo";
+import type { PromoContent } from "@/content/promo";
+import type { Lang } from "@/content";
+import LangSwitch from "@/components/promo/LangSwitch";
 import { projects } from "@/data/projects";
 import PixelMascot from "@/components/PixelMascot";
 import CtaButton from "@/components/promo/CtaButton";
@@ -13,13 +15,18 @@ import { DEFAULT_VIDEO_ASPECT_RATIO, type Project } from "@/types/project";
 import { publicImageSize } from "@/lib/imageSize";
 
 /*
-  Secciones de /promo, en el orden del brief. Todo el texto sale de
-  src/content/promo.ts. Las que llevan data-reveal entran con una
+  Secciones de la landing, en el orden del brief. Cada una recibe el texto
+  del idioma (`c`, de src/content/promo.ts o promo.en.ts) desde la página. Las que llevan data-reveal entran con una
   animación suave al hacer scroll (RevealObserver + promo.css); el hero no,
   porque está en pantalla desde el inicio.
 */
 
 const SECTION = "py-16 md:py-24";
+
+interface SectionProps {
+  c: PromoContent;
+  lang: Lang;
+}
 
 /* ── Logo de Reyno: envolvente negra como en el navbar del sitio. ──
    Sin enlace a propósito: en una landing de campaña no se saca al
@@ -33,8 +40,8 @@ function Logo({ className = "" }: { className?: string }) {
   );
 }
 
-/* ── Navegación: solo logo y CTA. ── */
-export function PromoNav() {
+/* ── Navegación: logo, selector de idioma y CTA. ── */
+export function PromoNav({ c, lang }: SectionProps) {
   return (
     <header
       className="sticky top-0 z-30 border-b border-transparent bg-[#eeefef]/85 backdrop-blur-md
@@ -43,15 +50,18 @@ export function PromoNav() {
       <div className={`${CONTAINER} flex h-[68px] items-center justify-between gap-3 md:h-[80px]`}>
         <Logo />
         <div className="flex items-center gap-2">
+          {/* Selector de idioma: desde sm. En móvil no cabe junto al botón
+              de llamada y queda solo en el footer. */}
+          <LangSwitch lang={lang} label={c.nav.langLabel} className="mr-2 hidden sm:flex" />
           {/* En móvil se oculta: ahí ya está la barra fija de WhatsApp. */}
           <CtaButton
             tipo="whatsapp"
             seccion="nav"
             variant="outline"
-            label={promo.nav.ctaWhatsapp}
+            label={c.nav.ctaWhatsapp}
             className="!hidden !h-11 !px-4 !text-[15px] md:!inline-flex"
           />
-          <CtaButton tipo="llamada" seccion="nav" label={promo.nav.cta} className="!h-11 !px-4 !text-[15px]" />
+          <CtaButton tipo="llamada" seccion="nav" label={c.nav.cta} className="!h-11 !px-4 !text-[15px]" />
         </div>
       </div>
     </header>
@@ -59,8 +69,8 @@ export function PromoNav() {
 }
 
 /* ── 1. Hero ── */
-export function Hero() {
-  const h = promo.hero;
+export function Hero({ c }: SectionProps) {
+  const h = c.hero;
   return (
     <section className={`${CONTAINER} pb-16 pt-8 md:pb-24 md:pt-14`}>
       {/* Escritorio: 40% texto, 60% video (el reel es 16:9), centrados entre sí en vertical.
@@ -123,8 +133,8 @@ function logoSize(src: string, ink: number, scale: number) {
   return { w: Math.round(h * ratio), h: Math.round(h), width, height };
 }
 
-export function Logos() {
-  const l = promo.logos;
+export function Logos({ c }: SectionProps) {
+  const l = c.logos;
   const logos = l.items.map((logo) => ({ ...logo, ...logoSize(logo.src, logo.ink, logo.scale) }));
 
   const list = (dup: boolean) => (
@@ -180,8 +190,8 @@ export function Logos() {
 /* ── 3. Cómo funciona ── vive en StepsSection.tsx. */
 
 /* ── 4. Servicios ── */
-export function Services() {
-  const s = promo.services;
+export function Services({ c }: SectionProps) {
+  const s = c.services;
   return (
     <section className={`${CONTAINER} ${SECTION} pt-0 md:pt-0`}>
       <div data-reveal>
@@ -261,8 +271,8 @@ const BENEFIT_MESH: MeshVars[] = [
   { "--m-base": "#98b6ff", "--m-1": "#e4ecff", "--m-2": "#ff7de3", "--m-3": "#8b6cff", "--m-4": "#7f9fff" },
 ];
 
-export function Benefits() {
-  const b = promo.benefits;
+export function Benefits({ c }: SectionProps) {
+  const b = c.benefits;
   return (
     <section className={`${CONTAINER} ${SECTION} pt-0 md:pt-0`}>
       <div data-reveal>
@@ -300,16 +310,16 @@ export function Benefits() {
 }
 
 /* ── 6. Trabajo reciente ── */
-export function Work() {
-  const w = promo.work;
+export function Work({ c, lang }: SectionProps) {
+  const w = c.work;
   const items: LightboxProject[] = w.slugs
     .map((slug) => projects.find((p) => p.slug === slug))
     .filter((p): p is NonNullable<typeof p> => Boolean(p))
     .map((p) => ({
       slug: p.slug,
       name: p.name,
-      type: p.tags.es.join(" · "),
-      summary: shortSummary(p.description.es),
+      type: p.tags[lang].join(" · "),
+      summary: shortSummary(p.description[lang]),
       cover: w.imageOverrides[p.slug] ?? p.cardImage ?? p.mainImage,
       items: lightboxItems(p),
     }));
@@ -365,8 +375,8 @@ function shortSummary(text: string): string {
 }
 
 /* ── 7. Sobre mí ── */
-export function About() {
-  const a = promo.about;
+export function About({ c }: SectionProps) {
+  const a = c.about;
   return (
     <section className={`${CONTAINER} ${SECTION} pt-0 md:pt-0`}>
       <div data-reveal className="grid items-center gap-8 rounded-[28px] bg-white p-5 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-12 md:p-8">
@@ -390,8 +400,8 @@ export function About() {
 }
 
 /* ── 8. Testimonios ── */
-export function Testimonials() {
-  const t = promo.testimonials;
+export function Testimonials({ c }: SectionProps) {
+  const t = c.testimonials;
   return (
     <section className={`${CONTAINER} ${SECTION} pt-0 md:pt-0`}>
       <div data-reveal>
@@ -426,8 +436,8 @@ export function Testimonials() {
 }
 
 /* ── 9. Preguntas frecuentes ── */
-export function FaqSection() {
-  const f = promo.faq;
+export function FaqSection({ c }: SectionProps) {
+  const f = c.faq;
   return (
     <section className={`${CONTAINER} ${SECTION} pt-0 md:pt-0`}>
       <div className="grid gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-12">
@@ -441,7 +451,7 @@ export function FaqSection() {
             <span aria-hidden className="block"><PixelMascot size={56} /></span>
             <p className="m-0 mt-5 font-satoshi text-[26px] font-bold leading-[1.1] tracking-[-0.02em] text-ink">{f.asideTitle}</p>
             <p className="m-0 mt-2 text-[16px] leading-[1.5] text-[#141414]/80">{f.asideText}</p>
-            <CtaButton tipo="whatsapp" seccion="faq" label={promo.hero.ctaWhatsapp} className="mt-6 w-full" />
+            <CtaButton tipo="whatsapp" seccion="faq" label={c.hero.ctaWhatsapp} className="mt-6 w-full" />
           </div>
         </div>
         <div data-reveal>
@@ -455,8 +465,8 @@ export function FaqSection() {
 /* ── 10. CTA final y footer ── */
 const FOOTER_LINK = "promo-focus rounded text-white/80 underline-offset-4 hover:text-white hover:underline";
 
-export function FinalCta() {
-  const f = promo.final;
+export function FinalCta({ c, lang }: SectionProps) {
+  const f = c.final;
   const year = new Date().getFullYear();
   return (
     <section id="agendar" className="bg-ink text-white">
@@ -477,12 +487,12 @@ export function FinalCta() {
           <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/brand/reyno-logo-white.svg" alt="Reyno Studio" width={172} height={47} className="h-[24px] w-auto" />
-            <a href={`mailto:${promo.contact.email}`} className={FOOTER_LINK}>
-              {promo.contact.email}
+            <a href={`mailto:${c.contact.email}`} className={FOOTER_LINK}>
+              {c.contact.email}
             </a>
-            <nav aria-label={promo.footer.socialLabel}>
+            <nav aria-label={c.footer.socialLabel}>
               <ul className="m-0 flex list-none gap-5 p-0">
-                {promo.footer.social.map((s) => (
+                {c.footer.social.map((s) => (
                   <li key={s.href}>
                     <a href={s.href} target="_blank" rel="noopener noreferrer" className={FOOTER_LINK}>
                       {s.label}
@@ -494,15 +504,18 @@ export function FinalCta() {
           </div>
           <div className="mt-6 flex flex-col items-center justify-between gap-3 md:flex-row">
             <p className="m-0">
-              © {year} {promo.footer.rights}
+              © {year} {c.footer.rights}
             </p>
-            {promo.footer.privacy.href ? (
-              <a href={promo.footer.privacy.href} className={FOOTER_LINK}>
-                {promo.footer.privacy.label}
-              </a>
-            ) : (
-              <span>{promo.footer.privacy.label}</span>
-            )}
+            <div className="flex flex-col items-center gap-3 md:flex-row md:gap-6">
+              {c.footer.privacy.href ? (
+                <a href={c.footer.privacy.href} className={FOOTER_LINK}>
+                  {c.footer.privacy.label}
+                </a>
+              ) : (
+                <span>{c.footer.privacy.label}</span>
+              )}
+              <LangSwitch lang={lang} label={c.nav.langLabel} tone="dark" className="flex" />
+            </div>
           </div>
         </footer>
       </div>

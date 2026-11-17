@@ -1,6 +1,6 @@
 import Image from "next/image";
 import type { CSSProperties } from "react";
-import { promo } from "@/content/promo";
+import type { PromoContent } from "@/content/promo";
 import { CONTAINER, Eyebrow, SectionTitle } from "@/components/promo/ui";
 
 /*
@@ -47,8 +47,10 @@ const CARDS: { mesh: MeshVars; text: string; body: string; num: string }[] = [
 
 const MOCKUPS = [CallMockup, ProposalMockup, DeliveryMockup];
 
-export default function StepsSection() {
-  const s = promo.steps;
+type Mockups = PromoContent["steps"]["mockups"];
+
+export default function StepsSection({ c }: { c: PromoContent }) {
+  const s = c.steps;
   return (
     <section id="como-trabajamos" className={`${CONTAINER} scroll-mt-16 py-16 md:py-24`}>
       <div data-reveal>
@@ -76,7 +78,7 @@ export default function StepsSection() {
               {/* Mitad superior: el mockup. Alto fijo en móvil para que no
                   se corte; en escritorio toma lo que deja el texto. */}
               <div className="relative h-[330px] lg:h-auto lg:flex-1" aria-hidden>
-                <Mockup />
+                <Mockup m={s.mockups} />
               </div>
 
               <div className="relative px-7 pb-8 pt-2">
@@ -100,8 +102,8 @@ export default function StepsSection() {
 const tilt = (r: number, rh: number) => ({ "--r": `${r}deg`, "--rh": `${rh}deg` }) as CSSProperties;
 
 /* ── 1. Platicamos: invitación de calendario + burbuja de WhatsApp ── */
-function CallMockup() {
-  const m = promo.steps.mockups.call;
+function CallMockup({ m: all }: { m: Mockups }) {
+  const m = all.call;
   return (
     <div className="absolute inset-0 flex items-center justify-center pt-16">
       <div className="relative">
@@ -155,8 +157,8 @@ function CallMockup() {
 }
 
 /* ── 2. Propuesta: documento oscuro ── */
-function ProposalMockup() {
-  const m = promo.steps.mockups.proposal;
+function ProposalMockup({ m: all }: { m: Mockups }) {
+  const m = all.proposal;
   return (
     // Arranca por encima del borde: la tarjeta recorta la parte de arriba
     // del documento, como si siguiera fuera.
@@ -244,8 +246,8 @@ function BrowserFrame({
   );
 }
 
-function DeliveryMockup() {
-  const m = promo.steps.mockups.delivery;
+function DeliveryMockup({ m: all }: { m: Mockups }) {
+  const m = all.delivery;
   return (
     <div className="absolute inset-0 flex items-center justify-center pt-4">
       <div className="relative h-[230px] w-[290px]">

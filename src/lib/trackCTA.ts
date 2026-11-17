@@ -3,6 +3,9 @@ import { getUtm } from "@/lib/utm";
 
 export type CtaTipo = "whatsapp" | "llamada";
 
+/** Versión de la landing donde se hizo clic. */
+export type CtaIdioma = "es" | "en";
+
 /**
  * Sección donde se hizo clic. Las del brief son hero, servicios, final y
  * barra_movil; nav y faq son los dos botones extra que tiene la página.
@@ -29,8 +32,8 @@ type Fbq = (command: "trackCustom", name: string, params: Record<string, unknown
  * Si algún día se instala GA4 o Meta Pixel, no hace falta tocar los
  * botones: aquí se detectan `gtag` y `fbq` y se les manda el mismo evento.
  */
-export function trackCTA(tipo: CtaTipo, seccion: CtaSeccion): void {
-  const props = { tipo, seccion, ...getUtm() };
+export function trackCTA(tipo: CtaTipo, seccion: CtaSeccion, idioma: CtaIdioma): void {
+  const props = { tipo, seccion, idioma, ...getUtm() };
 
   try {
     track("cta_click", props);

@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState, type KeyboardEvent, type MouseEvent, type ReactNode, type Ref, type RefObject } from "react";
 import { createPortal } from "react-dom";
-import { promo } from "@/content/promo";
+import { useLanding } from "@/components/promo/LandingContext";
 import CtaButton from "@/components/promo/CtaButton";
 import { Accented } from "@/components/promo/ui";
 
@@ -139,7 +139,7 @@ export default function WorkGallery({ projects }: { projects: LightboxProject[] 
     };
   }, [isOpen]);
 
-  const w = promo.work;
+  const w = useLanding().c.work;
 
   return (
     <>
@@ -220,7 +220,7 @@ function Lightbox({
 }) {
   const p = projects[index];
   const next = projects[(index + 1) % projects.length];
-  const t = promo.work.lightbox;
+  const t = useLanding().c.work.lightbox;
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const [reduced, setReduced] = useState(false);
