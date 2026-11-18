@@ -40,3 +40,43 @@ export const SOCIAL_LINKS = [
 export const INSTAGRAM_URL = SOCIAL_LINKS.find(
   (s) => s.label === "Instagram"
 )!.href;
+
+/**
+ * Dominios que sirve este proyecto. El middleware decide qué sitio mostrar
+ * según el host de la petición:
+ *   - reyno: la landing de Reyno Studio.
+ *   - portfolio: el portafolio de Esteve (src/app/(portfolio)), en la raíz.
+ *     "estevereyes.localhost" es para probarlo en local
+ *     (http://estevereyes.localhost:3000); www redirige con 301 al dominio
+ *     sin www.
+ * Cualquier otro host (localhost, previews de Vercel) se trata como Reyno.
+ */
+export const DOMAINS = {
+  reyno: {
+    canonical: "www.reyno-studio.com",
+    hosts: ["reyno-studio.com", "www.reyno-studio.com"],
+  },
+  portfolio: {
+    canonical: "estevereyes.com",
+    hosts: ["estevereyes.com", "estevereyes.localhost"],
+    redirectHosts: ["www.estevereyes.com"],
+  },
+} as const;
+
+/** URL pública del portafolio (canonical y og:url). */
+export const PORTFOLIO_URL = `https://${DOMAINS.portfolio.canonical}`;
+
+export type SiteKind = "reyno" | "portfolio";
+
+/** Host sin puerto y en minúsculas. */
+export function normalizeHost(host: string | null | undefined): string {
+  return (host ?? "").toLowerCase().replace(/:\d+$/, "");
+}
+
+/** Qué sitio corresponde a un host. */
+export function siteForHost(host: string | null | undefined): SiteKind {
+  const h = normalizeHost(host);
+  const p: readonly string[] = DOMAINS.portfolio.hosts;
+  const r: readonly string[] = DOMAINS.portfolio.redirectHosts;
+  return p.includes(h) || r.includes(h) ? "portfolio" : "reyno";
+}

@@ -1,8 +1,17 @@
 import type { MetadataRoute } from "next";
-import { SITE_URL } from "@/data/site";
+import { headers } from "next/headers";
+import { SITE_URL, siteForHost } from "@/data/site";
 
-/** /sitemap.xml: la landing en español (/) y en inglés (/en), enlazadas entre sí. */
+/**
+ * /sitemap.xml según el dominio (lee el host, así que se genera en cada
+ * petición):
+ *  - reyno-studio.com: la landing en español (/) y en inglés (/en),
+ *    enlazadas entre sí.
+ *  - estevereyes.com: vacío; el portafolio lleva noindex.
+ */
 export default function sitemap(): MetadataRoute.Sitemap {
+  if (siteForHost(headers().get("host")) === "portfolio") return [];
+
   const languages = { es: `${SITE_URL}/`, en: `${SITE_URL}/en` };
   return [
     {
