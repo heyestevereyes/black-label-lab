@@ -1,5 +1,4 @@
 import { portfolio } from "@/content/portfolio";
-import { publicFileExists } from "@/lib/publicFile";
 import { AboutView, FinalCtaView, GlassCards, HeroView, LogoStrip, SiteNav } from "@/components/promo/sections";
 import { ProcessCards } from "@/components/promo/StepsSection";
 import MobileActionBar from "@/components/promo/MobileActionBar";
@@ -25,13 +24,9 @@ import HeroPhoto from "@/components/portfolio/HeroPhoto";
 const p = portfolio;
 const FOOTER_LINK = "promo-focus rounded text-white/80 underline-offset-4 hover:text-white hover:underline";
 
-/** Placeholders visibles mientras falten datos reales (ver la lista de TODO). */
-const CV_TODO = publicFileExists(p.contact.cv) ? undefined : `TODO: add the CV PDF at /public${p.contact.cv}`;
-const EMAIL_TODO = p.contact.email.includes("TODO") ? "TODO: add the email in src/content/portfolio.ts" : undefined;
-
 export default function PortfolioPage() {
-  const cv = { kind: "cv", target: p.contact.cv, placeholder: CV_TODO } as const;
-  const email = { kind: "email", target: p.contact.email, placeholder: EMAIL_TODO } as const;
+  const cv = { kind: "cv", target: p.contact.cv } as const;
+  const email = { kind: "email", target: p.contact.email } as const;
   const linkedin = { kind: "linkedin", target: p.contact.linkedin } as const;
 
   return (
@@ -59,7 +54,7 @@ export default function PortfolioPage() {
             </>
           }
         />
-        <LogoStrip title={p.companies.title} items={p.companies.items} />
+        <LogoStrip title={p.companies.title} items={p.companies.items} layout="grouped" />
         <CaseStudies
           cta={
             <>

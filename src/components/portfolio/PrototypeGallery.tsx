@@ -71,7 +71,9 @@ export default function PrototypeGallery({ items, labels }: { items: PrototypeIt
                   src={p.cover}
                   alt=""
                   fill
-                  sizes="(min-width: 1200px) 560px, (min-width: 1024px) 45vw, 134vw"
+                  // Ancho real de la portada: ~380px en tres columnas,
+                  // todo el ancho menos márgenes en una. Retina pide el doble.
+                  sizes="(min-width: 1280px) 380px, (min-width: 1024px) 31vw, calc(100vw - 56px)"
                   quality={90}
                   className="promo-work-img object-cover"
                 />

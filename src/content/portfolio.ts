@@ -24,8 +24,7 @@ export const portfolio = {
   },
 
   contact: {
-    // TODO: the email recruiters should use.
-    email: "TODO@email.com",
+    email: "hey@estevereyes.com",
     linkedin: "https://www.linkedin.com/in/estevereyes-design/",
     // TODO: CV in PDF at /public/portfolio/esteve-reyes-cv.pdf
     cv: "/portfolio/esteve-reyes-cv.pdf",
@@ -52,12 +51,11 @@ export const portfolio = {
 
   companies: {
     title: "Companies I've designed for",
-    // TODO: logos in grayscale PNG at /public/portfolio/logos/.
-    // Same fields as the landing logos (ink and scale for optical balance).
+    // Logos in /public/portfolio/logos/ (PNG, transparent). Same fields as
+    // the landing logos: ink and scale balance their visual weight.
     items: [
-      { name: "Oracle Health", src: "", ink: 0.5, scale: 1 },
-      { name: "Kapital", src: "", ink: 0.5, scale: 1 },
-      { name: "Forte Fitness", src: "", ink: 0.5, scale: 1 },
+      { name: "Oracle Health", src: "/portfolio/logos/oracle.png", ink: 0.41, scale: 1 },
+      { name: "Kapital", src: "/portfolio/logos/kapital.png", ink: 0.28, scale: 1 },
     ],
   },
 
@@ -69,8 +67,7 @@ export const portfolio = {
       {
         slug: "kapital",
         name: "Kapital",
-        // TODO: years at Kapital.
-        meta: "Fintech · B2B banking platform · TODO years",
+        meta: "Fintech · B2B banking platform · 2022 to 2023",
         role: "Art Director and Principal UX Designer",
         summary:
           "A digital banking platform for businesses that brings accounts, corporate cards, credit, expenses, invoicing and payroll into one place.",
@@ -86,32 +83,6 @@ export const portfolio = {
           "An all in one experience that turns the brand promise of agile, simple finance into an interface that keeps balances, credit, payroll and invoicing clear.",
         // Gallery and videos come from src/data/projects.ts.
         projectSlug: "kapital",
-        confidential: false,
-      },
-      {
-        slug: "oracle-health",
-        name: "Oracle Health",
-        // TODO: years at Oracle Health.
-        meta: "Healthcare · Clinical platforms · TODO years",
-        role: "Senior UX Designer, Vision UX Team",
-        summary:
-          "Clinical platforms used by care teams in acute care hospitals, where every screen supports decisions about patients.",
-        challenge:
-          "Clinicians work under pressure, switching between patients and data constantly. The interface has to reduce cognitive load and prevent errors, without slowing anyone down.",
-        contribution: [
-          "Designed workflows and interfaces for clinical platforms within the Vision UX Team.",
-          "Worked with clinicians, product managers and engineers to turn complex clinical requirements into clear flows.",
-          "Applied and extended design system patterns to keep consistency across products.",
-          // TODO: add one or two specific contributions you can share.
-        ],
-        outcome:
-          "TODO: one sentence on the impact you can share publicly (for example a workflow you simplified or a product you helped launch).",
-        projectSlug: "",
-        // No screens: the work is under confidentiality. The card shows an
-        // abstract visual and this note instead of a gallery.
-        confidential: true,
-        confidentialNote:
-          "Screens are confidential. Happy to walk through this work in an interview.",
       },
       {
         slug: "forte-fitness",
@@ -131,7 +102,6 @@ export const portfolio = {
         outcome:
           "A complete MVP ready for development, with a brand and interface designed together from day one.",
         projectSlug: "forte-fitness",
-        confidential: false,
       },
     ],
     lightbox: {
@@ -171,7 +141,7 @@ export const portfolio = {
     // match the size of the screens in Figma.
     //
     // cover: optional image for the card. Without it, the card shows a
-    // fluid gradient like the confidential case study.
+    // fluid gradient with a screen icon.
     items: [
       {
         slug: "oracle-virtual-visits",
@@ -183,7 +153,7 @@ export const portfolio = {
           "Video visits between clinicians and patients, from joining the call to documenting the visit.",
         figmaUrl:
           "https://embed.figma.com/proto/yELVS1AhrTCOig7mUZxdYG/Esteve-Reyes---Oracle-Portfolio?page-id=0%3A1&node-id=1-52775&viewport=368%2C305%2C0.04&scaling=scale-down&content-scaling=fixed&starting-point-node-id=1%3A52775&embed-host=share",
-        cover: "",
+        cover: "/portfolio/prototypes/oracle-prototype.webp",
         device: "desktop",
       },
       {
@@ -196,7 +166,7 @@ export const portfolio = {
           "An assistant inside the banking app that helps businesses find information and complete tasks faster.",
         figmaUrl:
           "https://embed.figma.com/proto/5IXYIQeE2ZoZHac5CeehnJ/Kapital-Phoenix-Master?node-id=7142-82638&viewport=822%2C2347%2C0.11&scaling=scale-down&content-scaling=fixed&starting-point-node-id=7205%3A81822&page-id=5801%3A61890&embed-host=share",
-        cover: "",
+        cover: "/proyectos/Kapital/main.jpg",
         device: "desktop",
       },
       {
@@ -209,7 +179,7 @@ export const portfolio = {
           "A clinical workflow that helps care teams assess patients quickly and accurately.",
         figmaUrl:
           "https://embed.figma.com/proto/yELVS1AhrTCOig7mUZxdYG/Esteve-Reyes---Oracle-Portfolio?page-id=78%3A37949&node-id=78-37950&viewport=280%2C520%2C0.03&scaling=scale-down&content-scaling=fixed&starting-point-node-id=78%3A37950&embed-host=share",
-        cover: "",
+        cover: "/portfolio/prototypes/oracle-prototype.webp",
         device: "desktop",
       },
     ],
@@ -285,24 +255,23 @@ export const portfolio = {
   experience: {
     eyebrow: "Experience",
     title: "Where I've *done the work.*",
-    // TODO: confirm titles and years.
     items: [
       {
         company: "Oracle Health",
         role: "Senior UX Designer, Vision UX Team",
-        period: "TODO",
+        period: "2024 to 2026",
         text: "Designed clinical platforms for acute care hospitals.",
       },
       {
         company: "Kapital",
         role: "Art Director and Principal UX Designer",
-        period: "TODO",
+        period: "2022 to 2023",
         text: "Led brand, UX for the B2B banking platform and the marketing communication system.",
       },
       {
         company: "Reyno Studio",
         role: "Founder, Brand and Product Designer",
-        period: "TODO",
+        period: "2017 to present",
         text: "Independent studio designing brands, websites and digital products for clients in Mexico and abroad.",
       },
     ],

@@ -32,11 +32,6 @@ interface PortfolioButtonProps {
   variant?: ActionVariant;
   size?: ActionSize;
   className?: string;
-  /**
-   * El archivo o dato todavía no existe (TODO): el botón se queda, con
-   * borde punteado y un title que lo explica, para que se note al revisar.
-   */
-  placeholder?: string;
 }
 
 export default function PortfolioButton({
@@ -47,7 +42,6 @@ export default function PortfolioButton({
   variant = "dark",
   size = "md",
   className = "",
-  placeholder,
 }: PortfolioButtonProps) {
   return (
     <ActionLink
@@ -57,8 +51,7 @@ export default function PortfolioButton({
       onClick={() => trackPortfolio(EVENTS[kind], seccion)}
       variant={variant}
       size={size}
-      title={placeholder}
-      className={`${placeholder ? "outline-dashed outline-2 outline-offset-2 outline-[#febf29]" : ""} ${className}`}
+      className={className}
     />
   );
 }

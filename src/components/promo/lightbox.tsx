@@ -339,6 +339,7 @@ export function MediaCard({
   isolate,
   overlay,
   className,
+  aspect = "aspect-[4/3]",
   children,
 }: {
   delay: number;
@@ -348,6 +349,8 @@ export function MediaCard({
   overlay?: ReactNode;
   /** Clases extra del <li>. */
   className?: string;
+  /** Proporción de la portada (clase de Tailwind). */
+  aspect?: string;
   children: ReactNode;
 }) {
   return (
@@ -356,7 +359,7 @@ export function MediaCard({
       style={{ transitionDelay: `${delay}ms` }}
       className={`promo-work-card group relative rounded-[24px] bg-white p-3${className ? ` ${className}` : ""}`}
     >
-      <div className={`relative aspect-[4/3] overflow-hidden rounded-[16px] bg-[#e2e3e1]${isolate ? " isolate" : ""}`}>
+      <div className={`relative ${aspect} overflow-hidden rounded-[16px] bg-[#e2e3e1]${isolate ? " isolate" : ""}`}>
         {media}
         {overlay}
       </div>

@@ -47,13 +47,9 @@ export interface LightboxProject {
   /** Línea pequeña bajo el nombre en la tarjeta y sobre el título en el modal. */
   type: string;
   summary: string;
-  /** Portada de la tarjeta. Sin portada se pinta `visual` (caso confidencial). */
-  cover?: string;
-  visual?: ReactNode;
+  cover: string;
   items: LightboxItem[];
   caseStudy?: CaseStudy;
-  /** Nota en lugar de la galería (por ejemplo, pantallas confidenciales). */
-  note?: string;
 }
 
 /** Textos de las tarjetas y del modal. */
@@ -75,10 +71,17 @@ export interface GalleryLabels {
   outcomeLabel?: string;
 }
 
-/** Columnas de la grilla: dos (landing, cuatro proyectos) o tres (portafolio). */
+/*
+  Columnas de la grilla:
+    two: landing, cuatro proyectos en dos columnas (portadas 4:3).
+    wide: portafolio, dos casos que llenan el ancho, 50% cada uno, con
+          portadas más apaisadas (16:10) para que no queden muy altas.
+  sizes es el ancho en CSS de la portada; next/image pide el doble en
+  pantallas retina.
+*/
 const LAYOUTS = {
-  two: { grid: "md:grid-cols-2", sizes: "(min-width: 1200px) 840px, (min-width: 768px) 67vw, 134vw" },
-  three: { grid: "lg:grid-cols-3", sizes: "(min-width: 1200px) 560px, (min-width: 1024px) 45vw, 134vw" },
+  two: { grid: "md:grid-cols-2", aspect: "aspect-[4/3]", sizes: "(min-width: 1200px) 840px, (min-width: 768px) 67vw, 134vw" },
+  wide: { grid: "md:grid-cols-2", aspect: "aspect-[16/10]", sizes: "(min-width: 1280px) 576px, (min-width: 768px) calc(50vw - 56px), calc(100vw - 56px)" },
 } as const;
 
 export default function WorkGallery({
@@ -104,14 +107,9 @@ export default function WorkGallery({
           <MediaCard
             key={p.slug}
             delay={(i % 2) * 90}
-            isolate={!p.cover}
-            media={
-              p.cover ? (
-                <Image src={p.cover} alt="" fill sizes={grid.sizes} quality={90} className="promo-work-img object-cover" />
-              ) : (
-                p.visual
-              )
-            }
+            isolate={false}
+            aspect={grid.aspect}
+            media={<Image src={p.cover} alt="" fill sizes={grid.sizes} quality={90} className="promo-work-img object-cover" />}
             overlay={
               <span
                 aria-hidden
@@ -215,16 +213,6 @@ function Lightbox({
 
         {p.caseStudy && <CaseStudyBlock cs={p.caseStudy} t={t} />}
 
-        {p.note && (
-          <p className="m-0 mt-4 flex items-start gap-3 rounded-[20px] bg-white/[0.06] px-6 py-5 text-[16px] leading-[1.5] text-white/80 ring-1 ring-inset ring-white/10 md:px-8">
-            <svg className="mt-[3px] shrink-0 text-white" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-              strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-              <rect x="4" y="11" width="16" height="10" rx="2" />
-              <path d="M8 11V7a4 4 0 0 1 8 0v4" />
-            </svg>
-            {p.note}
-          </p>
-        )}
 
         {p.items.length > 0 && (
         <div className="mt-10 flex flex-col gap-3 md:mt-14 md:gap-4">

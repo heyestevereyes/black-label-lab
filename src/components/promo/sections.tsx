@@ -196,7 +196,20 @@ export function Logos({ c }: SectionProps) {
   return <LogoStrip title={c.logos.title} items={c.logos.items} />;
 }
 
-export function LogoStrip({ title, items }: { title: string; items: readonly LogoItem[] }) {
+/**
+ * spread: repartidos a todo el ancho, con carrusel en móvil (landing).
+ * grouped: centrados como grupo con un espacio fijo entre ellos, sin
+ * carrusel (portafolio, con pocos logos).
+ */
+export function LogoStrip({
+  title,
+  items,
+  layout = "spread",
+}: {
+  title: string;
+  items: readonly LogoItem[];
+  layout?: "spread" | "grouped";
+}) {
   const logos = items.map((logo) => ({ ...logo, ...(logo.src ? logoSize(logo.src, logo.ink, logo.scale) : null) }));
 
   const list = (dup: boolean) => (
@@ -243,12 +256,16 @@ export function LogoStrip({ title, items }: { title: string; items: readonly Log
       {/* En móvil, carrusel con desplazamiento automático (la segunda lista
           es la copia que cierra el ciclo); con movimiento reducido, en dos
           filas. Desde md, una sola fila. */}
-      <div className="promo-logos mx-auto mt-8 max-w-[1040px]">
-        <div className="promo-logos-track">
-          {list(false)}
-          {list(true)}
+      {layout === "grouped" ? (
+        <div className="promo-logos-grouped mt-8">{list(false)}</div>
+      ) : (
+        <div className="promo-logos mx-auto mt-8 max-w-[1040px]">
+          <div className="promo-logos-track">
+            {list(false)}
+            {list(true)}
+          </div>
         </div>
-      </div>
+      )}
     </section>
   );
 }
