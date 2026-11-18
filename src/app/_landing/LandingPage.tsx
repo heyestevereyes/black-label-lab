@@ -1,6 +1,7 @@
 import { getPromo, type Lang } from "@/content";
 import { LandingProvider } from "@/components/promo/LandingContext";
-import MobileWhatsAppBar from "@/components/promo/MobileWhatsAppBar";
+import CtaButton from "@/components/promo/CtaButton";
+import MobileActionBar from "@/components/promo/MobileActionBar";
 import RevealObserver from "@/components/promo/RevealObserver";
 import StepsSection from "@/components/promo/StepsSection";
 import {
@@ -37,7 +38,9 @@ export default function LandingPage({ lang }: { lang: Lang }) {
         <FaqSection c={c} lang={lang} />
         <FinalCta c={c} lang={lang} />
       </main>
-      <MobileWhatsAppBar label={c.mobileBar.cta} />
+      <MobileActionBar>
+        <CtaButton tipo="whatsapp" seccion="barra_movil" label={c.mobileBar.cta} variant="whatsapp" className="w-full" />
+      </MobileActionBar>
       <RevealObserver />
     </LandingProvider>
   );

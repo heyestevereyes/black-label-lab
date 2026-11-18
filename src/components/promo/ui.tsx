@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 
 /** Ancho máximo y márgenes laterales compartidos por todas las secciones. */
 export const CONTAINER = "mx-auto w-full max-w-[1280px] px-4 md:px-8";
@@ -41,5 +41,24 @@ export function SectionTitle({ text, className = "" }: { text: string; className
     >
       <Accented text={text} />
     </h2>
+  );
+}
+
+/** Variables de color de un fondo mesh (--m-base y --m-1 a --m-4). */
+export type MeshVars = CSSProperties & Record<`--m-${string}`, string>;
+
+/**
+ * Fondo mesh animado (promo.css, .promo-mesh): color base, cuatro manchas
+ * difuminadas y grano. Lo usan las tarjetas de proceso, las de beneficios
+ * y la portada de los casos confidenciales.
+ */
+export function Mesh({ vars }: { vars: MeshVars }) {
+  return (
+    <div className="promo-mesh" style={vars} aria-hidden>
+      <span className="promo-blob promo-blob-1" />
+      <span className="promo-blob promo-blob-2" />
+      <span className="promo-blob promo-blob-3" />
+      <span className="promo-blob promo-blob-4" />
+    </div>
   );
 }

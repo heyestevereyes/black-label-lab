@@ -3,8 +3,6 @@
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState, type KeyboardEvent, type MouseEvent, type ReactNode, type Ref, type RefObject } from "react";
 import { createPortal } from "react-dom";
-import { useLanding } from "@/components/promo/LandingContext";
-import CtaButton from "@/components/promo/CtaButton";
 import { Accented } from "@/components/promo/ui";
 
 /*
@@ -16,8 +14,11 @@ import { Accented } from "@/components/promo/ui";
   Escape o clic fuera también regresa esa entrada. Cambiar de proyecto con
   las flechas reemplaza el hash sin agregar entradas.
 
-  Los datos llegan ya armados desde Work (sections.tsx), que los toma de
-  src/data/projects.ts y mide las imágenes en el build.
+  Los datos llegan ya armados desde el servidor (Work en sections.tsx para
+  la landing, CaseStudies para el portafolio), que los toma de
+  src/data/projects.ts y mide las imágenes en el build. Los textos y los
+  botones del CTA final también llegan por props, así el mismo componente
+  sirve a los dos sitios.
 */
 
 /**
@@ -32,19 +33,69 @@ export type LightboxItem =
   | { type: "video"; src: string; aspectRatio: string }
   | { type: "clip"; src: string; poster: string; width: number; height: number };
 
+/** Ficha del caso de estudio (portafolio): va antes de la galería. */
+export interface CaseStudy {
+  role: string;
+  challenge: string;
+  contribution: readonly string[];
+  outcome: string;
+}
+
 export interface LightboxProject {
   slug: string;
   name: string;
+  /** Línea pequeña bajo el nombre en la tarjeta y sobre el título en el modal. */
   type: string;
   summary: string;
-  cover: string;
+  /** Portada de la tarjeta. Sin portada se pinta `visual` (caso confidencial). */
+  cover?: string;
+  visual?: ReactNode;
   items: LightboxItem[];
+  caseStudy?: CaseStudy;
+  /** Nota en lugar de la galería (por ejemplo, pantallas confidenciales). */
+  note?: string;
 }
+
+/** Textos de las tarjetas y del modal. */
+export interface GalleryLabels {
+  cardCta: string;
+  label: string;
+  close: string;
+  prev: string;
+  next: string;
+  of: string;
+  videoLabel: string;
+  imageAlt: string;
+  ctaTitle: string;
+  ctaText: string;
+  nextProject: string;
+  roleLabel?: string;
+  challengeLabel?: string;
+  contributionLabel?: string;
+  outcomeLabel?: string;
+}
+
+/** Columnas de la grilla: dos (landing, cuatro proyectos) o tres (portafolio). */
+const LAYOUTS = {
+  two: { grid: "md:grid-cols-2", sizes: "(min-width: 1200px) 840px, (min-width: 768px) 67vw, 134vw" },
+  three: { grid: "lg:grid-cols-3", sizes: "(min-width: 1200px) 560px, (min-width: 1024px) 45vw, 134vw" },
+} as const;
 
 // Los iframes de Vimeo no entran: llevan tabIndex -1 (ver VimeoEmbed).
 const FOCUSABLE = 'a[href], button:not([disabled]), video[controls], [tabindex]:not([tabindex="-1"])';
 
-export default function WorkGallery({ projects }: { projects: LightboxProject[] }) {
+export default function WorkGallery({
+  projects,
+  labels,
+  cta,
+  layout = "two",
+}: {
+  projects: LightboxProject[];
+  labels: GalleryLabels;
+  /** Botones del CTA al final de cada caso. */
+  cta: ReactNode;
+  layout?: keyof typeof LAYOUTS;
+}) {
   const [index, setIndex] = useState<number | null>(null);
   const cardRefs = useRef<(HTMLButtonElement | null)[]>([]);
   // Tarjeta que abrió el modal: recibe el foco al cerrar.
@@ -139,11 +190,12 @@ export default function WorkGallery({ projects }: { projects: LightboxProject[] 
     };
   }, [isOpen]);
 
-  const w = useLanding().c.work;
+  const w = labels;
+  const grid = LAYOUTS[layout];
 
   return (
     <>
-      <ul className="m-0 mt-10 grid list-none gap-4 p-0 md:grid-cols-2">
+      <ul className={`m-0 mt-10 grid list-none gap-4 p-0 ${grid.grid}`}>
         {projects.map((p, i) => (
           <li
             key={p.slug}
@@ -151,15 +203,12 @@ export default function WorkGallery({ projects }: { projects: LightboxProject[] 
             style={{ transitionDelay: `${(i % 2) * 90}ms` }}
             className="promo-work-card group relative rounded-[24px] bg-white p-3"
           >
-            <div className="relative aspect-[4/3] overflow-hidden rounded-[16px] bg-[#e2e3e1]">
-              <Image
-                src={p.cover}
-                alt=""
-                fill
-                sizes="(min-width: 1200px) 840px, (min-width: 768px) 67vw, 134vw"
-                quality={90}
-                className="promo-work-img object-cover"
-              />
+            <div className={`relative aspect-[4/3] overflow-hidden rounded-[16px] bg-[#e2e3e1]${p.cover ? "" : " isolate"}`}>
+              {p.cover ? (
+                <Image src={p.cover} alt="" fill sizes={grid.sizes} quality={90} className="promo-work-img object-cover" />
+              ) : (
+                p.visual
+              )}
               <span
                 aria-hidden
                 className="absolute bottom-3 right-3 inline-flex h-9 items-center gap-2 rounded-full bg-white/90 px-4
@@ -194,6 +243,8 @@ export default function WorkGallery({ projects }: { projects: LightboxProject[] 
         createPortal(
           <Lightbox
             projects={projects}
+            labels={labels}
+            cta={cta}
             index={index}
             onClose={close}
             onPrev={() => go(-1)}
@@ -207,12 +258,16 @@ export default function WorkGallery({ projects }: { projects: LightboxProject[] 
 
 function Lightbox({
   projects,
+  labels,
+  cta,
   index,
   onClose,
   onPrev,
   onNext,
 }: {
   projects: LightboxProject[];
+  labels: GalleryLabels;
+  cta: ReactNode;
   index: number;
   onClose: () => void;
   onPrev: () => void;
@@ -220,7 +275,7 @@ function Lightbox({
 }) {
   const p = projects[index];
   const next = projects[(index + 1) % projects.length];
-  const t = useLanding().c.work.lightbox;
+  const t = labels;
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const [reduced, setReduced] = useState(false);
@@ -356,6 +411,20 @@ function Lightbox({
           <p className="m-0 mt-5 text-[17px] leading-[1.55] text-white/75 md:text-[19px]">{p.summary}</p>
         </header>
 
+        {p.caseStudy && <CaseStudyBlock cs={p.caseStudy} t={t} />}
+
+        {p.note && (
+          <p className="m-0 mt-4 flex items-start gap-3 rounded-[20px] bg-white/[0.06] px-6 py-5 text-[16px] leading-[1.5] text-white/80 ring-1 ring-inset ring-white/10 md:px-8">
+            <svg className="mt-[3px] shrink-0 text-white" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <rect x="4" y="11" width="16" height="10" rx="2" />
+              <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+            </svg>
+            {p.note}
+          </p>
+        )}
+
+        {p.items.length > 0 && (
         <div className="mt-10 flex flex-col gap-3 md:mt-14 md:gap-4">
           {p.items.map((item) => {
             if (item.type === "video") {
@@ -409,6 +478,7 @@ function Lightbox({
             );
           })}
         </div>
+        )}
 
         {/* CTA al final de la galería. */}
         <div className="mt-4 rounded-[24px] bg-white px-6 py-10 text-center md:rounded-[28px] md:px-12 md:py-14">
@@ -416,10 +486,7 @@ function Lightbox({
             <Accented text={t.ctaTitle} />
           </h3>
           <p className="mx-auto mb-0 mt-4 max-w-[460px] text-[17px] leading-[1.5] text-muted">{t.ctaText}</p>
-          <div className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
-            <CtaButton tipo="llamada" seccion="lightbox" label={t.ctaCall} size="lg" />
-            <CtaButton tipo="whatsapp" seccion="lightbox" label={t.ctaWhatsapp} variant="whatsapp" size="lg" />
-          </div>
+          <div className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">{cta}</div>
         </div>
 
         {projects.length > 1 && (
@@ -438,6 +505,44 @@ function Lightbox({
             </span>
           </button>
         )}
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Ficha del caso: rol, reto, lo que hice y resultado, en dos columnas desde
+ * md. Va entre el encabezado y la galería.
+ */
+function CaseStudyBlock({ cs, t }: { cs: CaseStudy; t: GalleryLabels }) {
+  const label = "m-0 font-mono text-[12px] font-bold uppercase tracking-[0.12em] text-white/60";
+  const text = "m-0 mt-3 text-[17px] leading-[1.55] text-white/85";
+  return (
+    <div className="mt-10 grid gap-x-12 gap-y-8 rounded-[24px] bg-white/[0.06] p-6 ring-1 ring-inset ring-white/10 md:mt-14 md:grid-cols-2 md:p-10">
+      <div className="flex flex-col gap-8">
+        <div>
+          <h3 className={label}>{t.roleLabel}</h3>
+          <p className={`${text} font-medium !text-white`}>{cs.role}</p>
+        </div>
+        <div>
+          <h3 className={label}>{t.challengeLabel}</h3>
+          <p className={text}>{cs.challenge}</p>
+        </div>
+      </div>
+      <div>
+        <h3 className={label}>{t.contributionLabel}</h3>
+        <ul className="m-0 mt-3 flex list-none flex-col gap-3 p-0">
+          {cs.contribution.map((item) => (
+            <li key={item} className="flex items-start gap-3 text-[17px] leading-[1.5] text-white/85">
+              <span className="mt-[9px] h-1.5 w-1.5 shrink-0 rounded-full bg-[#00d71b]" aria-hidden />
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="border-t border-white/10 pt-8 md:col-span-2">
+        <h3 className={label}>{t.outcomeLabel}</h3>
+        <p className="m-0 mt-3 max-w-[760px] text-[19px] leading-[1.5] text-white md:text-[21px]">{cs.outcome}</p>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import type { CSSProperties } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import type { PromoContent } from "@/content/promo";
 import type { Lang } from "@/content";
 import LangSwitch from "@/components/promo/LangSwitch";
@@ -8,15 +8,21 @@ import PixelMascot from "@/components/PixelMascot";
 import CtaButton from "@/components/promo/CtaButton";
 import ReelVideo from "@/components/promo/ReelVideo";
 import Faq from "@/components/promo/Faq";
-import { Accented, CONTAINER, Eyebrow, SectionTitle } from "@/components/promo/ui";
+import { Accented, CONTAINER, Eyebrow, Mesh, SectionTitle, type MeshVars } from "@/components/promo/ui";
 import GlassIcon from "@/components/promo/GlassIcon";
+import type { BenefitIcon } from "@/content/promo";
 import WorkGallery, { type LightboxItem, type LightboxProject } from "@/components/promo/WorkGallery";
 import { DEFAULT_VIDEO_ASPECT_RATIO, type Project } from "@/types/project";
 import { publicImageSize } from "@/lib/imageSize";
 
 /*
   Secciones de la landing, en el orden del brief. Cada una recibe el texto
-  del idioma (`c`, de src/content/promo.ts o promo.en.ts) desde la página. Las que llevan data-reveal entran con una
+  del idioma (`c`, de src/content/promo.ts o promo.en.ts) desde la página.
+
+  Las que también usa el portafolio (/esteve-portfolio) están partidas en
+  dos: una vista genérica que recibe textos y botones por props (SiteNav,
+  HeroView, LogoStrip, GlassCards, AboutView, FinalCtaView) y la envoltura
+  de la landing que le pasa el contenido de Reyno (PromoNav, Hero, Logos...). Las que llevan data-reveal entran con una
   animación suave al hacer scroll (RevealObserver + promo.css); el hero no,
   porque está en pantalla desde el inicio.
 */
@@ -40,16 +46,25 @@ function Logo({ className = "" }: { className?: string }) {
   );
 }
 
-/* ── Navegación: logo, selector de idioma y CTA. ── */
-export function PromoNav({ c, lang }: SectionProps) {
+/* ── Navegación: marca a la izquierda, acciones a la derecha. ── */
+export function SiteNav({ brand, children }: { brand: ReactNode; children: ReactNode }) {
   return (
     <header
       className="sticky top-0 z-30 border-b border-transparent bg-[#eeefef]/85 backdrop-blur-md
                  [-webkit-backdrop-filter:blur(12px)]"
     >
       <div className={`${CONTAINER} flex h-[68px] items-center justify-between gap-3 md:h-[80px]`}>
-        <Logo />
-        <div className="flex items-center gap-2">
+        {brand}
+        <div className="flex items-center gap-2">{children}</div>
+      </div>
+    </header>
+  );
+}
+
+/* Landing: logo, selector de idioma y CTA. */
+export function PromoNav({ c, lang }: SectionProps) {
+  return (
+    <SiteNav brand={<Logo />}>
           {/* Selector de idioma: desde sm. En móvil no cabe junto al botón
               de llamada y queda solo en el footer. */}
           <LangSwitch lang={lang} label={c.nav.langLabel} className="mr-2 hidden sm:flex" />
@@ -62,15 +77,41 @@ export function PromoNav({ c, lang }: SectionProps) {
             className="!hidden !h-11 !px-4 !text-[15px] md:!inline-flex"
           />
           <CtaButton tipo="llamada" seccion="nav" label={c.nav.cta} className="!h-11 !px-4 !text-[15px]" />
-        </div>
-      </div>
-    </header>
+    </SiteNav>
   );
 }
 
 /* ── 1. Hero ── */
+interface HeroViewProps {
+  eyebrow: string;
+  title: string;
+  subtitle: string;
+  /** Botones bajo el subtítulo. */
+  actions: ReactNode;
+  trust: string;
+  reelLabel: string;
+}
+
 export function Hero({ c }: SectionProps) {
   const h = c.hero;
+  return (
+    <HeroView
+      eyebrow={h.eyebrow}
+      title={h.title}
+      subtitle={h.subtitle}
+      trust={h.trust}
+      reelLabel={h.reelLabel}
+      actions={
+        <>
+          <CtaButton tipo="llamada" seccion="hero" label={h.ctaCall} size="lg" />
+          <CtaButton tipo="whatsapp" seccion="hero" label={h.ctaWhatsapp} size="lg" variant="outline" />
+        </>
+      }
+    />
+  );
+}
+
+export function HeroView({ eyebrow, title, subtitle, actions, trust, reelLabel }: HeroViewProps) {
   return (
     <section className={`${CONTAINER} pb-16 pt-8 md:pb-24 md:pt-14`}>
       {/* Escritorio: 40% texto, 60% video (el reel es 16:9), centrados entre sí en vertical.
@@ -79,31 +120,28 @@ export function Hero({ c }: SectionProps) {
         <div>
           <p className="m-0 inline-flex items-center gap-2 rounded-full bg-white px-3.5 py-2 font-mono text-[12px] font-bold uppercase tracking-[0.08em] text-ink">
             <span className="h-2 w-2 rounded-full bg-[#00d71b]" aria-hidden />
-            {h.eyebrow}
+            {eyebrow}
           </p>
 
           <h1 className="m-0 mt-6 font-satoshi text-[clamp(40px,4.4vw,58px)] font-medium leading-[0.98] tracking-[-0.045em] text-ink">
-            <Accented text={h.title} />
+            <Accented text={title} />
           </h1>
 
           <p className="m-0 mt-6 max-w-[34ch] text-[clamp(18px,1.6vw,21px)] leading-[1.45] text-muted">
-            {h.subtitle}
+            {subtitle}
           </p>
 
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <CtaButton tipo="llamada" seccion="hero" label={h.ctaCall} size="lg" />
-            <CtaButton tipo="whatsapp" seccion="hero" label={h.ctaWhatsapp} size="lg" variant="outline" />
-          </div>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">{actions}</div>
 
           <p className="m-0 mt-7 flex max-w-[46ch] items-start gap-2.5 text-[15px] leading-snug text-muted">
             <svg className="mt-[2px] shrink-0 text-ink" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
               <path d="m12 2 2.9 6.6 7.1.6-5.4 4.7 1.6 7.1L12 17.3 5.8 21l1.6-7.1L2 9.2l7.1-.6L12 2Z" />
             </svg>
-            {h.trust}
+            {trust}
           </p>
         </div>
 
-        <ReelVideo label={h.reelLabel} />
+        <ReelVideo label={reelLabel} />
       </div>
     </section>
   );
@@ -121,6 +159,8 @@ export function Hero({ c }: SectionProps) {
     - Ajuste fino: `scale` de cada logo en promo.ts, a ojo.
     - Ancho máximo: ninguno pasa de LOGO_MAX_W.
   Los tamaños se calculan en el build con las medidas reales de cada PNG.
+  Un logo sin `src` (todavía sin archivo) se muestra como el nombre de la
+  empresa en texto, con el mismo gris.
 */
 const LOGO_BASE_H = 34;
 const LOGO_MAX_W = 160;
@@ -133,14 +173,27 @@ function logoSize(src: string, ink: number, scale: number) {
   return { w: Math.round(h * ratio), h: Math.round(h), width, height };
 }
 
+export interface LogoItem {
+  name: string;
+  src: string;
+  ink: number;
+  scale: number;
+}
+
 export function Logos({ c }: SectionProps) {
-  const l = c.logos;
-  const logos = l.items.map((logo) => ({ ...logo, ...logoSize(logo.src, logo.ink, logo.scale) }));
+  return <LogoStrip title={c.logos.title} items={c.logos.items} />;
+}
+
+export function LogoStrip({ title, items }: { title: string; items: readonly LogoItem[] }) {
+  const logos = items.map((logo) => ({ ...logo, ...(logo.src ? logoSize(logo.src, logo.ink, logo.scale) : null) }));
 
   const list = (dup: boolean) => (
     <ul className={`promo-logos-list${dup ? " promo-logos-dup" : ""}`} aria-hidden={dup || undefined}>
       {logos.map((logo) => (
         <li key={logo.name} className="flex items-center justify-center">
+          {!("w" in logo) ? (
+            <span className="promo-logo-text">{logo.name}</span>
+          ) : (
           <Image
             src={logo.src}
             alt={dup ? "" : logo.name}
@@ -151,6 +204,7 @@ export function Logos({ c }: SectionProps) {
             className="promo-logo"
             style={{ "--w": `${logo.w}px` } as CSSProperties}
           />
+          )}
         </li>
       ))}
     </ul>
@@ -159,7 +213,7 @@ export function Logos({ c }: SectionProps) {
   return (
     <section data-reveal className={`${CONTAINER} pb-4`}>
       <p className="m-0 text-center font-mono text-[12px] font-bold uppercase tracking-[0.12em] text-muted">
-        {l.title}
+        {title}
       </p>
       {/* Filtro de tono único (promo.css .promo-logo): todo lo oscuro pasa a
           un solo gris y lo claro se vuelve transparente, así los detalles en
@@ -254,8 +308,6 @@ export function Services({ c }: SectionProps) {
    promo.css) y un ícono de vidrio esmerilado (GlassIcon) al centro; debajo,
    título y descripción. Al pasar el mouse el ícono flota y gira un poco
    (.promo-glass en promo.css, solo sin movimiento reducido). */
-type MeshVars = CSSProperties & Record<`--m-${string}`, string>;
-
 const BENEFIT_MESH: MeshVars[] = [
   // Azul con morado y un toque de rosa.
   { "--m-base": "#2e6aff", "--m-1": "#98b6ff", "--m-2": "#8b6cff", "--m-3": "#ff7de3", "--m-4": "#2e6aff" },
@@ -272,15 +324,25 @@ const BENEFIT_MESH: MeshVars[] = [
 ];
 
 export function Benefits({ c }: SectionProps) {
-  const b = c.benefits;
+  return <GlassCards eyebrow={c.benefits.eyebrow} title={c.benefits.title} items={c.benefits.items} />;
+}
+
+interface GlassCardItem {
+  icon: BenefitIcon;
+  title: string;
+  text: string;
+}
+
+/** Tarjetas con mesh e ícono de vidrio: beneficios (landing) y fortalezas (portafolio). */
+export function GlassCards({ eyebrow, title, items }: { eyebrow: string; title: string; items: readonly GlassCardItem[] }) {
   return (
     <section className={`${CONTAINER} ${SECTION} pt-0 md:pt-0`}>
       <div data-reveal>
-        <Eyebrow>{b.eyebrow}</Eyebrow>
-        <SectionTitle text={b.title} />
+        <Eyebrow>{eyebrow}</Eyebrow>
+        <SectionTitle text={title} />
       </div>
       <ul className="m-0 mt-10 grid list-none gap-4 p-0 sm:grid-cols-2 lg:grid-cols-3">
-        {b.items.map((item, i) => (
+        {items.map((item, i) => (
           <li
             key={item.title}
             data-reveal
@@ -288,12 +350,7 @@ export function Benefits({ c }: SectionProps) {
             className="promo-benefit rounded-[28px] bg-white p-3"
           >
             <div className="relative isolate grid aspect-[4/3] place-items-center overflow-hidden rounded-[24px]">
-              <div className="promo-mesh" style={BENEFIT_MESH[i % BENEFIT_MESH.length]} aria-hidden>
-                <span className="promo-blob promo-blob-1" />
-                <span className="promo-blob promo-blob-2" />
-                <span className="promo-blob promo-blob-3" />
-                <span className="promo-blob promo-blob-4" />
-              </div>
+              <Mesh vars={BENEFIT_MESH[i % BENEFIT_MESH.length]} />
               <GlassIcon name={item.icon} uid={`b${i}`} className="promo-glass w-[44%]" />
             </div>
             <div className="px-3 pb-4 pt-5">
@@ -330,7 +387,16 @@ export function Work({ c, lang }: SectionProps) {
         <Eyebrow>{w.eyebrow}</Eyebrow>
         <SectionTitle text={w.title} />
       </div>
-      <WorkGallery projects={items} />
+      <WorkGallery
+        projects={items}
+        labels={{ cardCta: w.cardCta, ...w.lightbox }}
+        cta={
+          <>
+            <CtaButton tipo="llamada" seccion="lightbox" label={w.lightbox.ctaCall} size="lg" />
+            <CtaButton tipo="whatsapp" seccion="lightbox" label={w.lightbox.ctaWhatsapp} variant="whatsapp" size="lg" />
+          </>
+        }
+      />
     </section>
   );
 }
@@ -342,7 +408,7 @@ export function Work({ c, lang }: SectionProps) {
  * todos los galleryItems tal como vienen, imágenes y videos de Vimeo
  * mezclados.
  */
-function lightboxItems(p: Project): LightboxItem[] {
+export function lightboxItems(p: Project): LightboxItem[] {
   const head: LightboxItem[] = p.mainVideo
     ? [{ type: "video", src: p.mainVideo.src, aspectRatio: p.mainVideo.aspectRatio ?? DEFAULT_VIDEO_ASPECT_RATIO }]
     : p.cardVideo && p.cardImage
@@ -377,6 +443,21 @@ function shortSummary(text: string): string {
 /* ── 7. Sobre mí ── */
 export function About({ c }: SectionProps) {
   const a = c.about;
+  return (
+    <AboutView eyebrow={a.eyebrow} title={a.title} text={a.text} photo={a.photo} photoAlt={a.photoAlt} photoPlaceholder={a.photoPlaceholder} />
+  );
+}
+
+interface AboutViewProps {
+  eyebrow: string;
+  title: string;
+  text: string;
+  photo: string;
+  photoAlt: string;
+  photoPlaceholder?: string;
+}
+
+export function AboutView(a: AboutViewProps) {
   return (
     <section className={`${CONTAINER} ${SECTION} pt-0 md:pt-0`}>
       <div data-reveal className="grid items-center gap-8 rounded-[28px] bg-white p-5 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-12 md:p-8">
@@ -465,24 +546,57 @@ export function FaqSection({ c }: SectionProps) {
 /* ── 10. CTA final y footer ── */
 const FOOTER_LINK = "promo-focus rounded text-white/80 underline-offset-4 hover:text-white hover:underline";
 
-export function FinalCta({ c, lang }: SectionProps) {
-  const f = c.final;
-  const year = new Date().getFullYear();
+interface FinalCtaViewProps {
+  id: string;
+  title: string;
+  subtitle: string;
+  actions: ReactNode;
+  /** El pixel de Reyno arriba del título (solo la landing). */
+  mascot?: boolean;
+  footer: ReactNode;
+}
+
+/** Bloque oscuro final: título, botones y el footer debajo. */
+export function FinalCtaView({ id, title, subtitle, actions, mascot = false, footer }: FinalCtaViewProps) {
   return (
-    <section id="agendar" className="bg-ink text-white">
+    <section id={id} className="bg-ink text-white">
       <div className={`${CONTAINER} pb-10 pt-20 md:pt-28`}>
         <div data-reveal className="flex flex-col items-center text-center">
-          <span aria-hidden className="block"><PixelMascot size={72} /></span>
-          <h2 className="m-0 mt-8 max-w-[14ch] font-satoshi text-[clamp(40px,7vw,88px)] font-medium leading-[0.98] tracking-[-0.045em]">
-            <Accented text={f.title} />
+          {mascot && <span aria-hidden className="block"><PixelMascot size={72} /></span>}
+          <h2 className={`m-0 ${mascot ? "mt-8 " : ""}max-w-[14ch] font-satoshi text-[clamp(40px,7vw,88px)] font-medium leading-[0.98] tracking-[-0.045em]`}>
+            <Accented text={title} />
           </h2>
-          <p className="m-0 mt-6 max-w-[40ch] text-[clamp(18px,1.6vw,21px)] leading-[1.45] text-white/75">{f.subtitle}</p>
-          <div className="mt-9 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-            <CtaButton tipo="llamada" seccion="final" label={f.ctaCall} size="lg" variant="light" />
-            <CtaButton tipo="whatsapp" seccion="final" label={f.ctaWhatsapp} size="lg" variant="outlineLight" />
-          </div>
+          <p className="m-0 mt-6 max-w-[40ch] text-[clamp(18px,1.6vw,21px)] leading-[1.45] text-white/75">{subtitle}</p>
+          <div className="mt-9 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">{actions}</div>
         </div>
+        {footer}
+      </div>
+    </section>
+  );
+}
 
+export function FinalCta({ c, lang }: SectionProps) {
+  const f = c.final;
+  return (
+    <FinalCtaView
+      id="agendar"
+      title={f.title}
+      subtitle={f.subtitle}
+      mascot
+      actions={
+        <>
+          <CtaButton tipo="llamada" seccion="final" label={f.ctaCall} size="lg" variant="light" />
+          <CtaButton tipo="whatsapp" seccion="final" label={f.ctaWhatsapp} size="lg" variant="outlineLight" />
+        </>
+      }
+      footer={<ReynoFooter c={c} lang={lang} />}
+    />
+  );
+}
+
+function ReynoFooter({ c, lang }: SectionProps) {
+  const year = new Date().getFullYear();
+  return (
         <footer className="mt-24 border-t border-white/15 pt-8 text-[14px] text-white/65">
           <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -518,7 +632,5 @@ export function FinalCta({ c, lang }: SectionProps) {
             </div>
           </div>
         </footer>
-      </div>
-    </section>
   );
 }

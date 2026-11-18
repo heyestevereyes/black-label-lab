@@ -1,7 +1,7 @@
 import Image from "next/image";
 import type { CSSProperties } from "react";
 import type { PromoContent } from "@/content/promo";
-import { CONTAINER, Eyebrow, SectionTitle } from "@/components/promo/ui";
+import { CONTAINER, Eyebrow, Mesh, SectionTitle, type MeshVars } from "@/components/promo/ui";
 
 /*
   "Cómo funciona": tres tarjetas con fondo mesh animado (promo.css,
@@ -17,9 +17,10 @@ import { CONTAINER, Eyebrow, SectionTitle } from "@/components/promo/ui";
     1 azul #0700cf/#2e6aff con texto blanco  (≥ 4.6:1)
     2 amarillo #febf29 con texto #141414     (≥ 11:1)
     3 verde #00d71b con texto #141414        (≥ 9:1)
-*/
 
-type MeshVars = CSSProperties & Record<`--m-${string}`, string>;
+  El portafolio usa las mismas tarjetas sin mockups (ProcessCards sin
+  `mockups`): solo número, título y texto sobre el mesh.
+*/
 
 const CARDS: { mesh: MeshVars; text: string; body: string; num: string }[] = [
   {
@@ -49,39 +50,52 @@ const MOCKUPS = [CallMockup, ProposalMockup, DeliveryMockup];
 
 type Mockups = PromoContent["steps"]["mockups"];
 
+/** Landing: "Cómo funciona", con mockups. */
 export default function StepsSection({ c }: { c: PromoContent }) {
   const s = c.steps;
+  return <ProcessCards id="como-trabajamos" eyebrow={s.eyebrow} title={s.title} items={s.items} mockups={s.mockups} />;
+}
+
+interface ProcessCardsProps {
+  id: string;
+  eyebrow: string;
+  title: string;
+  items: readonly { title: string; text: string }[];
+  /** Sin mockups, las tarjetas solo llevan número, título y texto. */
+  mockups?: Mockups;
+}
+
+export function ProcessCards({ id, eyebrow, title, items, mockups }: ProcessCardsProps) {
   return (
-    <section id="como-trabajamos" className={`${CONTAINER} scroll-mt-16 py-16 md:py-24`}>
+    <section id={id} className={`${CONTAINER} scroll-mt-16 py-16 md:py-24`}>
       <div data-reveal>
-        <Eyebrow>{s.eyebrow}</Eyebrow>
-        <SectionTitle text={s.title} />
+        <Eyebrow>{eyebrow}</Eyebrow>
+        <SectionTitle text={title} />
       </div>
       <ol className="m-0 mt-10 grid list-none gap-4 p-0 lg:grid-cols-3">
-        {s.items.map((step, i) => {
-          const card = CARDS[i];
-          const Mockup = MOCKUPS[i];
+        {items.map((step, i) => {
+          const card = CARDS[i % CARDS.length];
+          const Mockup = MOCKUPS[i % MOCKUPS.length];
           return (
             <li
               key={step.title}
               data-reveal
               style={{ transitionDelay: `${i * 90}ms` }}
-              className={`promo-step relative isolate flex flex-col overflow-hidden rounded-[24px] lg:h-[520px] ${card.text}`}
+              className={`promo-step relative isolate flex flex-col overflow-hidden rounded-[24px] ${
+                mockups ? "lg:h-[520px]" : "min-h-[300px] justify-end lg:min-h-[380px]"
+              } ${card.text}`}
             >
-              <div className="promo-mesh" style={card.mesh} aria-hidden>
-                <span className="promo-blob promo-blob-1" />
-                <span className="promo-blob promo-blob-2" />
-                <span className="promo-blob promo-blob-3" />
-                <span className="promo-blob promo-blob-4" />
-              </div>
+              <Mesh vars={card.mesh} />
 
               {/* Mitad superior: el mockup. Alto fijo en móvil para que no
                   se corte; en escritorio toma lo que deja el texto. */}
-              <div className="relative h-[330px] lg:h-auto lg:flex-1" aria-hidden>
-                <Mockup m={s.mockups} />
-              </div>
+              {mockups && (
+                <div className="relative h-[330px] lg:h-auto lg:flex-1" aria-hidden>
+                  <Mockup m={mockups} />
+                </div>
+              )}
 
-              <div className="relative px-7 pb-8 pt-2">
+              <div className={`relative px-7 pb-8 ${mockups ? "pt-2" : "pt-8"}`}>
                 <span className={`grid h-10 w-10 place-items-center rounded-full font-mono text-[15px] font-bold ${card.num}`}>
                   {i + 1}
                 </span>
