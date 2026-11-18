@@ -6,14 +6,15 @@ import { DOMAINS, normalizeHost, PORTFOLIO_URL, siteForHost } from "@/data/site"
   Un proyecto, dos dominios (ver DOMAINS en src/data/site.ts). Todas las
   redirecciones son 301 y conservan los parámetros de la URL (UTM).
 
-  estevereyes.com (portafolio)
-    www.estevereyes.com/*             → https://estevereyes.com/  (un salto)
+  www.estevereyes.com (portafolio)
+    estevereyes.com/*                 → https://www.estevereyes.com/  (un salto;
+                                        en Vercel ya lo hace el dominio con 308)
     /                                 → rewrite interno a /esteve-portfolio
     cualquier otra página             → /
     La landing de Reyno nunca se muestra aquí.
 
   reyno-studio.com (landing)
-    /esteve-portfolio                 → https://estevereyes.com/
+    /esteve-portfolio                 → https://www.estevereyes.com/
       (solo en los dominios de Reyno; en localhost y en las previews de
       Vercel se sirve directo para poder revisarlo)
     /promo y /promo/*                 → /
@@ -66,7 +67,7 @@ export default function middleware(request: NextRequest) {
   const host = normalizeHost(request.headers.get("host"));
 
   if (siteForHost(host) === "portfolio") {
-    // www → dominio sin www, directo a la raíz.
+    // Dominio sin www → www, directo a la raíz.
     if ((DOMAINS.portfolio.redirectHosts as readonly string[]).includes(host)) {
       return NextResponse.redirect(`${PORTFOLIO_URL}/${search}`, 301);
     }

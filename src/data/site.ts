@@ -47,8 +47,9 @@ export const INSTAGRAM_URL = SOCIAL_LINKS.find(
  *   - reyno: la landing de Reyno Studio.
  *   - portfolio: el portafolio de Esteve (src/app/(portfolio)), en la raíz.
  *     "estevereyes.localhost" es para probarlo en local
- *     (http://estevereyes.localhost:3000); www redirige con 301 al dominio
- *     sin www.
+ *     (http://estevereyes.localhost:3000). El dominio principal es el de
+ *     www: Vercel ya manda estevereyes.com → www con 308, y si una petición
+ *     sin www llega al middleware, también la redirige (301) a www.
  * Cualquier otro host (localhost, previews de Vercel) se trata como Reyno.
  */
 export const DOMAINS = {
@@ -57,9 +58,9 @@ export const DOMAINS = {
     hosts: ["reyno-studio.com", "www.reyno-studio.com"],
   },
   portfolio: {
-    canonical: "estevereyes.com",
-    hosts: ["estevereyes.com", "estevereyes.localhost"],
-    redirectHosts: ["www.estevereyes.com"],
+    canonical: "www.estevereyes.com",
+    hosts: ["www.estevereyes.com", "estevereyes.localhost"],
+    redirectHosts: ["estevereyes.com"],
   },
 } as const;
 

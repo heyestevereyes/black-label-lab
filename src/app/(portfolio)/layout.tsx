@@ -10,7 +10,7 @@ import { publicFileExists } from "@/lib/publicFile";
   mismo documento que la landing (fuentes, CSS, Analytics) con
   <html lang="en">.
 
-  Se publica en estevereyes.com (el middleware hace el rewrite de "/" a
+  Se publica en www.estevereyes.com (el middleware hace el rewrite de "/" a
   esta ruta), así que canonical y og:url apuntan ahí. Se comparte solo por
   enlace: noindex y nofollow, fuera del sitemap y sin enlaces desde la
   landing. No se bloquea en robots.txt a propósito: si Google no puede
