@@ -17,7 +17,10 @@ import type { BenefitIcon } from "@/content/promo";
   `uid` hace únicos los id de defs: hay seis íconos en la misma página.
 */
 
-const SHAPES: Record<BenefitIcon, { body: ReactNode; detail: ReactNode }> = {
+/** Íconos disponibles: los de los beneficios más pantalla y teléfono (prototipos). */
+export type GlassIconName = BenefitIcon | "monitor" | "phone";
+
+const SHAPES: Record<GlassIconName, { body: ReactNode; detail: ReactNode }> = {
   // Burbuja de chat con tres puntos.
   chat: {
     body: (
@@ -89,6 +92,33 @@ const SHAPES: Record<BenefitIcon, { body: ReactNode; detail: ReactNode }> = {
       <path transform="rotate(-40 60 60)" d="M56 58.5h40" stroke="rgba(255,255,255,0.95)" strokeWidth="3" strokeLinecap="round" fill="none" />
     ),
   },
+  // Pantalla de escritorio: monitor con pie y base.
+  monitor: {
+    body: (
+      <>
+        <rect x="12" y="20" width="96" height="64" rx="12" />
+        <path d="M51 84h18l3 12H48Z" />
+        <rect x="36" y="94" width="48" height="9" rx="4.5" />
+      </>
+    ),
+    detail: (
+      <>
+        <rect x="26" y="34" width="30" height="7" rx="3.5" />
+        <rect x="26" y="48" width="52" height="7" rx="3.5" />
+        <rect x="26" y="62" width="40" height="7" rx="3.5" />
+      </>
+    ),
+  },
+  // Teléfono: cuerpo redondeado, bocina y barra de inicio.
+  phone: {
+    body: <rect x="34" y="10" width="52" height="100" rx="15" />,
+    detail: (
+      <>
+        <rect x="50" y="19" width="20" height="5" rx="2.5" />
+        <rect x="48" y="97" width="24" height="5" rx="2.5" />
+      </>
+    ),
+  },
   // Corazón.
   heart: {
     body: (
@@ -100,7 +130,7 @@ const SHAPES: Record<BenefitIcon, { body: ReactNode; detail: ReactNode }> = {
   },
 };
 
-export default function GlassIcon({ name, uid, className = "" }: { name: BenefitIcon; uid: string; className?: string }) {
+export default function GlassIcon({ name, uid, className = "" }: { name: GlassIconName; uid: string; className?: string }) {
   const { body, detail } = SHAPES[name];
   const id = (s: string) => `glass-${uid}-${s}`;
   const url = (s: string) => `url(#${id(s)})`;

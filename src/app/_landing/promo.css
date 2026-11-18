@@ -56,6 +56,37 @@ body,
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
+/* ── Prototipos de Figma: ancho del iframe en el lightbox ──
+   Lo más grande posible sin salirse de la pantalla. --proto-r es el alto
+   que ocupan la barra, el título y la línea de ayuda; el resto es para el
+   prototipo. Escritorio 16:10 (ancho = alto × 1.6), teléfono 9:19.5
+   (ancho = alto × 0.4615). El teléfono reserva más: su línea de ayuda y
+   el enlace van uno debajo del otro. El max() deja un mínimo usable en
+   pantallas muy bajas. En pantallas chicas el escritorio usa 6:5 (ver
+   PrototypeGallery) para que la barra de Figma no se coma el prototipo. */
+.promo-proto-desktop,
+.promo-proto-mobile {
+  --proto-r: 250px;
+  width: 100%;
+}
+.promo-proto-desktop {
+  max-width: max(320px, calc((100vh - var(--proto-r)) * 1.6));
+  max-width: max(320px, calc((100dvh - var(--proto-r)) * 1.6));
+}
+.promo-proto-mobile {
+  --proto-r: 300px;
+  max-width: max(240px, calc((100vh - var(--proto-r)) * 0.4615));
+  max-width: max(240px, calc((100dvh - var(--proto-r)) * 0.4615));
+}
+@media (min-width: 768px) {
+  .promo-proto-desktop {
+    --proto-r: 270px;
+  }
+  .promo-proto-mobile {
+    --proto-r: 340px;
+  }
+}
+
 /* Piezas de los mockups: giro de reposo --r, giro de hover --rh. */
 .promo-mock {
   transform: rotate(var(--r, 0deg));

@@ -46,7 +46,10 @@ export const portfolio = {
     ctaCv: "Download CV",
     ctaContact: "Get in touch",
     trust: "Open to remote Senior Product Designer roles.",
-    // Reuses the landing reel.
+    // Portrait in the hero instead of the reel.
+    photo: "/promo/esteve.jpg",
+    photoAlt: "Esteve Reyes, Senior UX and Product Designer",
+    // Kept until the hero stops using the reel. Remove afterwards.
     reelLabel: "Reel of selected work by Esteve Reyes",
   },
 
@@ -149,6 +152,79 @@ export const portfolio = {
       ctaTitle: "Want to hear the *full story?*",
       ctaText: "I'm happy to walk you through the process, decisions and results.",
       nextProject: "Next case study",
+    },
+  },
+
+  prototypes: {
+    eyebrow: "Interactive prototypes",
+    title: "Click through the *real flows.*",
+    subtitle:
+      "Interactive Figma prototypes from products I designed. Open one and use it like the real thing.",
+    cardCta: "Open prototype",
+    // Each card opens a lightbox with the Figma prototype embedded.
+    //
+    // figmaUrl: the embed URL from Figma (Share > Embed). If a regular
+    // prototype share link is pasted instead, the page converts it. The
+    // prototype must be shared as "Anyone with the link can view".
+    // Use scaling=scale-down so the whole screen fits the frame
+    // (min-zoom shows it at actual size and crops it), and leave out
+    // show-proto-sidebar so the flows panel does not cover the prototype.
+    //
+    // device: "desktop" (16:10 frame) or "mobile" (phone frame). It must
+    // match the size of the screens in Figma.
+    //
+    // cover: optional image for the card. Without it, the card shows a
+    // fluid gradient like the confidential case study.
+    items: [
+      {
+        slug: "oracle-virtual-visits",
+        company: "Oracle Health",
+        name: "Virtual Visits",
+        meta: "Healthcare · Telehealth",
+        // TODO: confirm the description.
+        summary:
+          "Video visits between clinicians and patients, from joining the call to documenting the visit.",
+        figmaUrl:
+          "https://embed.figma.com/proto/yELVS1AhrTCOig7mUZxdYG/Esteve-Reyes---Oracle-Portfolio?page-id=0%3A1&node-id=1-52775&viewport=368%2C305%2C0.04&scaling=scale-down&content-scaling=fixed&starting-point-node-id=1%3A52775&embed-host=share",
+        cover: "",
+        device: "desktop",
+      },
+      {
+        slug: "kapital-smart-assistant",
+        company: "Kapital Bank",
+        name: "Smart Bank Assistant",
+        meta: "Fintech · Conversational banking",
+        // TODO: confirm the description.
+        summary:
+          "An assistant inside the banking app that helps businesses find information and complete tasks faster.",
+        figmaUrl:
+          "https://embed.figma.com/proto/5IXYIQeE2ZoZHac5CeehnJ/Kapital-Phoenix-Master?node-id=7142-82638&viewport=822%2C2347%2C0.11&scaling=scale-down&content-scaling=fixed&starting-point-node-id=7205%3A81822&page-id=5801%3A61890&embed-host=share",
+        cover: "",
+        device: "desktop",
+      },
+      {
+        slug: "oracle-patient-assessment",
+        company: "Oracle Health",
+        name: "Patient Assessment",
+        meta: "Healthcare · Clinical workflow",
+        // TODO: confirm the description.
+        summary:
+          "A clinical workflow that helps care teams assess patients quickly and accurately.",
+        figmaUrl:
+          "https://embed.figma.com/proto/yELVS1AhrTCOig7mUZxdYG/Esteve-Reyes---Oracle-Portfolio?page-id=78%3A37949&node-id=78-37950&viewport=280%2C520%2C0.03&scaling=scale-down&content-scaling=fixed&starting-point-node-id=78%3A37950&embed-host=share",
+        cover: "",
+        device: "desktop",
+      },
+    ],
+    lightbox: {
+      label: "Prototype",
+      close: "Close",
+      prev: "Previous prototype",
+      next: "Next prototype",
+      loading: "Loading prototype",
+      hint: "Click inside the prototype to interact. Use the arrows in Figma to move between screens.",
+      openInFigma: "Open in Figma",
+      missing: "Prototype coming soon.",
     },
   },
 

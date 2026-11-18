@@ -27,3 +27,16 @@ export function trackPortfolio(event: PortfolioEvent, seccion: PortfolioSeccion)
   w.gtag?.("event", event, props);
   w.fbq?.("trackCustom", event, props);
 }
+
+/** Se abrió un prototipo de Figma (tarjeta, flechas o enlace con hash). */
+export function trackPrototype(slug: string): void {
+  const props = { slug };
+  try {
+    track("prototype_open", props);
+  } catch {
+    // La medición nunca debe romper la interacción.
+  }
+  const w = window as Window & { gtag?: Gtag; fbq?: Fbq };
+  w.gtag?.("event", "prototype_open", props);
+  w.fbq?.("trackCustom", "prototype_open", props);
+}

@@ -6,6 +6,7 @@ import MobileActionBar from "@/components/promo/MobileActionBar";
 import RevealObserver from "@/components/promo/RevealObserver";
 import PortfolioButton, { PortfolioLink } from "@/components/portfolio/PortfolioButton";
 import CaseStudies from "@/components/portfolio/CaseStudies";
+import Prototypes from "@/components/portfolio/Prototypes";
 import Experience from "@/components/portfolio/Experience";
 import Skills from "@/components/portfolio/Skills";
 
@@ -65,6 +66,7 @@ export default function PortfolioPage() {
             </>
           }
         />
+        <Prototypes />
         <ProcessCards id="process" eyebrow={p.process.eyebrow} title={p.process.title} items={p.process.items} />
         <GlassCards eyebrow={p.strengths.eyebrow} title={p.strengths.title} items={p.strengths.items} />
         <Experience />

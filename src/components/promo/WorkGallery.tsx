@@ -1,18 +1,18 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useRef, useState, type KeyboardEvent, type MouseEvent, type ReactNode, type Ref, type RefObject } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { Accented } from "@/components/promo/ui";
+import { Arrow, LightboxShell, MediaCard, useLightbox } from "@/components/promo/lightbox";
 
 /*
   "Trabajo reciente": tarjetas que abren un lightbox dentro de la landing en
   vez de mandar a la página del proyecto.
 
-  Historial: al abrir se agrega una entrada con hash (/promo#kapital), así el
-  botón atrás del navegador cierra el modal en vez de salir. Cerrar con X,
-  Escape o clic fuera también regresa esa entrada. Cambiar de proyecto con
-  las flechas reemplaza el hash sin agregar entradas.
+  El hash, el historial, el bloqueo de scroll y el modal (barra, teclado,
+  foco) viven en lightbox.tsx y los comparte con los prototipos del
+  portafolio. Aquí quedan las tarjetas y el contenido de cada caso.
 
   Los datos llegan ya armados desde el servidor (Work en sections.tsx para
   la landing, CaseStudies para el portafolio), que los toma de
@@ -81,9 +81,6 @@ const LAYOUTS = {
   three: { grid: "lg:grid-cols-3", sizes: "(min-width: 1200px) 560px, (min-width: 1024px) 45vw, 134vw" },
 } as const;
 
-// Los iframes de Vimeo no entran: llevan tabIndex -1 (ver VimeoEmbed).
-const FOCUSABLE = 'a[href], button:not([disabled]), video[controls], [tabindex]:not([tabindex="-1"])';
-
 export default function WorkGallery({
   projects,
   labels,
@@ -96,100 +93,7 @@ export default function WorkGallery({
   cta: ReactNode;
   layout?: keyof typeof LAYOUTS;
 }) {
-  const [index, setIndex] = useState<number | null>(null);
-  const cardRefs = useRef<(HTMLButtonElement | null)[]>([]);
-  // Tarjeta que abrió el modal: recibe el foco al cerrar.
-  const openerRef = useRef<number>(0);
-  // true si el modal agregó una entrada al historial que hay que regresar.
-  const pushedRef = useRef(false);
-  // history.length justo después de agregar la entrada del hash.
-  const hashLenRef = useRef(0);
-
-  const slugIndex = useCallback(
-    (hash: string) => projects.findIndex((p) => `#${p.slug}` === hash),
-    [projects]
-  );
-
-  const open = (i: number) => {
-    openerRef.current = i;
-    window.history.pushState(window.history.state, "", `#${projects[i].slug}`);
-    pushedRef.current = true;
-    hashLenRef.current = window.history.length;
-    setIndex(i);
-  };
-
-  const close = useCallback(() => {
-    const dropHash = () => {
-      window.history.replaceState(window.history.state, "", window.location.pathname + window.location.search);
-      pushedRef.current = false;
-      setIndex(null);
-    };
-    if (!pushedRef.current) return dropHash();
-    // Se regresa hasta antes de la entrada del hash; popstate cierra el
-    // modal. Si un iframe agregó entradas propias (algunos reproductores lo
-    // hacen al redirigir), se saltan también para no quedarse a medias.
-    const steps = Math.max(1, window.history.length - hashLenRef.current + 1);
-    window.history.go(-steps);
-    // Respaldo por si el navegador no llega a disparar popstate.
-    window.setTimeout(() => {
-      if (pushedRef.current && window.location.hash) dropHash();
-    }, 500);
-  }, []);
-
-  const go = (delta: number) => {
-    if (index === null) return;
-    const next = (index + delta + projects.length) % projects.length;
-    window.history.replaceState(window.history.state, "", `#${projects[next].slug}`);
-    setIndex(next);
-  };
-
-  // Atrás y adelante del navegador, y llegada directa con hash.
-  useEffect(() => {
-    const onPop = () => {
-      const i = slugIndex(window.location.hash);
-      if (i >= 0) {
-        pushedRef.current = true;
-        hashLenRef.current = window.history.length;
-        setIndex(i);
-      } else {
-        pushedRef.current = false;
-        setIndex(null);
-      }
-    };
-    window.addEventListener("popstate", onPop);
-
-    // /promo#kapital abre el proyecto; se reconstruye el historial para que
-    // atrás cierre el modal y deje al visitante en la landing.
-    const first = slugIndex(window.location.hash);
-    if (first >= 0) {
-      const state = window.history.state;
-      window.history.replaceState(state, "", window.location.pathname + window.location.search);
-      window.history.pushState(state, "", `#${projects[first].slug}`);
-      pushedRef.current = true;
-      hashLenRef.current = window.history.length;
-      openerRef.current = first;
-      setIndex(first);
-    }
-    return () => window.removeEventListener("popstate", onPop);
-  }, [slugIndex, projects]);
-
-  const isOpen = index !== null;
-
-  // Bloqueo del scroll del body y regreso a la misma posición al cerrar.
-  useEffect(() => {
-    if (!isOpen) return;
-    const y = window.scrollY;
-    const body = document.body.style;
-    const cards = cardRefs.current;
-    const prev = { position: body.position, top: body.top, left: body.left, right: body.right, width: body.width };
-    Object.assign(body, { position: "fixed", top: `-${y}px`, left: "0", right: "0", width: "100%" });
-    return () => {
-      Object.assign(body, prev);
-      window.scrollTo({ top: y, behavior: "instant" as ScrollBehavior });
-      cards[openerRef.current]?.focus({ preventScroll: true });
-    };
-  }, [isOpen]);
-
+  const lb = useLightbox(projects.map((p) => p.slug));
   const w = labels;
   const grid = LAYOUTS[layout];
 
@@ -197,18 +101,18 @@ export default function WorkGallery({
     <>
       <ul className={`m-0 mt-10 grid list-none gap-4 p-0 ${grid.grid}`}>
         {projects.map((p, i) => (
-          <li
+          <MediaCard
             key={p.slug}
-            data-reveal
-            style={{ transitionDelay: `${(i % 2) * 90}ms` }}
-            className="promo-work-card group relative rounded-[24px] bg-white p-3"
-          >
-            <div className={`relative aspect-[4/3] overflow-hidden rounded-[16px] bg-[#e2e3e1]${p.cover ? "" : " isolate"}`}>
-              {p.cover ? (
+            delay={(i % 2) * 90}
+            isolate={!p.cover}
+            media={
+              p.cover ? (
                 <Image src={p.cover} alt="" fill sizes={grid.sizes} quality={90} className="promo-work-img object-cover" />
               ) : (
                 p.visual
-              )}
+              )
+            }
+            overlay={
               <span
                 aria-hidden
                 className="absolute bottom-3 right-3 inline-flex h-9 items-center gap-2 rounded-full bg-white/90 px-4
@@ -217,17 +121,16 @@ export default function WorkGallery({
                 {w.cardCta}
                 <Arrow className="h-3.5 w-3.5" />
               </span>
-            </div>
+            }
+          >
             <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 px-3 pb-2 pt-4">
               <h3 className="m-0 font-satoshi text-[22px] font-bold tracking-[-0.02em] text-ink">
                 {/* El botón cubre toda la tarjeta (after:inset-0). */}
                 <button
-                  ref={(el) => {
-                    cardRefs.current[i] = el;
-                  }}
+                  ref={lb.cardRef(i)}
                   type="button"
                   aria-haspopup="dialog"
-                  onClick={() => open(i)}
+                  onClick={() => lb.open(i)}
                   className="promo-focus cursor-pointer rounded-[6px] text-left after:absolute after:inset-0 after:rounded-[24px] after:content-['']"
                 >
                   {p.name}
@@ -235,20 +138,20 @@ export default function WorkGallery({
               </h3>
               <p className="m-0 font-mono text-[12px] uppercase tracking-[0.06em] text-muted">{p.type}</p>
             </div>
-          </li>
+          </MediaCard>
         ))}
       </ul>
 
-      {isOpen &&
+      {lb.index !== null &&
         createPortal(
           <Lightbox
             projects={projects}
             labels={labels}
             cta={cta}
-            index={index}
-            onClose={close}
-            onPrev={() => go(-1)}
-            onNext={() => go(1)}
+            index={lb.index}
+            onClose={lb.close}
+            onPrev={() => lb.go(-1)}
+            onNext={() => lb.go(1)}
           />,
           document.body
         )}
@@ -276,130 +179,29 @@ function Lightbox({
   const p = projects[index];
   const next = projects[(index + 1) % projects.length];
   const t = labels;
-  const dialogRef = useRef<HTMLDivElement>(null);
-  const closeRef = useRef<HTMLButtonElement>(null);
   const [reduced, setReduced] = useState(false);
 
   useEffect(() => {
     setReduced(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
-    closeRef.current?.focus({ preventScroll: true });
   }, []);
 
-  // Un clic dentro de un video de Vimeo (por ejemplo en "Unmute") manda el
-  // foco al iframe, y desde ahí las teclas ya no llegan al modal. Al perder
-  // el foco la ventana, si se fue a uno de nuestros iframes, se regresa al
-  // modal: el clic sí llega al reproductor y Escape y las flechas siguen
-  // funcionando.
-  useEffect(() => {
-    let timer = 0;
-    const onBlur = () => {
-      timer = window.setTimeout(() => {
-        const active = document.activeElement;
-        const dialog = dialogRef.current;
-        if (dialog && active instanceof HTMLIFrameElement && dialog.contains(active)) {
-          dialog.focus({ preventScroll: true });
-        }
-      }, 0);
-    };
-    window.addEventListener("blur", onBlur);
-    return () => {
-      window.removeEventListener("blur", onBlur);
-      window.clearTimeout(timer);
-    };
-  }, []);
-
-  // Al cambiar de proyecto, la galería empieza desde arriba.
-  useEffect(() => {
-    dialogRef.current?.scrollTo({ top: 0 });
-  }, [index]);
-
-  const onKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === "Escape") {
-      e.preventDefault();
-      onClose();
-    } else if (e.key === "ArrowLeft") {
-      e.preventDefault();
-      onPrev();
-    } else if (e.key === "ArrowRight") {
-      e.preventDefault();
-      onNext();
-    } else if (e.key === "Tab" && dialogRef.current) {
-      // Foco atrapado dentro del modal.
-      const items = Array.from(dialogRef.current.querySelectorAll<HTMLElement>(FOCUSABLE)).filter(
-        (el) => el.offsetParent !== null || el === document.activeElement
-      );
-      if (!items.length) return;
-      const first = items[0];
-      const last = items[items.length - 1];
-      if (e.shiftKey && document.activeElement === first) {
-        e.preventDefault();
-        last.focus();
-      } else if (!e.shiftKey && document.activeElement === last) {
-        e.preventDefault();
-        first.focus();
-      }
-    }
-  };
-
-  // Clic fuera del contenido: en el fondo o en los márgenes del panel.
-  const onBackdrop = (e: MouseEvent<HTMLDivElement>) => {
-    if ((e.target as HTMLElement).dataset.backdrop !== undefined) onClose();
-  };
-
-  const counter = `${String(index + 1).padStart(2, "0")} / ${String(projects.length).padStart(2, "0")}`;
   const totalImages = p.items.filter((it) => it.type === "image").length;
   const totalVideos = p.items.filter((it) => it.type === "video").length;
   let imageN = 0;
   let videoN = 0;
 
   return (
-    <div
-      ref={dialogRef}
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="promo-lb-title"
-      tabIndex={-1}
-      onKeyDown={onKeyDown}
-      onClick={onBackdrop}
-      data-backdrop
-      className="fixed inset-0 z-[100] overflow-y-auto overscroll-contain font-satoshi outline-none"
+    <LightboxShell
+      index={index}
+      total={projects.length}
+      name={p.name}
+      slug={p.slug}
+      labels={t}
+      onClose={onClose}
+      onPrev={onPrev}
+      onNext={onNext}
+      panelClassName="max-w-[1120px] px-4 pb-16 pt-24 md:px-8 md:pb-24 md:pt-28"
     >
-      {/* Fondo en su propia capa: si el blur fuera del contenedor con scroll,
-          la barra fija de abajo quedaría anclada a él y se iría con el scroll. */}
-      <div
-        data-backdrop
-        aria-hidden
-        className="promo-lb fixed inset-0 bg-[#0c0c0c] md:bg-[#0c0c0c]/75 md:[-webkit-backdrop-filter:blur(22px)] md:[backdrop-filter:blur(22px)]"
-      />
-      {/* Barra fija: contador, flechas y cerrar. */}
-      <div
-        className="promo-lb fixed inset-x-0 top-0 z-10 flex h-16 items-center justify-between bg-[#0c0c0c]/80 px-4
-                   [-webkit-backdrop-filter:blur(12px)] [backdrop-filter:blur(12px)] md:h-20 md:bg-transparent
-                   md:px-6 md:[-webkit-backdrop-filter:none] md:[backdrop-filter:none]"
-      >
-        <p className="m-0 font-mono text-[12px] tracking-[0.12em] text-white/70" aria-hidden>
-          {counter}
-        </p>
-        <div className="flex items-center gap-2">
-          <ToolButton label={t.prev} onClick={onPrev}>
-            <Arrow className="h-4 w-4 rotate-180" />
-          </ToolButton>
-          <ToolButton label={t.next} onClick={onNext}>
-            <Arrow className="h-4 w-4" />
-          </ToolButton>
-          <ToolButton label={t.close} onClick={onClose} buttonRef={closeRef} className="ml-2">
-            <svg viewBox="0 0 16 16" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden>
-              <path d="M3 3l10 10M13 3 3 13" />
-            </svg>
-          </ToolButton>
-        </div>
-      </div>
-
-      <p className="sr-only" aria-live="polite">
-        {`${t.label} ${index + 1} ${t.of} ${projects.length}: ${p.name}`}
-      </p>
-
-      <div key={p.slug} data-backdrop className="promo-lb-panel relative mx-auto w-full max-w-[1120px] px-4 pb-16 pt-24 md:px-8 md:pb-24 md:pt-28">
         <header className="max-w-[760px]">
           <p className="m-0 font-mono text-[12px] font-bold uppercase tracking-[0.12em] text-white/60">{p.type}</p>
           <h2
@@ -435,7 +237,6 @@ function Lightbox({
                   src={item.src}
                   aspectRatio={item.aspectRatio}
                   title={`${p.name}, ${t.videoLabel.toLowerCase()} ${videoN} ${t.of} ${totalVideos}`}
-                  rootRef={dialogRef}
                 />
               );
             }
@@ -505,8 +306,7 @@ function Lightbox({
             </span>
           </button>
         )}
-      </div>
-    </div>
+    </LightboxShell>
   );
 }
 
@@ -560,12 +360,10 @@ function VimeoEmbed({
   src,
   aspectRatio,
   title,
-  rootRef,
 }: {
   src: string;
   aspectRatio: string;
   title: string;
-  rootRef: RefObject<HTMLDivElement>;
 }) {
   const boxRef = useRef<HTMLDivElement>(null);
   const [near, setNear] = useState(false);
@@ -585,11 +383,11 @@ function VimeoEmbed({
         }
       },
       // Un poco antes de entrar: el reproductor de Vimeo tarda en arrancar.
-      { root: rootRef.current, rootMargin: "600px 0px" }
+      { root: box.closest<HTMLElement>('[role="dialog"]'), rootMargin: "600px 0px" }
     );
     io.observe(box);
     return () => io.disconnect();
-  }, [near, rootRef]);
+  }, [near]);
 
   return (
     <div
@@ -606,45 +404,11 @@ function VimeoEmbed({
           // Fuera del orden de Tab: son muestras en bucle y, con el foco
           // adentro, el teclado dejaría de controlar el modal.
           tabIndex={-1}
+          // Si un clic deja el foco aquí, el modal lo recupera (LightboxShell).
+          data-refocus
           className="absolute left-0 top-0 h-full w-full border-0"
         />
       )}
     </div>
-  );
-}
-
-function ToolButton({
-  label,
-  onClick,
-  children,
-  className = "",
-  buttonRef,
-}: {
-  label: string;
-  onClick: () => void;
-  children: ReactNode;
-  className?: string;
-  buttonRef?: Ref<HTMLButtonElement>;
-}) {
-  return (
-    <button
-      ref={buttonRef}
-      type="button"
-      aria-label={label}
-      title={label}
-      onClick={onClick}
-      className={`promo-focus grid h-11 w-11 place-items-center rounded-full bg-white/10 text-white ring-1 ring-inset
-                  ring-white/15 transition-colors hover:bg-white/20 ${className}`}
-    >
-      {children}
-    </button>
-  );
-}
-
-function Arrow({ className = "" }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 16 16" className={className} fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      <path d="M2 8h12M9 3l5 5-5 5" />
-    </svg>
   );
 }
