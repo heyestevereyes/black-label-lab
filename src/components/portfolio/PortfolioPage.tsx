@@ -9,6 +9,7 @@ import CaseStudies from "@/components/portfolio/CaseStudies";
 import Prototypes from "@/components/portfolio/Prototypes";
 import Experience from "@/components/portfolio/Experience";
 import Skills from "@/components/portfolio/Skills";
+import HeroPhoto from "@/components/portfolio/HeroPhoto";
 
 /*
   Portafolio profesional (/esteve-portfolio). Usa las secciones de la
@@ -49,7 +50,8 @@ export default function PortfolioPage() {
           title={p.hero.title}
           subtitle={p.hero.subtitle}
           trust={p.hero.trust}
-          reelLabel={p.hero.reelLabel}
+          layout="portrait"
+          media={<HeroPhoto src={p.hero.photo} alt={p.hero.photoAlt} />}
           actions={
             <>
               <PortfolioButton {...cv} seccion="hero" label={p.hero.ctaCv} size="lg" />
@@ -71,13 +73,7 @@ export default function PortfolioPage() {
         <GlassCards eyebrow={p.strengths.eyebrow} title={p.strengths.title} items={p.strengths.items} />
         <Experience />
         <Skills />
-        <AboutView
-          eyebrow={p.about.eyebrow}
-          title={p.about.title}
-          text={p.about.text}
-          photo={p.about.photo}
-          photoAlt={p.about.photoAlt}
-        />
+        <AboutView eyebrow={p.about.eyebrow} title={p.about.title} text={p.about.text} />
         <FinalCtaView
           id="contact"
           title={p.final.title}

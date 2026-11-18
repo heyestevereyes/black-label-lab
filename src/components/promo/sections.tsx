@@ -89,8 +89,19 @@ interface HeroViewProps {
   /** Botones bajo el subtítulo. */
   actions: ReactNode;
   trust: string;
-  reelLabel: string;
+  /** Lo que va a la derecha: el reel (landing) o la foto (portafolio). */
+  media: ReactNode;
+  /**
+   * reel: 40% texto y 60% video 16:9.
+   * portrait: texto ancho y la foto vertical (4:5) a la derecha.
+   */
+  layout?: "reel" | "portrait";
 }
+
+const HERO_GRID = {
+  reel: "grid items-center gap-12 lg:grid-cols-[40fr_60fr] lg:gap-12",
+  portrait: "grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,440px)] lg:gap-16",
+} as const;
 
 export function Hero({ c }: SectionProps) {
   const h = c.hero;
@@ -100,7 +111,7 @@ export function Hero({ c }: SectionProps) {
       title={h.title}
       subtitle={h.subtitle}
       trust={h.trust}
-      reelLabel={h.reelLabel}
+      media={<ReelVideo label={h.reelLabel} />}
       actions={
         <>
           <CtaButton tipo="llamada" seccion="hero" label={h.ctaCall} size="lg" />
@@ -111,12 +122,13 @@ export function Hero({ c }: SectionProps) {
   );
 }
 
-export function HeroView({ eyebrow, title, subtitle, actions, trust, reelLabel }: HeroViewProps) {
+export function HeroView({ eyebrow, title, subtitle, actions, trust, media, layout = "reel" }: HeroViewProps) {
   return (
     <section className={`${CONTAINER} pb-16 pt-8 md:pb-24 md:pt-14`}>
-      {/* Escritorio: 40% texto, 60% video (el reel es 16:9), centrados entre sí en vertical.
-          Por debajo de lg el video pasa abajo a todo el ancho. */}
-      <div className="grid items-center gap-12 lg:grid-cols-[40fr_60fr] lg:gap-12">
+      {/* Escritorio: texto y visual lado a lado, centrados entre sí en
+          vertical (proporciones en HERO_GRID). Por debajo de lg el visual
+          pasa abajo. */}
+      <div className={HERO_GRID[layout]}>
         <div>
           <p className="m-0 inline-flex items-center gap-2 rounded-full bg-white px-3.5 py-2 font-mono text-[12px] font-bold uppercase tracking-[0.08em] text-ink">
             <span className="h-2 w-2 rounded-full bg-[#00d71b]" aria-hidden />
@@ -141,7 +153,7 @@ export function HeroView({ eyebrow, title, subtitle, actions, trust, reelLabel }
           </p>
         </div>
 
-        <ReelVideo label={reelLabel} />
+        {media}
       </div>
     </section>
   );
@@ -444,7 +456,12 @@ function shortSummary(text: string): string {
 export function About({ c }: SectionProps) {
   const a = c.about;
   return (
-    <AboutView eyebrow={a.eyebrow} title={a.title} text={a.text} photo={a.photo} photoAlt={a.photoAlt} photoPlaceholder={a.photoPlaceholder} />
+    <AboutView
+      eyebrow={a.eyebrow}
+      title={a.title}
+      text={a.text}
+      photo={{ src: a.photo, alt: a.photoAlt, placeholder: a.photoPlaceholder }}
+    />
   );
 }
 
@@ -452,12 +469,29 @@ interface AboutViewProps {
   eyebrow: string;
   title: string;
   text: string;
-  photo: string;
-  photoAlt: string;
-  photoPlaceholder?: string;
+  /**
+   * Foto a la izquierda (landing). Sin `photo`, la tarjeta queda en dos
+   * columnas de texto: título a la izquierda y párrafo a la derecha
+   * (portafolio, donde la foto ya está en el hero).
+   */
+  photo?: { src: string; alt: string; placeholder?: string };
 }
 
-export function AboutView(a: AboutViewProps) {
+export function AboutView({ eyebrow, title, text, photo }: AboutViewProps) {
+  if (!photo) {
+    return (
+      <section className={`${CONTAINER} ${SECTION} pt-0 md:pt-0`}>
+        <div data-reveal className="grid gap-6 rounded-[28px] bg-white p-7 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-12 md:p-12">
+          <div>
+            <Eyebrow>{eyebrow}</Eyebrow>
+            <SectionTitle text={title} />
+          </div>
+          <p className="m-0 self-end text-[clamp(18px,1.6vw,21px)] leading-[1.6] text-muted md:pb-1">{text}</p>
+        </div>
+      </section>
+    );
+  }
+  const a = { eyebrow, title, text, photo: photo.src, photoAlt: photo.alt, photoPlaceholder: photo.placeholder };
   return (
     <section className={`${CONTAINER} ${SECTION} pt-0 md:pt-0`}>
       <div data-reveal className="grid items-center gap-8 rounded-[28px] bg-white p-5 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-12 md:p-8">

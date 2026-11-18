@@ -11,7 +11,6 @@
  * Esteve in first person and about product work, not about Reyno's
  * services. Reyno appears only as a line in the experience section.
  */
-import { promo } from "./promo";
 
 export const portfolio = {
   meta: {
@@ -49,8 +48,6 @@ export const portfolio = {
     // Portrait in the hero instead of the reel.
     photo: "/promo/esteve.jpg",
     photoAlt: "Esteve Reyes, Senior UX and Product Designer",
-    // Kept until the hero stops using the reel. Remove afterwards.
-    reelLabel: "Reel of selected work by Esteve Reyes",
   },
 
   companies: {
@@ -334,8 +331,6 @@ export const portfolio = {
     eyebrow: "About me",
     title: "Hi, I'm *Esteve.*",
     text: "I'm a self taught, multidisciplinary designer based in Mexico, with a degree in Graphic Design. Over the last 10+ years I've designed digital products for fintech and healthcare, and I've learned that the best products come from understanding the business as much as the user. I'm looking for a team where I can own complex product problems from strategy to launch.",
-    photo: promo.about.photo,
-    photoAlt: "Esteve Reyes, Senior UX and Product Designer",
   },
 
   final: {
