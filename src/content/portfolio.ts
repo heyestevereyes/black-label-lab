@@ -87,8 +87,7 @@ export const portfolio = {
       {
         slug: "forte-fitness",
         name: "Forte Fitness",
-        // TODO: year of the project.
-        meta: "Health and wellness · Mobile app · TODO year",
+        meta: "Health and wellness · Mobile app",
         role: "Product Designer, from research to UI and brand",
         summary:
           "A wellness app that matches people with the right training program for their level, goals and schedule, and lets coaches run their business.",
